@@ -10,5 +10,6 @@ public class App
     {
         System.out.println( "Hello World!" );
         System.out.println( "dumn4my" );
+        System.out.println( "dumn4my" );
     }
 }
