@@ -14,6 +14,5 @@ public class Point {
     private Integer y;
     private Integer value;
     @ManyToOne
-    private Board boardId;
-
+    private Board board;
 }
