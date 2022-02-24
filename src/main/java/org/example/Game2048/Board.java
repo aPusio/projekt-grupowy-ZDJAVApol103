@@ -11,13 +11,8 @@ public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany(mappedBy = "boardId")
+    @OneToMany(mappedBy = "board")
     private List<Point> pointList;
     @ManyToOne
     private User user;
-
-
-
-
-
 }
