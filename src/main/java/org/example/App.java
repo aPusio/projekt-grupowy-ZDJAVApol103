@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.Hangman.Hangman;
+
 import java.util.Scanner;
 
 /**
@@ -21,6 +23,11 @@ public class App
                 break;
             case 2:
                 System.out.println("GAME 2");
+                break;
+            case 3:
+                System.out.println("Hangman");
+                Hangman hangman = new Hangman();
+                hangman.start();
                 break;
         }
     }
