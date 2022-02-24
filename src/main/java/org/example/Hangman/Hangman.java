@@ -5,7 +5,12 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class Hangman {
+
+        public static final int WINNING_SCORE =3;
+
     public void start() {
+
+
         Player player1 = new Player();
         Player player2 = new Player();
         Scanner scanner = new Scanner(System.in);
@@ -26,11 +31,11 @@ public class Hangman {
             printScore(player1,player2);
             runRuond(player2,scanner);
 
-            if(player1.getScore()>=3 || player2.getScore()>=3){
+            if(player1.getScore()==WINNING_SCORE || player2.getScore()==WINNING_SCORE){
                 endGame = true;
                 if(player1.getScore()==player2.getScore()){
                     System.out.println("draw");
-                } else if (player1.getScore()==3) {
+                } else if (player1.getScore()==WINNING_SCORE) {
                     System.out.println("P1 wins");
                 } else {
                     System.out.println("P2 wins");
@@ -38,6 +43,7 @@ public class Hangman {
 
             }
         }
+        scanner.close();
     }
 
     private void printScore(Player player1, Player player2) {
