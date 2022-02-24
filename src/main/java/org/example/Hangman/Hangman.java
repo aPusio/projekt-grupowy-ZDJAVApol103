@@ -54,16 +54,15 @@ public class Hangman {
 
     public void runRuond(Player player,Scanner scanner){
         player.setChances(7);
-        boolean score = false;
         Set<Character> letters = new HashSet<>();
 
         WordProccessor wordProccessor = new WordProccessor();
         String haslo = wordProccessor.generateWord();
-        boolean runGame = true;
+        boolean currentRound = true;
         char[] charHaslo = wordProccessor.makeCharArray(haslo);
         String hashedWord = wordProccessor.hash(charHaslo);
 
-        while (runGame) {
+        while (currentRound) {
             System.out.printf("Grę zaczyna %s,ilość szans: %d, aktuana ilość punktów %d, wybierz literę\n",player.getName(),player.getChances(),player.getScore());
             String s = scanner.next();
             char c = s.charAt(0);
@@ -83,13 +82,13 @@ public class Hangman {
 
             if(player.getChances()==0){
                 System.out.printf("Przegrana! %s nie odgadł hasła, ilość punktów %d, pozostałe szane %d\n",player.getName(),player.getScore(), player.getChances());
-                runGame = false;
+                currentRound = false;
             }
 
             if(!wordProccessor.check(hashedWord.toCharArray(),'#')){
                 player.increseScore();
                 System.out.printf("Wygrana! %s odgadł hasło, ilość punktów %d, pozostałe szane %d\n",player.getName(),player.getScore(), player.getChances());
-                runGame = false;
+                currentRound = false;
             }
         }
 
