@@ -6,11 +6,11 @@ import lombok.Data;
 public class WordProccessor {
 
     private long id;
-    private String word;
+    private String wordToGuess;
+    private char[] wordToArray;
 
     public String generateWord() {
-
-        return "test";
+        return "qwerty";
     }
 
     public char[] makeCharArray(String word) {
@@ -42,18 +42,21 @@ public class WordProccessor {
         for (char letter : array) {
             if (letter == c) {
                 array2[counter] = c;
-                counter++;
-            } else {
-                counter++;
             }
+                counter++;
         }
         StringBuilder sb = new StringBuilder();
         for (char d : array2) {
             sb.append(d);
         }
-
         return sb.toString();
     }
 
+    public void setNewWord(){
+        this.wordToGuess = generateWord();
+    }
 
+    public void setNewArray(){
+        this.wordToArray = makeCharArray(wordToGuess);
+    }
 }
