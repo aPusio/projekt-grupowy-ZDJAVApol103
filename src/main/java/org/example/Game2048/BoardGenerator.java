@@ -1,20 +1,43 @@
 package org.example.Game2048;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class BoardGenerator {
+    private static final Random RANDOM = new Random();
 
     public static Board generateNewBoard() {
-        Random random = new Random();
         Board board = new Board();
-        Point point1 = new Point(random.nextInt(3), random.nextInt(3), 2);
+        Point point1 = new Point(RANDOM.nextInt(4), RANDOM.nextInt(4), 2);
         Point point2;
         do {
-            point2 = new Point(random.nextInt(3), random.nextInt(3), 2);
+            point2 = new Point(RANDOM.nextInt(4), RANDOM.nextInt(4), 2);
         } while (point1.equals(point2));
         board.setPointList(List.of(point1, point2));
         return board;
+    }
+
+    public static Board updateBoard(Board board) {
+        List<Point> points = new ArrayList<>(board.getPointList());
+        Point newPoint;
+        boolean isNewPointEqual;
+        if (points.size() < 16) {
+            do {
+                isNewPointEqual = false;
+                newPoint = new Point(RANDOM.nextInt(4), RANDOM.nextInt(4), 2);
+                for (Point x : points) {
+                    if (newPoint.equals(x)) {
+                        isNewPointEqual = true;
+                        break;
+                    }
+                }
+            } while (isNewPointEqual);
+            points.add(newPoint);
+            board.setPointList(points);
+            return board;
+        }
+        throw new EndOfGameException();
     }
 
     public static void printBoard(List<Point> pointList) {
@@ -36,3 +59,5 @@ public class BoardGenerator {
         }
     }
 }
+
+
