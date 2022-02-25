@@ -8,10 +8,14 @@ public class TicTacToe {
         List<Paair> listPaair = new ArrayList<>();
         List<Integer> listNumbers = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        String pl1, pl2, turn;
+        String pl, pl1, pl2, turn;
         int fieldNumber;
         do {
-            Comment.PlayerChoice();
+        Comment.PlayerChoice();
+        pl = scanner.next();
+        } while ((!Objects.equals(pl, "x")) && (!Objects.equals(pl, "o")));
+        do {
+            Comment.ThePlayerStartsTheGame();
             pl1 = scanner.next();
         } while ((!Objects.equals(pl1, "x")) && (!Objects.equals(pl1, "o")));
         do {
@@ -20,7 +24,7 @@ public class TicTacToe {
             } else pl2 = "x";
             PlayerOne player = new PlayerOne(pl1);
                 do {
-                    if (!Objects.equals(pl1, "x")){
+                    if (Objects.equals(pl1, pl)){
                         Comment.FieldSelection();
                     fieldNumber = scanner.nextInt();}
                     else {
@@ -56,8 +60,6 @@ public class TicTacToe {
            }
         } while (!Objects.equals(turn, "e"));
         scanner.close();
-        System.out.println(listNumbers);
-        System.out.println(listPaair);
         Comment.WinPlayer(listPaair);
     }
     }

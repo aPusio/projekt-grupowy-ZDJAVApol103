@@ -1,5 +1,6 @@
 package org.example;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -35,7 +36,7 @@ public class Comment {
                 paairState.stream().anyMatch(haspaair1) && paairState.stream().anyMatch(haspaair5)
                         && paairState.stream().anyMatch(haspaair9) || paairState.stream().anyMatch(haspaair3) &&
                 paairState.stream().anyMatch(haspaair5) && paairState.stream().anyMatch(haspaair7)){
-            System.out.println("Winner is Player 'x'");
+            System.out.println("Winner is Player 'x'" + LocalDateTime.now() + paairState);
         } else if (paairState.stream().anyMatch(haspaair10) && paairState.stream().anyMatch(haspaair11)
                 && paairState.stream().anyMatch(haspaair12) || paairState.stream().anyMatch(haspaair13)
                 && paairState.stream().anyMatch(haspaair14) && paairState.stream().anyMatch(haspaair15) ||
@@ -48,7 +49,7 @@ public class Comment {
                 paairState.stream().anyMatch(haspaair10) && paairState.stream().anyMatch(haspaair14)
                         && paairState.stream().anyMatch(haspaair18) || paairState.stream().anyMatch(haspaair12) &&
                 paairState.stream().anyMatch(haspaair14) && paairState.stream().anyMatch(haspaair16)){
-            System.out.println("Winner is Player 'o'");
+            System.out.println("Winner is Player 'o'" + LocalDateTime.now() + paairState);
         } else if (paairState.stream().anyMatch(haspaair1) && paairState.stream().anyMatch(haspaair2) &&
                 paairState.stream().anyMatch(haspaair3) && paairState.stream().anyMatch(haspaair4) &&
                 paairState.stream().anyMatch(haspaair5) && paairState.stream().anyMatch(haspaair6) &&
@@ -58,11 +59,11 @@ public class Comment {
                 paairState.stream().anyMatch(haspaair13) && paairState.stream().anyMatch(haspaair14) &&
                 paairState.stream().anyMatch(haspaair15) && paairState.stream().anyMatch(haspaair16) &&
                 paairState.stream().anyMatch(haspaair17) && paairState.stream().anyMatch(haspaair18)){
-            System.out.println("There is no winner");
+            System.out.println("There is no winner" + LocalDateTime.now() + paairState);
         }
     }
-    public static void PlayerChoice(){
-        System.out.print("wybierz gracza 'x', lub 'o': ");
+    public static void ThePlayerStartsTheGame(){
+        System.out.print("wybierz, który gracz rozpoczyna 'x' lub 'o': ");
     }
     public static void FieldSelection(){
         System.out.printf("1 2 3%n4 5 6%n7 8 9%n");
@@ -80,5 +81,8 @@ public class Comment {
             System.out.print("=============================");
             System.out.println();
         }
+    }
+    public static void PlayerChoice(){
+        System.out.print("wybór gracza: 'o' / 'x'");
     }
 }
