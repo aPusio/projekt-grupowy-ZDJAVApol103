@@ -14,7 +14,6 @@ public class Hangman {
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
-
         printPalyerPick("first");
         Player player1 = new Player.PlayerBuilder(scanner.next()).score(0).build();
         printPalyerPick("second");
