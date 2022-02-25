@@ -8,12 +8,16 @@ public class Hangman {
 
     public static final int WINNING_SCORE = 3;
 
+    public void menu(){
+
+    }
+
     public void start() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("select first players name");
+        printPalyerPick("first");
         Player player1 = new Player.PlayerBuilder(scanner.next()).score(0).build();
-        System.out.println("select second players name");
+        printPalyerPick("second");
         Player player2 = new Player.PlayerBuilder(scanner.next()).score(0).build();
 
         boolean endGame = false;
@@ -38,6 +42,15 @@ public class Hangman {
         scanner.close();
     }
 
+    private void printPalyerPick(String number) {
+        if(number.equals("first")){
+            System.out.print("Select first player\n");
+        }
+        if(number.equals("second")){
+            System.out.print("Select second player\n");
+        }
+    }
+
     private void printScore(Player player1, Player player2) {
         System.out.printf("P1 score: %d\n", player1.getScore());
         System.out.printf("P2 score: %d\n", player2.getScore());
@@ -47,7 +60,7 @@ public class Hangman {
         player.setChances(7);
         Set<Character> letters = new HashSet<>();
 
-        WordProccessor wordProccessor = new WordProccessor();
+        WordsProcessor wordProccessor = new WordsProcessor();
         boolean currentRound = true;
         wordProccessor.setNewWord();
         wordProccessor.setNewArray();
