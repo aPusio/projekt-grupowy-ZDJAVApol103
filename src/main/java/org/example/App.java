@@ -30,19 +30,6 @@ public class App
         HibernateFactory hibernateFactory = new HibernateFactory();
         SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
         Session session = sessionFactory.openSession();
-        Car car = new Car();
-        car.setName("FIAT");
-        car.setProductionYear(1992);
-
-        Wheel michelin = new Wheel();
-        michelin.setSize(17);
-        michelin.setModel("SnowDragon");
-
-        car.setWheelList(List.of(michelin));
-        michelin.setCar(car);
-
-        session.save(car);
-        session.save(michelin);
 
         session.close();
         sessionFactory.close();
