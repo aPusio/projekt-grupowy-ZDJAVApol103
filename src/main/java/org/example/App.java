@@ -1,5 +1,9 @@
 package org.example;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import java.util.List;
 import org.example.Hangman.Hangman;
 
 import java.util.Scanner;
@@ -30,5 +34,11 @@ public class App
                 hangman.start();
                 break;
         }
+        HibernateFactory hibernateFactory = new HibernateFactory();
+        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
+        Session session = sessionFactory.openSession();
+
+        session.close();
+        sessionFactory.close();
     }
 }
