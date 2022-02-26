@@ -12,6 +12,7 @@ public class Hangman {
     public static final int CHANCES = 1;
 
     public void menu(Scanner scanner) {
+        WordsProcessor wordsProcessor = new WordsProcessor();
 
         boolean loopMenu = true;
         while (loopMenu) {
@@ -20,19 +21,26 @@ public class Hangman {
                     System.out.println("start game");
                     Hangman hangman = new Hangman();
                     hangman.start();
-                    continue;
+                    break;
                 case "2":
                     System.out.println("add single word");
                     String wordToAdd = scanner.next(); //
                     System.out.println(wordToAdd);
-                    WordsProcessor wordsProcessor = new WordsProcessor();
                     wordsProcessor.addWord(wordToAdd);
                     break;
                 case "3":
                     System.out.println("delete single word");
+                    Long wordToDell = Long.valueOf(scanner.next()); //
+                    System.out.println(wordToDell);
+                    wordsProcessor.deleteWord(wordToDell);
                     break;
                 case "4":
                     System.out.println("edit single word");
+                    Long wordToUpdate = Long.valueOf(scanner.next()); //
+                    System.out.println(wordToUpdate);
+                    System.out.print("Zmienić na: ");
+                    String haslo = scanner.next();
+                    wordsProcessor.updateWord(wordToUpdate,haslo);
                     break;
                 case "0":
                     loopMenu = false;
@@ -73,20 +81,20 @@ public class Hangman {
     }
 
     private String scannerPrint(Scanner scanner) {
-        System.out.println("Pick option" +
-                "1. new game" +
-                "2. add word" +
-                "3. delete word" +
-                "4. edit word" +
-                "0. exit");
-        return (String) scanner.next();
+        System.out.println("Pick option\nb" +
+                "1. new game\n" +
+                "2. add word\n" +
+                "3. delete word\n" +
+                "4. edit word\n" +
+                "0. exit\n");
+        return scanner.next();
     }
 
     private void printPalyerPick(String number) {
-        if (number.equals("first")) {
+        if(number.equals("first")){
             System.out.print("Select first player\n");
         }
-        if (number.equals("second")) {
+        if(number.equals("second")){
             System.out.print("Select second player\n");
         }
     }
