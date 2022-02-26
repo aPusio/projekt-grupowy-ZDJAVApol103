@@ -9,7 +9,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class Shots {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_shot;
