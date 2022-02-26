@@ -11,7 +11,6 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "board")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

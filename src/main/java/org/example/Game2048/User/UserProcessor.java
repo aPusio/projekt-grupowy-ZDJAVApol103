@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class UserProcessor {
-    private static final Scanner SCANNER = new Scanner(System.in);
 
     private User addNewUser(String nickname, Session session) {
         User user = new User();

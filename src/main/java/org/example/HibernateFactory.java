@@ -1,5 +1,8 @@
 package org.example;
 
+import org.example.Game2048.Board.Board;
+import org.example.Game2048.Point.Point;
+import org.example.Game2048.User.User;
 import org.example.learnig.Car;
 import org.example.learnig.Owner;
 import org.example.learnig.Wheel;
@@ -21,6 +24,11 @@ public class HibernateFactory {
         configuration.addAnnotatedClass(Car.class);
         configuration.addAnnotatedClass(Owner.class);
         configuration.addAnnotatedClass(Wheel.class);
+
+        configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(Board.class);
+        configuration.addAnnotatedClass(Point.class);
+
         return configuration;
     }
 
