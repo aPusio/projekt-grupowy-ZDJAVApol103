@@ -5,10 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
-@Data
+
 @Entity
+@Table(name = "user")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
@@ -17,5 +20,9 @@ public class User {
     private Long id;
     private String nickname;
     @OneToMany(mappedBy = "user")
-    private List<Board> boardList;
+    private List<Board> boardList = new ArrayList<>();
+
+    public void addNewBoard(Board board){
+        boardList.add(board);
+    }
 }

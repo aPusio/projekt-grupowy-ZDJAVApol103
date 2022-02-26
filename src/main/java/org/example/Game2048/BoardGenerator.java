@@ -36,8 +36,8 @@ public class BoardGenerator {
             points.add(newPoint);
             board.setPointList(points);
             return board;
-        }
-        throw new EndOfGameException();
+        } else
+            throw new EndOfGameException();
     }
 
     public static void printBoard(List<Point> pointList) {
