@@ -16,5 +16,7 @@ public class SaveTheGame {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime localDateTime;
+    @OneToMany(mappedBy = "saveTheGame")
+    @Column(name = "saveTheGame_id")
     private List<Paair> listPaair;
 }

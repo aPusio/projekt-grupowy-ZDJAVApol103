@@ -11,9 +11,22 @@ public class TicTacToe {
 
         List<Paair> listPaair = new ArrayList<>();
         List<Integer> listNumbers = new ArrayList<>();
+        HibernateFactory hibernateFactory = new HibernateFactory();
+        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
         Scanner scanner = new Scanner(System.in);
         String pl, pl1, pl2, turn;
-        int fieldNumber;
+        int fieldNumber, option;
+        long state;
+        System.out.printf("wybierz opcję%n 1- wczytaj grę%n 2- zagraj");
+        option = scanner.nextInt();
+            System.out.print("wybierz stan gry:");
+        if (option == 1) {
+            state = scanner.nextLong();
+            try (Session session = hibernateFactory.getSessionFactory().openSession()) {
+                Paair paair = session.get(Paair.class, state);
+                System.out.println(state);
+            }
+        }
         do {
         Comment.PlayerChoice();
         pl = scanner.next();
@@ -65,15 +78,17 @@ public class TicTacToe {
         } while (!Objects.equals(turn, "e"));
         scanner.close();
         Comment.WinPlayer(listPaair);
-        HibernateFactory hibernateFactory = new HibernateFactory();
-        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
         Session session = sessionFactory.openSession();
 
         SaveTheGame saveTheGame = new SaveTheGame();
         saveTheGame.setLocalDateTime(LocalDateTime.now());
        saveTheGame.setListPaair(listPaair);
-
         session.save(saveTheGame);
+       for(Paair paair: listPaair){
+           paair.setSaveTheGame(saveTheGame);
+           session.save(paair);
+       }
+
 
         session.close();
         sessionFactory.close();
