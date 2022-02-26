@@ -1,5 +1,7 @@
 package org.example.Hangman;
 
+import com.mysql.cj.xdevapi.XDevAPIError;
+
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -8,8 +10,36 @@ public class Hangman {
 
     public static final int WINNING_SCORE = 3;
 
-    public void menu(){
+    public void menu(Scanner scanner) {
 
+        boolean loopMenu = true;
+        while (loopMenu) {
+            switch (scanner.nextInt()) {
+                case 1:
+                    System.out.println("start game");
+                    Hangman hangman = new Hangman();
+                    hangman.start();
+                    break;
+                case 2:
+                        System.out.println("add single word");
+                        String wordToAdd = scanner.next(); //
+                        System.out.println(wordToAdd);
+                        WordsProcessor wordsProcessor = new WordsProcessor();
+                        wordsProcessor.addWord(wordToAdd);
+                    break;
+                case 3:
+                    System.out.println("delete single word");
+                    break;
+                case 4:
+                    System.out.println("edit single word");
+                    break;
+                case 0:
+                    loopMenu = false;
+                    break;
+                default:
+                    System.out.println("wrong option");
+            }
+        }
     }
 
     public void start() {
@@ -42,10 +72,10 @@ public class Hangman {
     }
 
     private void printPalyerPick(String number) {
-        if(number.equals("first")){
+        if (number.equals("first")) {
             System.out.print("Select first player\n");
         }
-        if(number.equals("second")){
+        if (number.equals("second")) {
             System.out.print("Select second player\n");
         }
     }

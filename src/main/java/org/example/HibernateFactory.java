@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.Hangman.Words;
+import org.example.Hangman.WordsProcessor;
 import org.example.learnig.Car;
 import org.example.learnig.Owner;
 import org.example.learnig.Wheel;
@@ -21,6 +23,10 @@ public class HibernateFactory {
         configuration.addAnnotatedClass(Car.class);
         configuration.addAnnotatedClass(Owner.class);
         configuration.addAnnotatedClass(Wheel.class);
+
+        //Hangman
+        configuration.addAnnotatedClass(WordsProcessor.class);
+        configuration.addAnnotatedClass(Words.class);
         return configuration;
     }
 

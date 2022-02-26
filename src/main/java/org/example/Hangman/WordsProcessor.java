@@ -1,6 +1,7 @@
 package org.example.Hangman;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
+import org.example.HibernateFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -15,11 +16,11 @@ public class WordsProcessor {
     private String wordToGuess;
     private char[] wordToArray;
 
-    HibernateUtils hibernateUtils = new HibernateUtils();
+    HibernateFactory hibernateUtils = new HibernateFactory();
     SessionFactory sessionFactory = hibernateUtils.getSessionFactory();
 
     public String generateWord() {
-        return readWord(6L);
+        return readWord(3L);
     }
 
     public char[] makeCharArray(String word) {

@@ -31,14 +31,14 @@ public class App
             case 3:
                 System.out.println("Hangman");
                 Hangman hangman = new Hangman();
-                hangman.start();
+                hangman.menu(scanner);
                 break;
         }
-        HibernateFactory hibernateFactory = new HibernateFactory();
-        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
-        Session session = sessionFactory.openSession();
-
-        session.close();
-        sessionFactory.close();
+//        HibernateFactory hibernateFactory = new HibernateFactory();
+//        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
+//        Session session = sessionFactory.openSession();
+//
+//        session.close();
+//        sessionFactory.close();
     }
 }
