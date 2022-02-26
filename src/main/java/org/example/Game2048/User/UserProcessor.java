@@ -1,5 +1,8 @@
-package org.example.Game2048;
+package org.example.Game2048.User;
 
+import org.example.Game2048.Board.Board;
+import org.example.Game2048.Board.BoardGenerator;
+import org.example.Game2048.Point.Point;
 import org.hibernate.Session;
 
 import javax.persistence.NoResultException;

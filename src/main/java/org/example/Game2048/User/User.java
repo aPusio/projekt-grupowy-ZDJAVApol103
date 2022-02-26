@@ -1,8 +1,9 @@
-package org.example.Game2048;
+package org.example.Game2048.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.Game2048.Board.Board;
 
 import javax.persistence.*;
 import java.util.ArrayList;

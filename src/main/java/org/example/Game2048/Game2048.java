@@ -1,5 +1,10 @@
 package org.example.Game2048;
 
+import org.example.Game2048.Board.Board;
+import org.example.Game2048.Board.BoardGenerator;
+import org.example.Game2048.User.User;
+import org.example.Game2048.User.UserProcessor;
+import org.example.HibernateFactory;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -7,8 +12,6 @@ import java.util.Scanner;
 
 public class Game2048 {
     public static void main(String[] args) {
-        System.out.println("Siemano!");
-
         Session session = new HibernateFactory().getSessionFactory().openSession();
         UserProcessor userProcessor = new UserProcessor();
         Scanner scanner = new Scanner(System.in);
