@@ -14,8 +14,6 @@ public class HibernateFactory {
         configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
         configuration.setProperty("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
         configuration.setProperty("hibernate.hbm2ddl.auto", "update");
-        configuration.addAnnotatedClass(Car.class);
-        configuration.addAnnotatedClass(Wheel.class);
         return configuration;
     }
 
