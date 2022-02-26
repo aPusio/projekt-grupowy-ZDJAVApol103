@@ -58,8 +58,18 @@ public class Comment {
                 paairState.stream().anyMatch(haspaair11) && paairState.stream().anyMatch(haspaair12) &&
                 paairState.stream().anyMatch(haspaair13) && paairState.stream().anyMatch(haspaair14) &&
                 paairState.stream().anyMatch(haspaair15) && paairState.stream().anyMatch(haspaair16) &&
-                paairState.stream().anyMatch(haspaair17) && paairState.stream().anyMatch(haspaair18)){
+                paairState.stream().anyMatch(haspaair17) && paairState.stream().anyMatch(haspaair18)) {
             System.out.println("There is no winner" + LocalDateTime.now() + paairState);
+        } else if (paairState.stream().anyMatch(haspaair1) || paairState.stream().anyMatch(haspaair2) ||
+                    paairState.stream().anyMatch(haspaair3) || paairState.stream().anyMatch(haspaair4) ||
+                    paairState.stream().anyMatch(haspaair5) || paairState.stream().anyMatch(haspaair6) ||
+                    paairState.stream().anyMatch(haspaair7) || paairState.stream().anyMatch(haspaair8) ||
+                    paairState.stream().anyMatch(haspaair9) || paairState.stream().anyMatch(haspaair10) ||
+                    paairState.stream().anyMatch(haspaair11) || paairState.stream().anyMatch(haspaair12) ||
+                    paairState.stream().anyMatch(haspaair13) || paairState.stream().anyMatch(haspaair14) ||
+                    paairState.stream().anyMatch(haspaair15) || paairState.stream().anyMatch(haspaair16) ||
+                    paairState.stream().anyMatch(haspaair17) || paairState.stream().anyMatch(haspaair18)){
+            System.out.println("Game pending" + LocalDateTime.now() + paairState);
         }
     }
     public static void ThePlayerStartsTheGame(){
