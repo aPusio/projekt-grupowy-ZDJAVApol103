@@ -4,6 +4,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
+import org.example.Hangman.Hangman;
+
 import java.util.Scanner;
 
 /**
@@ -25,6 +27,11 @@ public class App
                 break;
             case 2:
                 System.out.println("GAME 2");
+                break;
+            case 3:
+                System.out.println("Hangman");
+                Hangman hangman = new Hangman();
+                hangman.start();
                 break;
         }
         HibernateFactory hibernateFactory = new HibernateFactory();
