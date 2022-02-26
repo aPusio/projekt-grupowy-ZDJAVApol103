@@ -27,6 +27,6 @@ public class Ships {
     private List<Shots> shots;
 
     @ManyToOne
-    private ShipsPlayers player;
+    private ShipsPlayers shipsPlayers;
 
 }

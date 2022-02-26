@@ -2,8 +2,8 @@ package org.example.Ships;
 
 public class Players {
 
-        private Board board;
-      private String name;
+    private Board board;
+    private String name;
 
 
     public String getName() {
