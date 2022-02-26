@@ -16,6 +16,6 @@ public class ShipsPlayers {
     private String login;
     private String status;
 
-    @OneToOne(mappedBy = "player")
+    @OneToMany(mappedBy = "player")
     private List<Shots> shots;
 }
