@@ -9,7 +9,7 @@ import org.hibernate.Transaction;
 import java.io.Serializable;
 
 @Data
-@Slf4j
+
 public class WordsProcessor {
 
     private long id;
@@ -86,7 +86,7 @@ public class WordsProcessor {
             Words words = new Words();
             words.setWord(haslo);
             Serializable id = session.save(words);
-            log.info("Saved word {}",id);
+            //log.info("Saved word {}",id);
         }
     }
 
@@ -96,7 +96,7 @@ public class WordsProcessor {
             Words words = session.get(Words.class, id);
             words.setWord(haslo);
             session.saveOrUpdate(words);
-            log.info("Updated {}",words);
+            //log.info("Updated {}",words);
             transaction.commit();
         }
     }

@@ -20,9 +20,10 @@ public class HibernateFactory {
         configuration.setProperty("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
         configuration.setProperty("hibernate.hbm2ddl.auto", "update");
 
-        configuration.addAnnotatedClass(Car.class);
-        configuration.addAnnotatedClass(Owner.class);
-        configuration.addAnnotatedClass(Wheel.class);
+
+//        configuration.addAnnotatedClass(Car.class);
+//        configuration.addAnnotatedClass(Owner.class);
+//        configuration.addAnnotatedClass(Wheel.class);
 
         //Hangman
         configuration.addAnnotatedClass(WordsProcessor.class);

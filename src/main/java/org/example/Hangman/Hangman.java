@@ -8,32 +8,33 @@ import java.util.Set;
 
 public class Hangman {
 
-    public static final int WINNING_SCORE = 3;
+    public static final int WINNING_SCORE = 1;
+    public static final int CHANCES = 1;
 
     public void menu(Scanner scanner) {
 
         boolean loopMenu = true;
         while (loopMenu) {
-            switch (scanner.nextInt()) {
-                case 1:
+            switch (scannerPrint(scanner)) {
+                case "1":
                     System.out.println("start game");
                     Hangman hangman = new Hangman();
                     hangman.start();
+                    continue;
+                case "2":
+                    System.out.println("add single word");
+                    String wordToAdd = scanner.next(); //
+                    System.out.println(wordToAdd);
+                    WordsProcessor wordsProcessor = new WordsProcessor();
+                    wordsProcessor.addWord(wordToAdd);
                     break;
-                case 2:
-                        System.out.println("add single word");
-                        String wordToAdd = scanner.next(); //
-                        System.out.println(wordToAdd);
-                        WordsProcessor wordsProcessor = new WordsProcessor();
-                        wordsProcessor.addWord(wordToAdd);
-                    break;
-                case 3:
+                case "3":
                     System.out.println("delete single word");
                     break;
-                case 4:
+                case "4":
                     System.out.println("edit single word");
                     break;
-                case 0:
+                case "0":
                     loopMenu = false;
                     break;
                 default:
@@ -71,6 +72,16 @@ public class Hangman {
         scanner.close();
     }
 
+    private String scannerPrint(Scanner scanner) {
+        System.out.println("Pick option" +
+                "1. new game" +
+                "2. add word" +
+                "3. delete word" +
+                "4. edit word" +
+                "0. exit");
+        return (String) scanner.next();
+    }
+
     private void printPalyerPick(String number) {
         if (number.equals("first")) {
             System.out.print("Select first player\n");
@@ -86,7 +97,7 @@ public class Hangman {
     }
 
     public void runRound(Player player, Scanner scanner) {
-        player.setChances(7);
+        player.setChances(CHANCES);
         Set<Character> letters = new HashSet<>();
 
         WordsProcessor wordProccessor = new WordsProcessor();
