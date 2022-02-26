@@ -1,5 +1,9 @@
 package org.example;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -23,5 +27,11 @@ public class App
                 System.out.println("GAME 2");
                 break;
         }
+        HibernateFactory hibernateFactory = new HibernateFactory();
+        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
+        Session session = sessionFactory.openSession();
+
+        session.close();
+        sessionFactory.close();
     }
 }
