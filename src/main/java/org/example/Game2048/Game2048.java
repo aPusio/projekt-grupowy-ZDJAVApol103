@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Game2048 {
     public static void main(String[] args) {
+        System.out.println("Siemano!");
 
         Session session = new HibernateFactory().getSessionFactory().openSession();
         UserProcessor userProcessor = new UserProcessor();
