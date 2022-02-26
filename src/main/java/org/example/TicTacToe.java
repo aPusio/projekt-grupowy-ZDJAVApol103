@@ -5,7 +5,6 @@ import org.example.Service.SaveTheGame;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import javax.persistence.Column;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -18,8 +17,8 @@ public class TicTacToe {
         String pl, pl1, pl2, turn;
         int fieldNumber;
         do {
-        Comment.PlayerChoice();
-        pl = scanner.next();
+            Comment.PlayerChoice();
+            pl = scanner.next();
         } while ((!Objects.equals(pl, "x")) && (!Objects.equals(pl, "o")));
         do {
             Comment.ThePlayerStartsTheGame();
@@ -30,16 +29,16 @@ public class TicTacToe {
                 pl2 = "o";
             } else pl2 = "x";
             PlayerOne player = new PlayerOne(pl1);
-                do {
-                    if (Objects.equals(pl1, pl)){
-                        Comment.FieldSelection();
-                    fieldNumber = scanner.nextInt();}
-                    else {
-                        Random random = new Random();
-                        fieldNumber = random.nextInt(9) + 1;
-                    }
+            do {
+                if (Objects.equals(pl1, pl)) {
+                    Comment.FieldSelection();
+                    fieldNumber = scanner.nextInt();
+                } else {
+                    Random random = new Random();
+                    fieldNumber = random.nextInt(9) + 1;
                 }
-                while ((Methods.CheckedLists(fieldNumber, listNumbers)) && fieldNumber < 10 && fieldNumber > 0);
+            }
+            while ((Methods.CheckedLists(fieldNumber, listNumbers)) && fieldNumber < 10 && fieldNumber > 0);
             String[][] board = new String[3][3];
 
             for (int i = 0; i < board.length; i++) {
@@ -47,12 +46,12 @@ public class TicTacToe {
                     board[i][j] = " ";
                 }
             }
-            for (Paair o: listPaair){
+            for (Paair o : listPaair) {
                 Methods.MapState(o, board);
             }
-                Methods.State(fieldNumber, String.valueOf(player), board);
-                listNumbers.add(fieldNumber);
-               listPaair.add(new Paair(String.valueOf(player), fieldNumber));
+            Methods.State(fieldNumber, String.valueOf(player), board);
+            listNumbers.add(fieldNumber);
+            listPaair.add(new Paair(String.valueOf(player), fieldNumber));
             Comment.GameBoard(board);
             System.out.println(listNumbers);
             do {
@@ -60,11 +59,11 @@ public class TicTacToe {
                 turn = scanner.next();
             } while ((!Objects.equals(turn, "n")) && (!Objects.equals(turn, "e")));
             if ((Objects.equals(turn, "n")) && Objects.equals(String.valueOf(player), pl1)) {
-               pl1 = pl2;
+                pl1 = pl2;
             }
-           if (Methods.EndGame(listPaair)){
-               break;
-           }
+            if (Methods.EndGame(listPaair)) {
+                break;
+            }
         } while (!Objects.equals(turn, "e"));
         scanner.close();
         Comment.WinPlayer(listPaair);
@@ -75,11 +74,12 @@ public class TicTacToe {
         SaveTheGame saveTheGame = new SaveTheGame();
         saveTheGame.setLocalDateTime(LocalDateTime.now());
         saveTheGame.setListPaair(listPaair);
-
         session.save(saveTheGame);
-        session.save(listPaair);
-
+        for (Paair paair : listPaair) {
+            paair.setSaveTheGame(saveTheGame);
+            session.save(paair);
+        }
         session.close();
         sessionFactory.close();
     }
-    }
+}
