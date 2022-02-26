@@ -3,8 +3,10 @@ package org.example.Ships;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.example.learnig.Wheel;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,5 +22,11 @@ public class Ships {
     private int xEndPoint;
     private int yEndPoint;
     private int hits;
+
+    @OneToMany(mappedBy = "ship")
+    private List<Shots> shots;
+
+    @ManyToOne
+    private ShipsPlayers player;
 
 }
