@@ -1,6 +1,8 @@
 package org.example;
 
-import com.mysql.cj.xdevapi.SessionFactory;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateFactory {
@@ -15,6 +17,11 @@ public class HibernateFactory {
 
 
         return configuration;
+    }
+    public SessionFactory getSessionFactory() {
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+                .applySettings(getHibernateConfig().getProperties()).build();
+        return getHibernateConfig().buildSessionFactory(registry);
     }
 
 
