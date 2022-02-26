@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class Game2048 {
     public void startGame(){
-        Session session = new HibernateFactory().getSessionFactory().openSession();
+        Session session = new Factory().getSessionFactory().openSession();
         UserProcessor userProcessor = new UserProcessor();
         Scanner scanner = new Scanner(System.in);
 
@@ -27,7 +27,7 @@ public class Game2048 {
                     "2 - wczytaj grę");
             switch (scanner.nextInt()){
                 case 1:
-                    userProcessor.addNewBoard(user,session);
+                    userProcessor.addNewBoard(user,session,BoardGenerator.generateNewBoard());
                     BoardGenerator.printBoard(user.getBoardList().get(0).getPointList());
                     break;
                 case 2:
@@ -39,9 +39,21 @@ public class Game2048 {
             }
         }else {
             System.out.println("Nowa gra!");
-            List<Board> boardList = user.getBoardList();
-            BoardGenerator.printBoard(boardList.get(0).getPointList());
+//            BoardGenerator.printBoard(user.getBoardList().get(0).getPointList());
+//            do {
+//                List<Board> boardList = user.getBoardList();
+//                int index = boardList.size()-1;
+//                Board board = BoardGenerator.updateBoard(boardList.get(index));
+//                userProcessor.addNewBoard(user,session,board);
+//                System.out.println(user.getBoardList().size());
+//                BoardGenerator.printBoard(boardList.get(index).getPointList());
+//            }while (new Scanner(System.in).nextInt()!=1);
         }
         session.close();
+    }
+
+    public static void main(String[] args) {
+        Game2048 game2048 = new Game2048();
+        game2048.startGame();
     }
 }

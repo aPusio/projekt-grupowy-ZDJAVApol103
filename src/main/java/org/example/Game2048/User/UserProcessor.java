@@ -11,18 +11,18 @@ import java.util.Scanner;
 
 public class UserProcessor {
 
-    private User addNewUser(String nickname, Session session) {
+    private User addNewUser(String nickname, Session session, Board board) {
         User user = new User();
         user.setNickname(nickname);
 
-        addNewBoard(user,session);
+        addNewBoard(user,session, board);
         return user;
     }
-    public void addNewBoard(User user, Session session){
-        Board board = BoardGenerator.generateNewBoard();
+    public void addNewBoard(User user, Session session, Board board){
         board.setUser(user);
-
-        user.addNewBoard(board);
+        List<Board> boardList = user.getBoardList();
+        boardList.add(board);
+        user.setBoardList(boardList);
 
         session.save(user);
         session.save(board);
@@ -41,7 +41,7 @@ public class UserProcessor {
                     .setParameter("nickname", nickname)
                     .getSingleResult();
         } catch (NoResultException e) {
-            return addNewUser(nickname, session);
+            return addNewUser(nickname, session, BoardGenerator.generateNewBoard());
         }
     }
 }
