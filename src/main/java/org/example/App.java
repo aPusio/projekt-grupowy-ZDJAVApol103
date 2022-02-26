@@ -16,6 +16,9 @@ public class App
 {
     public static void main( String[] args )
     {
+        HibernateFactory hibernateFactory = new HibernateFactory();
+        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("WYBIERZ OPCJE Z MENU:");
         String userOption = scanner.next();
@@ -30,15 +33,14 @@ public class App
                 break;
             case "3":
                 System.out.println("Hangman");
-                Hangman hangman = new Hangman();
-                hangman.menu(scanner);
+                Hangman hangman = new Hangman(sessionFactory);
+                hangman.menu();
                 break;
         }
-//        HibernateFactory hibernateFactory = new HibernateFactory();
-//        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
-//        Session session = sessionFactory.openSession();
-//
-//        session.close();
-//        sessionFactory.close();
+
+        Session session = sessionFactory.openSession();
+
+        session.close();
+        sessionFactory.close();
     }
 }

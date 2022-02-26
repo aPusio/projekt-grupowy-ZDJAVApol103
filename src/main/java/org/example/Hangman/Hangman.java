@@ -1,6 +1,6 @@
 package org.example.Hangman;
 
-import com.mysql.cj.xdevapi.XDevAPIError;
+import org.hibernate.SessionFactory;
 
 import java.util.HashSet;
 import java.util.Scanner;
@@ -10,22 +10,27 @@ public class Hangman {
 
     public static final int WINNING_SCORE = 1;
     public static final int CHANCES = 1;
+    private SessionFactory sf;
 
-    public void menu(Scanner scanner) {
+    public Hangman(SessionFactory sessionFactory) {
+        this.sf = sessionFactory;
+    }
 
+    public void menu() {
+        Scanner scanner = new Scanner(System.in);
         boolean loopMenu = true;
         while (loopMenu) {
             switch (scannerPrint(scanner)) {
                 case "1":
                     System.out.println("start game");
-                    Hangman hangman = new Hangman();
-                    hangman.start();
-                    continue;
+                    Hangman hangman = new Hangman(sf);
+                    hangman.start(sf);
+                    break;
                 case "2":
                     System.out.println("add single word");
                     String wordToAdd = scanner.next(); //
                     System.out.println(wordToAdd);
-                    WordsProcessor wordsProcessor = new WordsProcessor();
+                    WordsProcessor wordsProcessor = new WordsProcessor(sf);
                     wordsProcessor.addWord(wordToAdd);
                     break;
                 case "3":
@@ -43,7 +48,9 @@ public class Hangman {
         }
     }
 
-    public void start() {
+    public void start(SessionFactory sessionFactory) {
+
+
         Scanner scanner = new Scanner(System.in);
         printPalyerPick("first");
         Player player1 = new Player.PlayerBuilder(scanner.next()).score(0).build();
@@ -100,19 +107,21 @@ public class Hangman {
         player.setChances(CHANCES);
         Set<Character> letters = new HashSet<>();
 
-        WordsProcessor wordProccessor = new WordsProcessor();
+        WordsProcessor wordsProcessor = new WordsProcessor(sf);
         boolean currentRound = true;
-        wordProccessor.setNewWord();
-        wordProccessor.setNewArray();
-        String hashedWord = wordProccessor.hash(wordProccessor.getWordToArray());
+
+        wordsProcessor.readWord2();
+        wordsProcessor.setNewWord();
+        wordsProcessor.setNewArray();
+        String hashedWord = wordsProcessor.hash(wordsProcessor.getWordToArray());
 
         while (currentRound) {
-            System.out.printf("Grę zaczyna %s,ilość szans: %d, aktuana ilość punktów %d, wybierz literę\n", player.getName(), player.getChances(), player.getScore());
+            System.out.printf("Grę zaczyna %s,ilość szans: %d, aktualna ilość punktów %d, wybierz literę\n", player.getName(), player.getChances(), player.getScore());
             String s = scanner.next();
             char c = s.charAt(0);
 
-            if (wordProccessor.check(wordProccessor.getWordToArray(), c)) {
-                hashedWord = wordProccessor.partialUnhash(wordProccessor.getWordToArray(), c, hashedWord);
+            if (wordsProcessor.check(wordsProcessor.getWordToArray(), c)) {
+                hashedWord = wordsProcessor.partialUnhash(wordsProcessor.getWordToArray(), c, hashedWord);
                 System.out.println(hashedWord);
             } else {
                 player.subtractChance();
@@ -125,15 +134,17 @@ public class Hangman {
             System.out.println(letters);
 
             if (player.getChances() == 0) {
-                System.out.printf("Przegrana! %s nie odgadł hasła, ilość punktów %d, pozostałe szane %d\n", player.getName(), player.getScore(), player.getChances());
+                System.out.printf("Przegrana! %s nie odgadł hasła, ilość punktów %d, pozostałe szanse %d\n", player.getName(), player.getScore(), player.getChances());
                 currentRound = false;
             }
 
-            if (!wordProccessor.check(hashedWord.toCharArray(), '#')) {
+            if (!wordsProcessor.check(hashedWord.toCharArray(), '#')) {
                 player.increseScore();
-                System.out.printf("Wygrana! %s odgadł hasło, ilość punktów %d, pozostałe szane %d\n", player.getName(), player.getScore(), player.getChances());
+                System.out.printf("Wygrana! %s odgadł hasło, ilość punktów %d, pozostałe szanse %d\n", player.getName(), player.getScore(), player.getChances());
                 currentRound = false;
             }
+
+
         }
 
     }

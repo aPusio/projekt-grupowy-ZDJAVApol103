@@ -1,4 +1,5 @@
 package org.example.Hangman;
+
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.example.HibernateFactory;
@@ -6,22 +7,43 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.io.Serializable;
+import java.util.*;
 
 @Data
 
 public class WordsProcessor {
 
+    private SessionFactory sessionFactory;
+
+    public WordsProcessor(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
     private long id;
     private String wordToGuess;
     private char[] wordToArray;
+    private Set<Words> lista;
 
-    HibernateFactory hibernateUtils = new HibernateFactory();
-    SessionFactory sessionFactory = hibernateUtils.getSessionFactory();
+    public String generateWord(List<Words> list) {
+        String s = "";
+        for( Words w :list){
+            s =w.getWord();
+            list.remove(w);
+        }
 
-    public String generateWord() {
-        return readWord(3L);
+        return s;
     }
+
+//    public String generateWord(Set<Words> lista) {
+//        StringBuilder sb = new StringBuilder();
+//        sb.setLength(0);
+//        Iterator iterator = lista.iterator();
+//        return sb.append(iterator.next()).toString();
+//    }
 
     public char[] makeCharArray(String word) {
         return word.toCharArray();
@@ -53,7 +75,7 @@ public class WordsProcessor {
             if (letter == c) {
                 array2[counter] = c;
             }
-                counter++;
+            counter++;
         }
         StringBuilder sb = new StringBuilder();
         for (char d : array2) {
@@ -62,23 +84,30 @@ public class WordsProcessor {
         return sb.toString();
     }
 
-    public void setNewWord(){
-        this.wordToGuess = generateWord();
+    public void setNewWord() {
+       // this.wordToGuess = generateWord(); ////////////////////////
     }
 
-    public void setNewArray(){
+    public void setNewArray() {
         this.wordToArray = makeCharArray(wordToGuess);
     }
 
     String readWord(long id) {
         StringBuilder sb = new StringBuilder();
         try (Session session = sessionFactory.openSession()) {
-            Words words = session.get(Words.class,id);
+            Words words = session.get(Words.class, id);
             sb.append(words.getWord());
-
         }
-
         return sb.toString();
+    }
+
+    public List<Words> readWord2() {
+        List <Words> lista = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        try (Session session = sessionFactory.openSession()) {
+            lista  = session.createQuery("FROM Words",Words.class).getResultList();
+        }
+        return lista;
     }
 
     void addWord(String haslo) {
@@ -108,5 +137,21 @@ public class WordsProcessor {
             session.delete(words);
             transaction.commit();
         }
+    }
+
+    Set<Words> getSixWords() {
+
+        Set<Words> lista = new HashSet<>();
+        Words w1 = new Words();
+        w1.setId(10);
+        w1.setWord("pociag");
+        Words w2 = new Words();
+        w2.setId(11);
+        w2.setWord("pociag");
+
+        lista.add(w1);
+        lista.add(w2);
+
+        return null;
     }
 }
