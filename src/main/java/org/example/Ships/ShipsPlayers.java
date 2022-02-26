@@ -18,4 +18,9 @@ public class ShipsPlayers {
 
     @OneToMany(mappedBy = "player")
     private List<Shots> shots;
+
+    @OneToMany(mappedBy = "player")
+    private List<Ships> ships;
+
+
 }
