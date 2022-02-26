@@ -1,6 +1,8 @@
 package org.example;
 
 
+import org.example.Service.Paair;
+
 import java.util.*;
 import java.util.function.Predicate;
 
@@ -71,49 +73,49 @@ public class Methods {
         return b;
     }
     public static void MapState(Paair paairState, String[][] board){
-        switch (paairState.number) {
+        switch (paairState.getNumber()) {
             case 1 : {
-                board[0][0] = paairState.str;
+                board[0][0] = paairState.getStr();
                 System.out.println(Arrays.deepToString(board));
                 break;
             }
             case 2 : {
-                board[0][1] = paairState.str;
+                board[0][1] = paairState.getStr();
                 System.out.println(Arrays.deepToString(board));
                 break;
             }
             case 3 : {
-                board[0][2] = paairState.str;
+                board[0][2] = paairState.getStr();
                 System.out.println(Arrays.deepToString(board));
                 break;
             }
             case 4 : {
-                board[1][0] = paairState.str;
+                board[1][0] = paairState.getStr();
                 System.out.println(Arrays.deepToString(board));
                 break;
             }
             case 5 : {
-                board[1][1] = paairState.str;
+                board[1][1] = paairState.getStr();
                 System.out.println(Arrays.deepToString(board));
                 break;
             }
             case 6 : {
-                board[1][2] = paairState.str;
+                board[1][2] = paairState.getStr();
                 System.out.println(Arrays.deepToString(board));
                 break;
             }
             case 7 : {
-                board[2][0] = paairState.str;
+                board[2][0] = paairState.getStr();
                 System.out.println(Arrays.deepToString(board));
                 break;
             }
             case 8 : {
-                board[2][1] = paairState.str;
+                board[2][1] = paairState.getStr();
                 System.out.println(Arrays.deepToString(board));
                 break;
             }
             case 9 : {
-                board[2][2] = paairState.str;
+                board[2][2] = paairState.getStr();
                 System.out.println(Arrays.deepToString(board));
                 break;
             }

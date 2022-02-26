@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.Service.Paair;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.function.Predicate;

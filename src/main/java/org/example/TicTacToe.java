@@ -1,8 +1,11 @@
 package org.example;
 
+import org.example.Service.Paair;
+import org.example.Service.SaveTheGame;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import javax.persistence.Column;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -71,9 +74,10 @@ public class TicTacToe {
 
         SaveTheGame saveTheGame = new SaveTheGame();
         saveTheGame.setLocalDateTime(LocalDateTime.now());
-       saveTheGame.setListPaair(listPaair);
+        saveTheGame.setListPaair(listPaair);
 
         session.save(saveTheGame);
+        session.save(listPaair);
 
         session.close();
         sessionFactory.close();

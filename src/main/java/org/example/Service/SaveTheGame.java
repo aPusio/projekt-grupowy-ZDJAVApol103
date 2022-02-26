@@ -1,7 +1,8 @@
-package org.example;
+package org.example.Service;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.example.Service.Paair;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -16,5 +17,8 @@ public class SaveTheGame {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime localDateTime;
+    @OneToMany(mappedBy = "saveTheGame")
+    @Column(name = "saveTheGame_id")
     private List<Paair> listPaair;
+
 }
