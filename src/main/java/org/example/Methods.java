@@ -8,43 +8,55 @@ public class Methods {
 
     public static void State(int number, String player, String[][] board) {
         switch (number) {
-            case 1 -> {
+            case 1 : {
                 board[0][0] = player;
                 System.out.println(Arrays.deepToString(board));
+                break;
             }
-            case 2 -> {
+
+            case 2 :{
                 board[0][1] = player;
                 System.out.println(Arrays.deepToString(board));
+                break;
             }
-            case 3 -> {
+            case 3 : {
                 board[0][2] = player;
                 System.out.println(Arrays.deepToString(board));
+                break;
             }
-            case 4 -> {
+            case 4 : {
                 board[1][0] = player;
                 System.out.println(Arrays.deepToString(board));
+                break;
             }
-            case 5 -> {
+            case 5 : {
                 board[1][1] = player;
                 System.out.println(Arrays.deepToString(board));
+                break;
             }
-            case 6 -> {
+            case 6 : {
                 board[1][2] = player;
                 System.out.println(Arrays.deepToString(board));
+                break;
             }
-            case 7 -> {
+            case 7 : {
                 board[2][0] = player;
                 System.out.println(Arrays.deepToString(board));
+                break;
             }
-            case 8 -> {
+            case 8 : {
                 board[2][1] = player;
                 System.out.println(Arrays.deepToString(board));
+                break;
             }
-            case 9 -> {
+            case 9 : {
                 board[2][2] = player;
                 System.out.println(Arrays.deepToString(board));
+                break;
             }
-            default -> System.out.println("koniec gry");
+            default:
+                System.out.println("koniec gry");
+            break;
         }
     }
     public static boolean CheckedLists(int fieldNumber, List<Integer> listNumbers){
@@ -60,43 +72,54 @@ public class Methods {
     }
     public static void MapState(Paair paairState, String[][] board){
         switch (paairState.number) {
-            case 1 -> {
+            case 1 : {
                 board[0][0] = paairState.str;
                 System.out.println(Arrays.deepToString(board));
+                break;
             }
-            case 2 -> {
+            case 2 : {
                 board[0][1] = paairState.str;
                 System.out.println(Arrays.deepToString(board));
+                break;
             }
-            case 3 -> {
+            case 3 : {
                 board[0][2] = paairState.str;
                 System.out.println(Arrays.deepToString(board));
+                break;
             }
-            case 4 -> {
+            case 4 : {
                 board[1][0] = paairState.str;
                 System.out.println(Arrays.deepToString(board));
+                break;
             }
-            case 5 -> {
+            case 5 : {
                 board[1][1] = paairState.str;
                 System.out.println(Arrays.deepToString(board));
+                break;
             }
-            case 6 -> {
+            case 6 : {
                 board[1][2] = paairState.str;
                 System.out.println(Arrays.deepToString(board));
+                break;
             }
-            case 7 -> {
+            case 7 : {
                 board[2][0] = paairState.str;
                 System.out.println(Arrays.deepToString(board));
+                break;
             }
-            case 8 -> {
+            case 8 : {
                 board[2][1] = paairState.str;
                 System.out.println(Arrays.deepToString(board));
+                break;
             }
-            case 9 -> {
+            case 9 : {
                 board[2][2] = paairState.str;
                 System.out.println(Arrays.deepToString(board));
+                break;
             }
-            default -> System.out.println("koniec gry:");
+            default:
+                System.out.println("koniec gry:");
+            break;
         }
     }
 
