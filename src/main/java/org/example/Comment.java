@@ -1,9 +1,13 @@
 package org.example;
 
 import org.example.Service.Paair;
+import org.hibernate.SessionFactory;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
 import java.util.function.Predicate;
 
 public class Comment {

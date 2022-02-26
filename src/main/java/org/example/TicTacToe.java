@@ -4,6 +4,7 @@ import org.example.Service.Paair;
 import org.example.Service.SaveTheGame;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -14,6 +15,16 @@ public class TicTacToe {
         List<Paair> listPaair = new ArrayList<>();
         List<Integer> listNumbers = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
+
+        HibernateFactory hibernateFactory = new HibernateFactory();
+        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
+        Session session = sessionFactory.openSession();
+
+        Load(sessionFactory,8L);
+
+
+
+
         String pl, pl1, pl2, turn;
         int fieldNumber;
         do {
@@ -67,9 +78,9 @@ public class TicTacToe {
         } while (!Objects.equals(turn, "e"));
         scanner.close();
         Comment.WinPlayer(listPaair);
-        HibernateFactory hibernateFactory = new HibernateFactory();
-        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
-        Session session = sessionFactory.openSession();
+//        HibernateFactory hibernateFactory = new HibernateFactory();
+//        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
+//        Session session = sessionFactory.openSession();
 
         SaveTheGame saveTheGame = new SaveTheGame();
         saveTheGame.setLocalDateTime(LocalDateTime.now());
@@ -81,5 +92,13 @@ public class TicTacToe {
         }
         session.close();
         sessionFactory.close();
+    }
+    public static void Load(SessionFactory sessionFactory,Long ID){
+        Session session1 = sessionFactory.openSession();
+        List<Paair> from_paair = session1.createQuery("FROM Paair", Paair.class).getResultList();
+//        Query<Paair> query = session1.createQuery("FROM Paair WHERE Paair.ID = :ID", Paair.class);
+//        query.setParameter("ID",ID);
+//        List<Paair> paairList = query.getResultList();
+//        session1.close();
     }
 }
