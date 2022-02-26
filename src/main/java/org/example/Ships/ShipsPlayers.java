@@ -12,7 +12,8 @@ import java.util.List;
 public class ShipsPlayers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_player;
+    @Column(name = "id_player")
+    private Long idPlayer;
     private String login;
     private String status;
 

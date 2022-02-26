@@ -11,7 +11,8 @@ import javax.persistence.*;
 public class Shots {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_shot;
+    @Column(name = "id_shot")
+    private Long idShot;
     private int xCoordinate;
     private int yCoordinate;
     private boolean isHit;
