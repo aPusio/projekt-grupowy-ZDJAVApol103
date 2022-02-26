@@ -21,6 +21,7 @@ public class HibernateFactory {
         configuration.addAnnotatedClass(Car.class);
         configuration.addAnnotatedClass(Owner.class);
         configuration.addAnnotatedClass(Wheel.class);
+        configuration.addAnnotatedClass(SaveTheGame.class);
         return configuration;
     }
 

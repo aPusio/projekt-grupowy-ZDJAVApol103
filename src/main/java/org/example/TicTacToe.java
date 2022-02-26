@@ -1,5 +1,9 @@
 package org.example;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class TicTacToe {
@@ -61,5 +65,17 @@ public class TicTacToe {
         } while (!Objects.equals(turn, "e"));
         scanner.close();
         Comment.WinPlayer(listPaair);
+        HibernateFactory hibernateFactory = new HibernateFactory();
+        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
+        Session session = sessionFactory.openSession();
+
+        SaveTheGame saveTheGame = new SaveTheGame();
+        saveTheGame.setLocalDateTime(LocalDateTime.now());
+       saveTheGame.setListPaair(listPaair);
+
+        session.save(saveTheGame);
+
+        session.close();
+        sessionFactory.close();
     }
     }
