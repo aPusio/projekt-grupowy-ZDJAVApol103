@@ -17,6 +17,6 @@ public class Shots {
     private int yCoordinate;
     private boolean isHit;
 
-    @OneToOne
+    @ManyToOne
     private ShipsPlayers player;
 }
