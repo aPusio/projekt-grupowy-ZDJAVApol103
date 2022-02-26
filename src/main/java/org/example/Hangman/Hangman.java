@@ -3,13 +3,14 @@ package org.example.Hangman;
 import org.hibernate.SessionFactory;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
 public class Hangman {
 
-    public static final int WINNING_SCORE = 1;
-    public static final int CHANCES = 1;
+    public static final int WINNING_SCORE = 1; // debug  :D:D
+    public static final int CHANCES = 1; // debug  :D:D
     private SessionFactory sf;
 
     public Hangman(SessionFactory sessionFactory) {
@@ -35,6 +36,8 @@ public class Hangman {
                     break;
                 case "3":
                     System.out.println("delete single word");
+                    WordsProcessor wp = new WordsProcessor(sf);
+                    System.out.println(wp.readEveryWordFromDB());
                     break;
                 case "4":
                     System.out.println("edit single word");
@@ -49,8 +52,6 @@ public class Hangman {
     }
 
     public void start(SessionFactory sessionFactory) {
-
-
         Scanner scanner = new Scanner(System.in);
         printPalyerPick("first");
         Player player1 = new Player.PlayerBuilder(scanner.next()).score(0).build();
@@ -110,8 +111,11 @@ public class Hangman {
         WordsProcessor wordsProcessor = new WordsProcessor(sf);
         boolean currentRound = true;
 
-        wordsProcessor.readWord2();
-        wordsProcessor.setNewWord();
+        List<Words> list = wordsProcessor.readEveryWordFromDB();
+        String haslo = wordsProcessor.pickOneWordDeleteAfter(list);
+
+        System.out.println(haslo);  // debug  :D:D
+        wordsProcessor.setNewWord(haslo);
         wordsProcessor.setNewArray();
         String hashedWord = wordsProcessor.hash(wordsProcessor.getWordToArray());
 

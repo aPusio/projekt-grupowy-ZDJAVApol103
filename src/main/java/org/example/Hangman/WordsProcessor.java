@@ -1,15 +1,10 @@
 package org.example.Hangman;
 
 import lombok.*;
-import lombok.extern.slf4j.Slf4j;
-import org.example.HibernateFactory;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.io.Serializable;
 import java.util.*;
 
@@ -26,24 +21,24 @@ public class WordsProcessor {
     private long id;
     private String wordToGuess;
     private char[] wordToArray;
-    private Set<Words> lista;
+    private List<Words> lista;
 
-    public String generateWord(List<Words> list) {
-        String s = "";
-        for( Words w :list){
-            s =w.getWord();
-            list.remove(w);
-        }
 
-        return s;
+    public String pickOneWordDeleteAfter(List<Words> list){
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        int i = random.nextInt(list.size());
+
+        sb.append(list.get(i).getWord());
+        list.remove(i);
+        return sb.toString();
     }
 
-//    public String generateWord(Set<Words> lista) {
-//        StringBuilder sb = new StringBuilder();
-//        sb.setLength(0);
-//        Iterator iterator = lista.iterator();
-//        return sb.append(iterator.next()).toString();
-//    }
+    public String generateWord(String s) {
+        System.out.println(s);
+        return "nuill";
+    }
+
 
     public char[] makeCharArray(String word) {
         return word.toCharArray();
@@ -84,8 +79,8 @@ public class WordsProcessor {
         return sb.toString();
     }
 
-    public void setNewWord() {
-       // this.wordToGuess = generateWord(); ////////////////////////
+    public void setNewWord(String s) {
+       this.wordToGuess = s;
     }
 
     public void setNewArray() {
@@ -101,9 +96,8 @@ public class WordsProcessor {
         return sb.toString();
     }
 
-    public List<Words> readWord2() {
+    public List<Words> readEveryWordFromDB() {
         List <Words> lista = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
         try (Session session = sessionFactory.openSession()) {
             lista  = session.createQuery("FROM Words",Words.class).getResultList();
         }
@@ -139,19 +133,4 @@ public class WordsProcessor {
         }
     }
 
-    Set<Words> getSixWords() {
-
-        Set<Words> lista = new HashSet<>();
-        Words w1 = new Words();
-        w1.setId(10);
-        w1.setWord("pociag");
-        Words w2 = new Words();
-        w2.setId(11);
-        w2.setWord("pociag");
-
-        lista.add(w1);
-        lista.add(w2);
-
-        return null;
-    }
 }
