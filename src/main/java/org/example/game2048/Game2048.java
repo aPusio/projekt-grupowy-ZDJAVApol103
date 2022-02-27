@@ -1,12 +1,17 @@
 package org.example.game2048;
 
+import org.example.HibernateFactory;
 import org.hibernate.Session;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Game2048 {
-    private static final Session SESSION = new Factory().getSessionFactory().openSession();
+//    Prywatna DB:
+//    private static final Session SESSION = new Factory().getSessionFactory().openSession();
+//    DB projektu wspólnego:
+    private static final Session SESSION = new HibernateFactory().getSessionFactory().openSession();
     private static final UserProcessor USER_PROCESSOR = new UserProcessor();
 
     public void startGame() {
@@ -48,6 +53,7 @@ public class Game2048 {
             int index = boardList.size() - 1;
             BoardGenerator.printBoard(boardList.get(index).getPointList());
             Board board = boardList.get(index);
+            List<Point> points = new ArrayList<>(board.getPointList());
             System.out.println("Podaj ruch\n" +
                     "1 - góra\n" +
                     "2 - dół\n" +
@@ -56,20 +62,20 @@ public class Game2048 {
             move = new Scanner(System.in).nextInt();
             switch (move) {
                 case 1:
-                    board.setPointList(Movement.moveUp(board.getPointList()));
-                    USER_PROCESSOR.addNewBoard(user, BoardGenerator.updateBoard(board));
+                    board.setPointList(Movement.moveUp(points));
+                    addBoard(user, BoardGenerator.updateBoard(board));
                     break;
                 case 2:
-                    board.setPointList(Movement.moveDown(board.getPointList()));
-                    USER_PROCESSOR.addNewBoard(user, BoardGenerator.updateBoard(board));
+                    board.setPointList(Movement.moveDown(points));
+                    addBoard(user, BoardGenerator.updateBoard(board));
                     break;
                 case 3:
-                    board.setPointList(Movement.moveRight(board.getPointList()));
-                    USER_PROCESSOR.addNewBoard(user, BoardGenerator.updateBoard(board));
+                    board.setPointList(Movement.moveRight(points));
+                    addBoard(user, BoardGenerator.updateBoard(board));
                     break;
                 case 4:
-                    board.setPointList(Movement.moveLeft(board.getPointList()));
-                    USER_PROCESSOR.addNewBoard(user, BoardGenerator.updateBoard(board));
+                    board.setPointList(Movement.moveLeft(points));
+                    addBoard(user, BoardGenerator.updateBoard(board));
                     break;
                 case 0:
                     System.out.println("Koniec!");
@@ -80,6 +86,10 @@ public class Game2048 {
             }
         }while (move!=0);
 
+    }
+
+    private void addBoard(User user, Board updatedBoard) {
+        USER_PROCESSOR.addNewBoard(user, updatedBoard);
     }
 
     public static void main(String[] args) {
