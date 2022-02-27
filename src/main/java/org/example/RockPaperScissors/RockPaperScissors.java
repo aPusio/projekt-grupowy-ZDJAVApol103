@@ -6,8 +6,11 @@ public class RockPaperScissors {
     private int userScore = 0;
     private int computerScore = 0;
     private int numberOfGames = 0;
+    private int numberOfRound = 0;
+    private int roundWins = 0;
+    private int roundLost = 0;
 
-    public enum Move {
+    enum Move {
         ROCK, PAPER, SCISSORS, WATER, FIRE, AIR, SPONGE;
 
         public int compareMoves(Move otherMove) {
@@ -45,29 +48,28 @@ public class RockPaperScissors {
             int compareMoves = userMove.compareMoves(computerMove);
             switch (compareMoves) {
                 case 0:
-                    System.out.println("Draw!");
+                    System.out.println("Draw!\n");
                     break;
                 case 1:
-                    System.out.println(userMove + " beats " + computerMove + ". You won!");
+                    System.out.println(userMove + " beats " + computerMove + ". You won!\n");
                     userScore++;
                     break;
                 case -1:
-                    System.out.println(computerMove + " beats " + userMove + ". You lost.");
+                    System.out.println(computerMove + " beats " + userMove + ". You lost.\n");
                     computerScore++;
                     break;
             }
             numberOfGames++;
         }
         printActualGameStats();
-        userScore = 0;
-        computerScore = 0;
-        numberOfGames = 0;
+        actualRoundStats();
+        clearStats();
 
         if (user.playAgain()) {
             System.out.println();
             startGame();
         } else {
-            System.out.println("\nTHE END\nTHANKS FOR THE GAME ");
+            endGame();
         }
     }
     private void printActualGameStats() {
@@ -78,6 +80,38 @@ public class RockPaperScissors {
         System.out.println("WINS = " + wins);
         System.out.println("LOSSES = " + losses);
         System.out.println("DRAWS = " + draws);
-        System.out.println("GAME PLAYED = " + numberOfGames);
+        System.out.println("GAME PLAYED = " + numberOfGames + "\n");
+
+        if (wins > losses){
+            System.out.println("!!! CONGRATULATIONS !!! YOU WIN THIS ROUND !!!\n");
+        }
+        else {
+            System.out.println("SORRY :( YOU LOST THIS ROUND\n");
+        }
+    }
+    private void actualRoundStats(){
+        numberOfRound++;
+        if (userScore > computerScore){
+            roundWins++; }
+        else {
+            roundLost++;
+        }
+    }
+    private void clearStats(){
+        userScore = 0;
+        computerScore = 0;
+        numberOfGames = 0;
+    }
+    private void endGame() {
+        if (roundWins > roundLost){
+            System.out.println("\n!!! YOU ARE A WINNER !!!");
+        }
+        else {
+            System.out.println("\n:( YOUR ARE A LOSER");
+        }
+        System.out.println("\nROUNDS = " + numberOfRound);
+        System.out.println("WON ROUNDS = " + roundWins);
+        System.out.println("LOST ROUNDS = " + roundLost);
+        System.out.println("\nTHE END\nTHANKS FOR THE GAME ");
     }
 }
