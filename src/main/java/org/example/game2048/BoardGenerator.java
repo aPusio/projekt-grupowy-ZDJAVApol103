@@ -52,7 +52,7 @@ public class BoardGenerator {
                     }
                 }
                 if (!isFilled) {
-                    System.out.printf("%3s ", String.valueOf(0));
+                    System.out.printf("%3s ", 0);
                 }
             }
             System.out.println();

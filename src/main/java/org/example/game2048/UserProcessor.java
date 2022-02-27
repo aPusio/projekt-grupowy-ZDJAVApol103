@@ -8,37 +8,20 @@ import javax.persistence.NoResultException;
 import java.util.List;
 
 public class UserProcessor {
-    //    Prywatna DB:
-//    private static final SessionFactory SESSION_FACTORY = new Factory().getSessionFactory();
-    //    DB projektu wspólnego:
-    private static final SessionFactory SESSION_FACTORY = new HibernateFactory().getSessionFactory();
+//        Prywatna DB:
+    private static final SessionFactory SESSION_FACTORY = new Factory().getSessionFactory();
+    private static final BoardProcessor BOARD_PROCESSOR = new BoardProcessor();
+//        DB projektu wspólnego:
+//    private static final SessionFactory SESSION_FACTORY = new HibernateFactory().getSessionFactory();
 
     private User addNewUser(String nickname) {
         try (Session session = SESSION_FACTORY.openSession()){
             User user = new User();
             user.setNickname(nickname);
             session.save(user);
-            addNewBoard(user, BoardGenerator.generateNewBoard());
+            BOARD_PROCESSOR.addNewBoard(user, BoardGenerator.generateNewBoard());
             return user;
         }
-    }
-
-    public void addNewBoard(User user, Board board) {
-        try (Session session = SESSION_FACTORY.openSession()) {
-            board.setUser(user);
-            List<Board> boardList = user.getBoardList();
-            boardList.add(board);
-            user.setBoardList(boardList);
-
-            session.save(board);
-
-            List<Point> points = board.getPointList();
-            for (Point point : points) {
-                point.setBoard(board);
-                session.save(point);
-            }
-        }
-
     }
 
     public User getUser(String nickname, Session session) {

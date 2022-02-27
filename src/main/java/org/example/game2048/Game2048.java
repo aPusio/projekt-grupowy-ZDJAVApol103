@@ -8,9 +8,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Game2048 {
-//    Prywatna DB:
+    private static final BoardProcessor BOARD_PROCESSOR = new BoardProcessor();
+    //    Prywatna DB:
     private static final Session SESSION = new Factory().getSessionFactory().openSession();
-//    DB projektu wspólnego:
+    //    DB projektu wspólnego:
 //    private static final Session SESSION = new HibernateFactory().getSessionFactory().openSession();
     private static final UserProcessor USER_PROCESSOR = new UserProcessor();
 
@@ -29,7 +30,7 @@ public class Game2048 {
             switch (scanner.nextInt()) {
                 case 1:
                     System.out.println("Rozpoczęto nową grę!");
-                    USER_PROCESSOR.addNewBoard(user, BoardGenerator.generateNewBoard());
+                    BOARD_PROCESSOR.addNewBoard(user, BoardGenerator.generateNewBoard());
                     do {
                         play(user);
                     } while (new Scanner(System.in).nextInt() != 1);
@@ -65,19 +66,19 @@ public class Game2048 {
             switch (move) {
                 case "w":
                     board.setPointList(Movement.moveUp(points));
-                    USER_PROCESSOR.addNewBoard(user, BoardGenerator.updateBoard(board));
+                    addBoard(user, BoardGenerator.updateBoard(board));
                     break;
                 case "s":
                     board.setPointList(Movement.moveDown(points));
-                    USER_PROCESSOR.addNewBoard(user, BoardGenerator.updateBoard(board));
+                    addBoard(user, BoardGenerator.updateBoard(board));
                     break;
                 case "d":
                     board.setPointList(Movement.moveRight(points));
-                    USER_PROCESSOR.addNewBoard(user, BoardGenerator.updateBoard(board));
+                    addBoard(user, BoardGenerator.updateBoard(board));
                     break;
                 case "a":
                     board.setPointList(Movement.moveLeft(points));
-                    USER_PROCESSOR.addNewBoard(user, BoardGenerator.updateBoard(board));
+                    addBoard(user, BoardGenerator.updateBoard(board));
                     break;
                 case "q":
                     System.out.println("Koniec!");
@@ -91,7 +92,7 @@ public class Game2048 {
     }
 
     private void addBoard(User user, Board updatedBoard) {
-        USER_PROCESSOR.addNewBoard(user, updatedBoard);
+        BOARD_PROCESSOR.addNewBoard(user, updatedBoard);
     }
 
     public static void main(String[] args) {
