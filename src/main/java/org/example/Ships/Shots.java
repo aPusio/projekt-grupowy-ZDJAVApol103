@@ -21,6 +21,6 @@ public class Shots {
     private ShipsPlayers player;
 
     @ManyToOne
-    private Ships ships;
+    private ShipsEntity ships;
 
 }

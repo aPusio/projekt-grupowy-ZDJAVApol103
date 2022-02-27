@@ -21,7 +21,7 @@ public class ShipsPlayers {
     private List<Shots> shots;
 
     @OneToMany(mappedBy = "player")
-    private List<Ships> ships;
+    private List<ShipsEntity> ships;
 
 
 }

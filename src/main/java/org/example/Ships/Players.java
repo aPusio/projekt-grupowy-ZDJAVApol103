@@ -4,7 +4,13 @@ public class Players {
 
     private Board board;
     private String name;
+    private int score;
 
+    public Players(Board board, String name, int score) {
+        this.board = board;
+        this.name = name;
+        this.score = score;
+    }
 
     public String getName() {
         return name;

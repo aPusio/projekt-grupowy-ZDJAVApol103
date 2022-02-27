@@ -15,15 +15,22 @@ public class ShipsProcessor {
     HibernateFactory hibernateFactory = new HibernateFactory();
     SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
 
-    void dodaj(String login, String haslo) {
+    void dodaj(int length,  int xStart, int xEnd, int  yStart, int yEnd, int hits) {
 
         try (
-                Session session = SDA_SESSION_FACTORY.openSession()) {
-            //zapisywanie nowego bibliotekarza:
-            Bibliotekarz bibliotekarz = new Bibliotekarz();
-            bibliotekarz.setHaslo(haslo);
-            bibliotekarz.setLogin(login);
-            Serializable id = session.save(bibliotekarz);
-            log.info("Saved new entity (bibliotekarz) with id: {}", id);
+                Session session = sessionFactory.openSession()) {
+            //zapisywanie nowego statku:
+            ShipsEntity ships = new ShipsEntity();
+            ships.setShipLength(length);
+            ships.setXEndPoint(xEnd);
+            ships.setYEndPoint(yEnd);
+            ships.setXStartPoint(xStart);
+            ships.setYStartPoint(yStart);
+            ships.setHits(hits);
+            Serializable id = session.save(ships);
+            log.info("Saved new entity (ships) with id: {}", id);
         }
+    }
 }
+
+
