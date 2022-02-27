@@ -1,6 +1,11 @@
 package org.example.game2048;
 
-import org.example.HibernateFactory;
+import org.example.game2048.board.Board;
+import org.example.game2048.board.BoardGenerator;
+import org.example.game2048.board.BoardProcessor;
+import org.example.game2048.point.Point;
+import org.example.game2048.user.User;
+import org.example.game2048.user.UserProcessor;
 import org.hibernate.Session;
 
 import java.util.ArrayList;

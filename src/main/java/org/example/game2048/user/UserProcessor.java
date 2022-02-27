@@ -1,11 +1,13 @@
-package org.example.game2048;
+package org.example.game2048.user;
 
-import org.example.HibernateFactory;
+import org.example.game2048.Factory;
+import org.example.game2048.board.BoardGenerator;
+import org.example.game2048.board.BoardProcessor;
+import org.example.game2048.user.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.NoResultException;
-import java.util.List;
 
 public class UserProcessor {
 //        Prywatna DB:

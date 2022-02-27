@@ -1,9 +1,9 @@
 package org.example;
 
 
-import org.example.game2048.Board;
-import org.example.game2048.Point;
-import org.example.game2048.User;
+import org.example.game2048.board.Board;
+import org.example.game2048.point.Point;
+import org.example.game2048.user.User;
 import org.example.learnig.hibernate.Car;
 import org.example.learnig.hibernate.Owner;
 import org.example.learnig.hibernate.Wheel;

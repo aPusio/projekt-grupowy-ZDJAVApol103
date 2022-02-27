@@ -1,6 +1,7 @@
-package org.example.game2048;
+package org.example.game2048.point;
 
 import lombok.*;
+import org.example.game2048.board.Board;
 
 import javax.persistence.*;
 import java.util.Objects;

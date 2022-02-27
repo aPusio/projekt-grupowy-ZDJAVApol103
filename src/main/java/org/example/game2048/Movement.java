@@ -1,4 +1,6 @@
 package org.example.game2048;
+import org.example.game2048.point.Point;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;

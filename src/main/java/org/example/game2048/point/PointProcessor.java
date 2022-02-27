@@ -1,5 +1,8 @@
-package org.example.game2048;
+package org.example.game2048.point;
 
+import org.example.game2048.Factory;
+import org.example.game2048.board.Board;
+import org.example.game2048.point.Point;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
