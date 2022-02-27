@@ -37,18 +37,49 @@ public class Game2048 {
                     break;
             }
         } else {
-            do {
-                play(user);
-            } while (new Scanner(System.in).nextInt() != 1);
+            play(user);
         }
     }
 
     private void play(User user) {
-        List<Board> boardList = user.getBoardList();
-        int index = boardList.size() - 1;
-        BoardGenerator.printBoard(boardList.get(index).getPointList());
-        Board board = BoardGenerator.updateBoard(boardList.get(index));
-        USER_PROCESSOR.addNewBoard(user, board);
+        int move;
+        do {
+            List<Board> boardList = user.getBoardList();
+            int index = boardList.size() - 1;
+            BoardGenerator.printBoard(boardList.get(index).getPointList());
+            Board board = boardList.get(index);
+            System.out.println("Podaj ruch\n" +
+                    "1 - góra\n" +
+                    "2 - dół\n" +
+                    "3 - prawo\n" +
+                    "4 - lewo");
+            move = new Scanner(System.in).nextInt();
+            switch (move) {
+                case 1:
+                    board.setPointList(Movement.moveUp(board.getPointList()));
+                    USER_PROCESSOR.addNewBoard(user, BoardGenerator.updateBoard(board));
+                    break;
+                case 2:
+                    board.setPointList(Movement.moveDown(board.getPointList()));
+                    USER_PROCESSOR.addNewBoard(user, BoardGenerator.updateBoard(board));
+                    break;
+                case 3:
+                    board.setPointList(Movement.moveRight(board.getPointList()));
+                    USER_PROCESSOR.addNewBoard(user, BoardGenerator.updateBoard(board));
+                    break;
+                case 4:
+                    board.setPointList(Movement.moveLeft(board.getPointList()));
+                    USER_PROCESSOR.addNewBoard(user, BoardGenerator.updateBoard(board));
+                    break;
+                case 0:
+                    System.out.println("Koniec!");
+                    break;
+                default:
+                    System.out.println("Zły ruch!");
+                    break;
+            }
+        }while (move!=0);
+
     }
 
     public static void main(String[] args) {
