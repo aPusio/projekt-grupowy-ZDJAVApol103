@@ -1,7 +1,6 @@
 package org.example.Hangman;
 
 import lombok.Data;
-import org.hibernate.SessionFactory;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,7 +18,7 @@ public class Player {
     private int chances;
 
     @OneToMany
-    private List<Hangman> hangman;
+    private List<Hangman2> hangman2;
 
     public void subtractChance(){
         this.chances -=1;
