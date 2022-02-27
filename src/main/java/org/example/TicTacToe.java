@@ -1,7 +1,10 @@
 package org.example;
 
+import org.example.Service.Paair;
+import org.example.Service.SaveTheGame;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -15,6 +18,7 @@ public class TicTacToe {
         SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
         Scanner scanner = new Scanner(System.in);
         String pl, pl1, pl2, turn;
+       // Load(sessionFactory,8L);
         String[][] board = new String[3][3];
         int fieldNumber, option;
         int state;
@@ -34,8 +38,8 @@ public class TicTacToe {
             }
         }
         do {
-        Comment.PlayerChoice();
-        pl = scanner.next();
+            Comment.PlayerChoice();
+            pl = scanner.next();
         } while ((!Objects.equals(pl, "x")) && (!Objects.equals(pl, "o")));
         do {
             Comment.ThePlayerStartsTheGame();
@@ -62,7 +66,7 @@ public class TicTacToe {
                     board[i][j] = " ";
                 }
             }
-            for (Paair o: listPaair){
+            for (Paair o : listPaair) {
                 Methods.MapState(o, board);
             }
                 Methods.State(fieldNumber, String.valueOf(player), board);
@@ -75,11 +79,11 @@ public class TicTacToe {
                 turn = scanner.next();
             } while ((!Objects.equals(turn, "n")) && (!Objects.equals(turn, "e")));
             if ((Objects.equals(turn, "n")) && Objects.equals(String.valueOf(player), pl1)) {
-               pl1 = pl2;
+                pl1 = pl2;
             }
-           if (Methods.EndGame(listPaair)){
-               break;
-           }
+            if (Methods.EndGame(listPaair)) {
+                break;
+            }
         } while (!Objects.equals(turn, "e"));
         scanner.close();
         Comment.WinPlayer(listPaair);
@@ -98,4 +102,11 @@ public class TicTacToe {
         session.close();
         sessionFactory.close();
     }
+    public static void Load(SessionFactory sessionFactory,Long ID){
+        Session session1 = sessionFactory.openSession();
+        List<Paair> from_paair = session1.createQuery("FROM Paair", Paair.class).getResultList();
+//        Query<Paair> query = session1.createQuery("FROM Paair WHERE Paair.ID = :ID", Paair.class);
+//        query.setParameter("ID",ID);
+//        List<Paair> paairList = query.getResultList();
+//        session1.close();
     }

@@ -3,7 +3,6 @@ package org.example;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import java.util.List;
 import java.util.Scanner;
 
 /**
