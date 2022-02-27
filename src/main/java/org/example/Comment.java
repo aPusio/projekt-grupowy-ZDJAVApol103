@@ -82,7 +82,14 @@ public class Comment {
     public static void FurtherMove(){
         System.out.print("n - next player: e - end game: ");
     }
-    public  static void GameBoard(String[][] gameboard){
+
+    public  static void GameBoard(String[][] gameboard, Paair paairState){
+        for (int i = 0; i < gameboard.length; i++) {
+            for (int j = 0; j < gameboard.length; j++) {
+                gameboard[i][j] = " ";
+            }
+            Methods.State(paairState.getNumber(), String.valueOf(paairState.getStr()), gameboard);
+        }
         for (String[] strings : gameboard) {
             for (int j = 0; j < gameboard.length; j++) {
                 System.out.printf(" %s%3s%3s ", "|", strings[j], "|");

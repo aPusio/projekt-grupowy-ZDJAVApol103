@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.function.Predicate;
 
 public class TicTacToe {
     public static void main(String[] args) {
@@ -15,6 +16,7 @@ public class TicTacToe {
         SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
         Scanner scanner = new Scanner(System.in);
         String pl, pl1, pl2, turn;
+        String[][] board = new String[3][3];
         int fieldNumber, option;
         long state;
         System.out.printf("wybierz opcję%n 1- wczytaj grę%n 2- zagraj");
@@ -24,7 +26,10 @@ public class TicTacToe {
             state = scanner.nextLong();
             try (Session session = hibernateFactory.getSessionFactory().openSession()) {
                 Paair paair = session.get(Paair.class, state);
-                System.out.println(state);
+                List<Paair> from_paair = session.createQuery("FROM Paair", Paair.class).getResultList();
+                for (Paair paair1: from_paair) {
+                    Comment.GameBoard(board, paair1);
+                }
             }
         }
         do {
@@ -50,7 +55,6 @@ public class TicTacToe {
                     }
                 }
                 while ((Methods.CheckedLists(fieldNumber, listNumbers)) && fieldNumber < 10 && fieldNumber > 0);
-            String[][] board = new String[3][3];
 
             for (int i = 0; i < board.length; i++) {
                 for (int j = 0; j < board.length; j++) {
@@ -63,7 +67,7 @@ public class TicTacToe {
                 Methods.State(fieldNumber, String.valueOf(player), board);
                 listNumbers.add(fieldNumber);
                listPaair.add(new Paair(String.valueOf(player), fieldNumber));
-            Comment.GameBoard(board);
+            Comment.GameBoard(board, new Paair(String.valueOf(player), fieldNumber));
             System.out.println(listNumbers);
             do {
                 Comment.FurtherMove();
