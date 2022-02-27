@@ -48,6 +48,7 @@ public class Game2048 {
 
     private void play(User user) {
         String move;
+
         do {
             List<Board> boardList = user.getBoardList();
             int index = boardList.size() - 1;
