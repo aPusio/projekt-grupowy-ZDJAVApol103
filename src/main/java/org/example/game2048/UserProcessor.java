@@ -1,5 +1,6 @@
 package org.example.game2048;
 
+import org.example.HibernateFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -7,7 +8,10 @@ import javax.persistence.NoResultException;
 import java.util.List;
 
 public class UserProcessor {
-    private static final SessionFactory SESSION_FACTORY = new Factory().getSessionFactory();
+    //    Prywatna DB:
+//    private static final SessionFactory SESSION_FACTORY = new Factory().getSessionFactory();
+    //    DB projektu wspólnego:
+    private static final SessionFactory SESSION_FACTORY = new HibernateFactory().getSessionFactory();
 
     private User addNewUser(String nickname) {
         try (Session session = SESSION_FACTORY.openSession()){
