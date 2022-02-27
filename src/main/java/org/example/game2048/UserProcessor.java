@@ -37,7 +37,6 @@ public class UserProcessor {
 
     }
 
-
     public User getUser(String nickname, Session session) {
         try {
             return session.createQuery("SELECT u FROM User u WHERE u.nickname = :nickname", User.class)

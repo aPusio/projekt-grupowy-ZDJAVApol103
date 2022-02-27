@@ -23,7 +23,7 @@ public class Movement {
                 }
             } else if (verticalLine.size() == 2) {
                 if (verticalLine.get(0).getValue().equals(verticalLine.get(1).getValue())) {
-                    pointList.add(new Point(0, i, verticalLine.get(0).getValue() + verticalLine.get(1).getValue()));
+                    pointList.add(new Point(3, 0, verticalLine.get(0).getValue() + verticalLine.get(1).getValue()));
                     pointList.remove(verticalLine.get(0));
                     pointList.remove(verticalLine.get(1));
                 } else {
@@ -91,13 +91,13 @@ public class Movement {
                     point.setY(tmp);
                     tmp = tmp +1;
                 }
-                if (verticalLine.get(0).getValue().equals(verticalLine.get(1).getValue())) {
-                    verticalLine.get(0).setValue(verticalLine.get(0).getValue() + verticalLine.get(1).getValue());
-                    verticalLine.get(1).setValue(verticalLine.get(2).getValue());
-                    pointList.remove(verticalLine.get(2));
-                } else if (verticalLine.get(1).getValue().equals(verticalLine.get(2).getValue())) {
-                    verticalLine.get(1).setValue(verticalLine.get(1).getValue() + verticalLine.get(2).getValue());
-                    pointList.remove(verticalLine.get(2));
+                if (verticalLine.get(1).getValue().equals(verticalLine.get(2).getValue())) {
+                    verticalLine.get(2).setValue(verticalLine.get(1).getValue() + verticalLine.get(2).getValue());
+                    verticalLine.get(1).setValue(verticalLine.get(0).getValue());
+                    pointList.remove(verticalLine.get(0));
+                } else if (verticalLine.get(0).getValue().equals(verticalLine.get(1).getValue())) {
+                    verticalLine.get(1).setValue(verticalLine.get(0).getValue() + verticalLine.get(1).getValue());
+                    pointList.remove(verticalLine.get(0));
                 }
             } else if (verticalLine.size() == 4) {
 

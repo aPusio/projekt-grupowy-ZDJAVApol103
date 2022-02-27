@@ -10,7 +10,7 @@ public class Factory {
         Configuration configuration = new Configuration();
         configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/game_2048?serverTimezone=UTC");
         configuration.setProperty("hibernate.connection.username", "root");
-        configuration.setProperty("hibernate.connection.password", "admin");
+        configuration.setProperty("hibernate.connection.password", "19681992");
         configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
         configuration.setProperty("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
         configuration.setProperty("hibernate.hbm2ddl.auto", "update");

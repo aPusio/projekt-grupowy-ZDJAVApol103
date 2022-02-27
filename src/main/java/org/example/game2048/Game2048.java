@@ -42,43 +42,44 @@ public class Game2048 {
     }
 
     private void play(User user) {
-        int move;
+        String move;
         do {
             List<Board> boardList = user.getBoardList();
             int index = boardList.size() - 1;
             BoardGenerator.printBoard(boardList.get(index).getPointList());
             Board board = boardList.get(index);
-            System.out.println("Podaj ruch\n" +
-                    "1 - góra\n" +
-                    "2 - dół\n" +
-                    "3 - prawo\n" +
-                    "4 - lewo");
-            move = new Scanner(System.in).nextInt();
+            System.out.println("Enter movement:\n" +
+                    "w - Move up.\n" +
+                    "s - Move down.\n" +
+                    "d - Move right.\n" +
+                    "a - Move left\n" +
+                    "q - Quit.");
+            move = new Scanner(System.in).nextLine();
             switch (move) {
-                case 1:
+                case "w":
                     board.setPointList(Movement.moveUp(board.getPointList()));
                     USER_PROCESSOR.addNewBoard(user, BoardGenerator.updateBoard(board));
                     break;
-                case 2:
+                case "s":
                     board.setPointList(Movement.moveDown(board.getPointList()));
                     USER_PROCESSOR.addNewBoard(user, BoardGenerator.updateBoard(board));
                     break;
-                case 3:
+                case "d":
                     board.setPointList(Movement.moveRight(board.getPointList()));
                     USER_PROCESSOR.addNewBoard(user, BoardGenerator.updateBoard(board));
                     break;
-                case 4:
+                case "a":
                     board.setPointList(Movement.moveLeft(board.getPointList()));
                     USER_PROCESSOR.addNewBoard(user, BoardGenerator.updateBoard(board));
                     break;
-                case 0:
+                case "q":
                     System.out.println("Koniec!");
                     break;
                 default:
                     System.out.println("Zły ruch!");
                     break;
             }
-        }while (move!=0);
+        } while (!move.equals("q"));
 
     }
 
