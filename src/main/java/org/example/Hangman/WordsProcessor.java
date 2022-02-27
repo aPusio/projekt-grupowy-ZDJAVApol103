@@ -23,12 +23,10 @@ public class WordsProcessor {
     private char[] wordToArray;
     private List<Words> lista;
 
-
     public String pickOneWordDeleteAfter(List<Words> list){
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
         int i = random.nextInt(list.size());
-
         sb.append(list.get(i).getWord());
         list.remove(i);
         return sb.toString();
@@ -87,7 +85,7 @@ public class WordsProcessor {
         this.wordToArray = makeCharArray(wordToGuess);
     }
 
-    String readWord(long id) {
+    String readWordById(long id) {
         StringBuilder sb = new StringBuilder();
         try (Session session = sessionFactory.openSession()) {
             Words words = session.get(Words.class, id);
