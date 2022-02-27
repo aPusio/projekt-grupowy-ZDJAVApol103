@@ -1,11 +1,12 @@
 package org.example;
 
+
 import org.example.game2048.Board;
 import org.example.game2048.Point;
 import org.example.game2048.User;
-import org.example.learnig.Car;
-import org.example.learnig.Owner;
-import org.example.learnig.Wheel;
+import org.example.learnig.hibernate.Car;
+import org.example.learnig.hibernate.Owner;
+import org.example.learnig.hibernate.Wheel;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
