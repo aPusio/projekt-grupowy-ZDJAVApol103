@@ -20,7 +20,6 @@ public class BoardProcessor {
             board.setUser(user);
             List<Board> boardList = user.getBoardList();
             boardList.add(board);
-            user.setBoardList(boardList);
             session.save(board);
             POINT_PROCESSOR.addPoints(board);
         }
