@@ -85,6 +85,9 @@ public class RockPaperScissors {
         if (wins > losses){
             System.out.println("!!! CONGRATULATIONS !!! YOU WIN THIS ROUND !!!\n");
         }
+        else if (wins == losses){
+            System.out.println("YOU TIED\n");
+        }
         else {
             System.out.println("SORRY :( YOU LOST THIS ROUND\n");
         }
