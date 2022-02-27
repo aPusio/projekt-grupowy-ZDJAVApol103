@@ -1,4 +1,4 @@
-package org.example.learnig;
+package org.example.learnig.hibernate;
 
 import lombok.Getter;
 import lombok.Setter;
