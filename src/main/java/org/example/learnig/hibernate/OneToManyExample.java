@@ -1,10 +1,10 @@
-package org.example.learnig;
+package org.example.learnig.hibernate;
 
 import org.example.HibernateFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-public class LearnigMain {
+public class OneToManyExample {
     public static void main(String[] args) {
         HibernateFactory hibernateFactory = new HibernateFactory();
         SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
@@ -14,15 +14,21 @@ public class LearnigMain {
         car.setName("Fiat");
         car.setProductionYear(1992);
 
-        Owner owner = new Owner();
-        owner.setName("Adam");
-        owner.setSurname("Adamski");
+        Wheel leftWheel = new Wheel();
+        leftWheel.setSize(17);
+        leftWheel.setName("kolo lewe");
 
-        car.setOwner(owner);
-        owner.setCar(car);
+        Wheel rightWheel = new Wheel();
+        rightWheel.setSize(17);
+        rightWheel.setName("kolo prawe");
+
+//        car.setWheels(List.of(leftWheel, rightWheel));
+        leftWheel.setCar(car);
+        rightWheel.setCar(car);
 
         session.save(car);
-        session.save(owner);
+        session.save(leftWheel);
+        session.save(rightWheel);
 
         session.close();
         sessionFactory.close();
