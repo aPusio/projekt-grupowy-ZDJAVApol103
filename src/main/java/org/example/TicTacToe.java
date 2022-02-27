@@ -18,18 +18,18 @@ public class TicTacToe {
         SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
         Scanner scanner = new Scanner(System.in);
         String pl, pl1, pl2, turn;
-       // Load(sessionFactory,8L);
+        // Load(sessionFactory,8L);
         String[][] board = new String[3][3];
         int fieldNumber, option;
         int state;
         System.out.printf("wybierz opcję%n 1- wczytaj grę%n 2- zagraj");
         option = scanner.nextInt();
-            System.out.print("wybierz stan gry:");
+        System.out.print("wybierz stan gry:");
         if (option == 1) {
             state = scanner.nextInt();
             try (Session session = hibernateFactory.getSessionFactory().openSession()) {
-               Paair textPaair = null;
-               List<Paair> from_paair = session.createQuery("FROM Paair WHERE saveTheGame_id = 8", Paair.class).getResultList();
+                Paair textPaair = null;
+                List<Paair> from_paair = session.createQuery("FROM Paair WHERE saveTheGame_id = 8", Paair.class).getResultList();
                /* for (Paair paair1 : from_paair) {
                     textPaair = paair1;
                     //Comment.GameBoard(board, paair1);
@@ -50,16 +50,16 @@ public class TicTacToe {
                 pl2 = "o";
             } else pl2 = "x";
             PlayerOne player = new PlayerOne(pl1);
-                do {
-                    if (Objects.equals(pl1, pl)){
-                        Comment.FieldSelection();
-                    fieldNumber = scanner.nextInt();}
-                    else {
-                        Random random = new Random();
-                        fieldNumber = random.nextInt(9) + 1;
-                    }
+            do {
+                if (Objects.equals(pl1, pl)) {
+                    Comment.FieldSelection();
+                    fieldNumber = scanner.nextInt();
+                } else {
+                    Random random = new Random();
+                    fieldNumber = random.nextInt(9) + 1;
                 }
-                while ((Methods.CheckedLists(fieldNumber, listNumbers)) && fieldNumber < 10 && fieldNumber > 0);
+            }
+            while ((Methods.CheckedLists(fieldNumber, listNumbers)) && fieldNumber < 10 && fieldNumber > 0);
 
             for (int i = 0; i < board.length; i++) {
                 for (int j = 0; j < board.length; j++) {
@@ -69,9 +69,9 @@ public class TicTacToe {
             for (Paair o : listPaair) {
                 Methods.MapState(o, board);
             }
-                Methods.State(fieldNumber, String.valueOf(player), board);
-                listNumbers.add(fieldNumber);
-               listPaair.add(new Paair(String.valueOf(player), fieldNumber));
+            Methods.State(fieldNumber, String.valueOf(player), board);
+            listNumbers.add(fieldNumber);
+            listPaair.add(new Paair(String.valueOf(player), fieldNumber));
             Comment.GameBoard(board, new Paair(String.valueOf(player), fieldNumber));
             System.out.println(listNumbers);
             do {
@@ -91,18 +91,19 @@ public class TicTacToe {
 
         SaveTheGame saveTheGame = new SaveTheGame();
         saveTheGame.setLocalDateTime(LocalDateTime.now());
-       saveTheGame.setListPaair(listPaair);
+        saveTheGame.setListPaair(listPaair);
         session.save(saveTheGame);
-       for(Paair paair: listPaair){
-           paair.setSaveTheGame(saveTheGame);
-           session.save(paair);
-       }
+        for (Paair paair : listPaair) {
+            paair.setSaveTheGame(saveTheGame);
+            session.save(paair);
+        }
 
 
         session.close();
         sessionFactory.close();
     }
-    public static void Load(SessionFactory sessionFactory,Long ID){
+
+    public static void Load(SessionFactory sessionFactory, Long ID) {
         Session session1 = sessionFactory.openSession();
         List<Paair> from_paair = session1.createQuery("FROM Paair", Paair.class).getResultList();
 //        Query<Paair> query = session1.createQuery("FROM Paair WHERE Paair.ID = :ID", Paair.class);
@@ -110,3 +111,4 @@ public class TicTacToe {
 //        List<Paair> paairList = query.getResultList();
 //        session1.close();
     }
+}
