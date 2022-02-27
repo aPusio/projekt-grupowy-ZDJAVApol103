@@ -1,16 +1,10 @@
-package org.example.Game2048.User;
+package org.example.game2048;
 
-import org.example.Game2048.Board.Board;
-import org.example.Game2048.Board.BoardGenerator;
-import org.example.Game2048.Factory;
-import org.example.Game2048.Point.Point;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import javax.persistence.GeneratedValue;
 import javax.persistence.NoResultException;
 import java.util.List;
-import java.util.Scanner;
 
 public class UserProcessor {
     private static final SessionFactory SESSION_FACTORY = new Factory().getSessionFactory();

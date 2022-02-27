@@ -1,11 +1,11 @@
-package org.example.Game2048.Board;
+package org.example.game2048;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.example.Game2048.Point.Point;
-import org.example.Game2048.User.User;
+import org.example.game2048.Point;
+import org.example.game2048.User;
 
 import javax.persistence.*;
 import java.util.List;

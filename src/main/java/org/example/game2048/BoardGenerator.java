@@ -1,6 +1,4 @@
-package org.example.Game2048.Board;
-
-import org.example.Game2048.Point.Point;
+package org.example.game2048;
 
 import java.util.ArrayList;
 import java.util.List;

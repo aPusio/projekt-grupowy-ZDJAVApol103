@@ -1,9 +1,5 @@
-package org.example.Game2048;
+package org.example.game2048;
 
-import org.example.Game2048.Board.Board;
-import org.example.Game2048.Board.BoardGenerator;
-import org.example.Game2048.User.User;
-import org.example.Game2048.User.UserProcessor;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -45,8 +41,6 @@ public class Game2048 {
                 play(user);
             } while (new Scanner(System.in).nextInt() != 1);
         }
-
-
     }
 
     private void play(User user) {
@@ -55,7 +49,6 @@ public class Game2048 {
         BoardGenerator.printBoard(boardList.get(index).getPointList());
         Board board = BoardGenerator.updateBoard(boardList.get(index));
         USER_PROCESSOR.addNewBoard(user, board);
-
     }
 
     public static void main(String[] args) {

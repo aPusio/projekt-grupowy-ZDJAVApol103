@@ -1,4 +1,4 @@
-package org.example.Game2048;
+package org.example.game2048;
 
 public enum Move {
     UP,

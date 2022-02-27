@@ -1,8 +1,5 @@
-package org.example.Game2048;
+package org.example.game2048;
 
-import org.example.Game2048.Board.Board;
-import org.example.Game2048.Point.Point;
-import org.example.Game2048.User.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;

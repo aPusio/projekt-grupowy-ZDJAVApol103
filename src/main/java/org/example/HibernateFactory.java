@@ -1,8 +1,8 @@
 package org.example;
 
-import org.example.Game2048.Board.Board;
-import org.example.Game2048.Point.Point;
-import org.example.Game2048.User.User;
+import org.example.game2048.Board;
+import org.example.game2048.Point;
+import org.example.game2048.User;
 import org.example.learnig.Car;
 import org.example.learnig.Owner;
 import org.example.learnig.Wheel;

@@ -1,10 +1,8 @@
 package org.example;
 
-import org.example.Game2048.Game2048;
+import org.example.game2048.Game2048;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
-import java.util.List;
 
 import org.example.Hangman.Hangman;
 
