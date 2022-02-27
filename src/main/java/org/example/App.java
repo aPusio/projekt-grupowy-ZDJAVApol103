@@ -1,9 +1,13 @@
 package org.example;
 
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import org.example.Hangman.HangmanProcessor;
+import java.util.List;
+
+import org.example.Hangman.Hangman;
 
 import java.util.Scanner;
 
@@ -13,6 +17,8 @@ import java.util.Scanner;
  */
 public class App 
 {
+
+
     public static void main( String[] args )
     {
         HibernateFactory hibernateFactory = new HibernateFactory();
@@ -20,17 +26,17 @@ public class App
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("WYBIERZ OPCJE Z MENU:");
-        String userOption = scanner.next();
+        int userOption = scanner.nextInt();
         System.out.println("USER WPISAL " + userOption);
 
-        switch (userOption){
-            case "1":
+        switch (userOption) {
+            case 1:
                 System.out.println("GAME 1");
                 break;
-            case "2":
+            case 2:
                 System.out.println("GAME 2");
                 break;
-            case "3":
+            case 3:
                 System.out.println("Hangman");
                 HangmanProcessor hangmanProcessor = new HangmanProcessor(sessionFactory,scanner);
                 hangmanProcessor.menu(scanner);

@@ -1,10 +1,10 @@
-package org.example.learnig;
+package org.example.learnig.hibernate;
 
 import org.example.HibernateFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-public class LearnigMain {
+public class OneToOneExample {
     public static void main(String[] args) {
         HibernateFactory hibernateFactory = new HibernateFactory();
         SessionFactory sessionFactory = hibernateFactory.getSessionFactory();

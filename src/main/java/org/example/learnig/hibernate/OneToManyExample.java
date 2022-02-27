@@ -1,4 +1,4 @@
-package org.example.learnig;
+package org.example.learnig.hibernate;
 
 import org.example.HibernateFactory;
 import org.hibernate.Session;
