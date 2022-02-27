@@ -17,19 +17,19 @@ public class Shoot {
         System.out.println("Y = ");
         scanner.nextInt();
 
-        while(xCoordinate < 0 || xCoordinate >= 9 || yCoordinate < 0 || yCoordinate > 9) {
+        while (xCoordinate < 0 || xCoordinate >= 9 || yCoordinate < 0 || yCoordinate > 9) {
             System.out.println("Target out of the board. Please provide correct coordinates");
         }
         if (table[xCoordinate][yCoordinate] == true) {
-                System.out.println("HIT!");
-                table[xCoordinate][yCoordinate] = false;
-                currentPlayerShipCount--;
-                // todo update SQL table Shots
-                // todo update SQL table Ships
-            } else {
-                System.out.println("You missed.");
-                // todo update SQL table Shots
-            }
+            System.out.println("HIT!");
+            table[xCoordinate][yCoordinate] = false;
+            currentPlayerShipCount--;
+            // todo update SQL table Shots
+            // todo update SQL table Ships
+        } else {
+            System.out.println("You missed.");
+            // todo update SQL table Shots
         }
     }
+}
 }
