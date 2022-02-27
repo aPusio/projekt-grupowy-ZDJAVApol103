@@ -1,6 +1,5 @@
 package org.example.Game2048.Board;
 
-import org.example.Game2048.EndOfGameException;
 import org.example.Game2048.Point.Point;
 
 import java.util.ArrayList;
