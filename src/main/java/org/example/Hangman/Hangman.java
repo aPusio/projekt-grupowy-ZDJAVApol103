@@ -1,13 +1,12 @@
 package org.example.Hangman;
 
+import lombok.Data;
 import org.hibernate.mapping.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Data
 public class Hangman {
 
     @Id
@@ -15,7 +14,10 @@ public class Hangman {
     private long id;
 
     private String usedLetters;
-    private List players;
+    @ManyToOne
+    private Player player1;
+    @ManyToOne
+    private Player player2;
 
 
 }

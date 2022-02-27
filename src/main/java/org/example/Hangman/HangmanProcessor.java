@@ -30,6 +30,12 @@ public class HangmanProcessor {
                     HangmanProcessor hangmanProcessor = new HangmanProcessor(sf);
                     hangmanProcessor.start(sf);
                     break;
+                case "11":
+                    System.out.println("Load game");
+                    HangmanProcessor hangmanProcessor2 = new HangmanProcessor(sf);
+                    //tu będzie czytanie z bazy
+                    hangmanProcessor2.start(sf);
+                    break;
                 case "2":
                     System.out.println("add single word");
                     String wordToAdd = scanner.next(); //
@@ -52,6 +58,34 @@ public class HangmanProcessor {
                     System.out.println("wrong option");
             }
         }
+    }
+    public void start(SessionFactory sessionFactory, String usedLetters){
+        Scanner scanner = new Scanner(System.in);
+        printPalyerPick("first");
+        Player player1 = new Player.PlayerBuilder(scanner.next()).score(0).build();
+        printPalyerPick("second");
+        Player player2 = new Player.PlayerBuilder(scanner.next()).score(0).build();
+
+        boolean endGame = false;
+
+        while (!endGame) {
+            printScore(player1, player2);
+            runRound(player1, scanner, sessionFactory);
+            printScore(player1, player2);
+            runRound(player2, scanner, sessionFactory);
+
+            if (player1.getScore() == WINNING_SCORE || player2.getScore() == WINNING_SCORE) {
+                endGame = true;
+                if (player1.getScore() == player2.getScore()) {
+                    System.out.println("draw");
+                } else if (player1.getScore() == WINNING_SCORE) {
+                    System.out.println("P1 wins");
+                } else {
+                    System.out.println("P2 wins");
+                }
+            }
+        }
+        scanner.close();
     }
 
     public void start(SessionFactory sessionFactory) {
@@ -114,6 +148,8 @@ public class HangmanProcessor {
         System.out.printf("P2 score: %d\n", player2.getScore());
     }
 
+
+
     void updateUsedLetters(Long id, String haslo, SessionFactory sessionFactory) {
         try (Session session = sessionFactory.openSession()) {
             //sprawdź czy istnieje wpis dla HangmanGame
@@ -126,6 +162,12 @@ public class HangmanProcessor {
             //log.info("Updated {}",words);
             transaction.commit();
         }
+    }
+
+    public String saveUsedLetter(char c){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(c);
+        return stringBuilder.toString();
     }
 
     public void runRound(Player player, Scanner scanner, SessionFactory sessionFactory) {
@@ -161,10 +203,9 @@ public class HangmanProcessor {
             letters.add(c);
             System.out.println(letters);
 
-            // trzeba zapisać pierwszą rundę
-            // >> pierwszy insert
-            // >> updaty
-
+            Hangman hangman = new Hangman();
+            hangman.setUsedLetters(saveUsedLetter(c));
+            hangman.setPlayer1(player);
 
             if (player.getChances() == 0) {
                 System.out.printf("Przegrana! %s nie odgadł hasła, ilość punktów %d, pozostałe szanse %d\n", player.getName(), player.getScore(), player.getChances());

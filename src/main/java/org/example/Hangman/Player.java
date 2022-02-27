@@ -3,10 +3,8 @@ package org.example.Hangman;
 import lombok.Data;
 import org.hibernate.SessionFactory;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,6 +17,9 @@ public class Player {
     private String name;
     private int score;
     private int chances;
+
+    @OneToMany
+    private List<Hangman> hangman;
 
     public void subtractChance(){
         this.chances -=1;
