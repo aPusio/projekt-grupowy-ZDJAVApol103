@@ -3,12 +3,12 @@ package org.example.RockPaperScissors;
 public class RockPaperScissors {
     private User user = new User();
     private Computer computer = new Computer();
-    private int userScore = 0;
-    private int computerScore = 0;
-    private int numberOfGames = 0;
-    private int numberOfRound = 0;
-    private int roundWins = 0;
-    private int roundLost = 0;
+    protected int userScore = 0;
+    protected int computerScore = 0;
+    protected int numberOfGames = 0;
+    protected int numberOfRound = 0;
+    protected int roundWins = 0;
+    protected int roundLost = 0;
 
     enum Move {
         ROCK, PAPER, SCISSORS, WATER, FIRE, AIR, SPONGE;
@@ -92,7 +92,7 @@ public class RockPaperScissors {
             System.out.println("SORRY :( YOU LOST THIS ROUND\n");
         }
     }
-    private void actualRoundStats(){
+     private void actualRoundStats(){
         numberOfRound++;
         if (userScore > computerScore){
             roundWins++; }

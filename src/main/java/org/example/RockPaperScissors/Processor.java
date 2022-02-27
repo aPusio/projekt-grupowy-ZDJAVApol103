@@ -15,7 +15,7 @@ public class Processor  {
     private static final HibernateFacRPS SDA_SESSION_FACTORY
             = new HibernateFacRPS();
 
-    public  void save(int wynik) {
+    public  void save() {
         SessionFactory sessionFactory = SDA_SESSION_FACTORY.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
 
@@ -23,6 +23,17 @@ public class Processor  {
             gracz.setNazwa("Piotr");
 
             Serializable save = session.save(gracz);
+            session.close();
+        }
+    }
+            public void save1(int wynik) {
+                SessionFactory sessionFactory = SDA_SESSION_FACTORY.getSessionFactory();
+                try (Session session = sessionFactory.openSession()) {
+
+            Round round = new Round();
+            round.setResult(wynik);
+
+            Serializable save1 = session.save(round);
             session.close();
         }
     }
@@ -38,7 +49,7 @@ public class Processor  {
     public static void main(String[] args) {
 
         Processor przetwarzacz = new Processor();
-        //  przetwarzacz.save();
+            przetwarzacz.save();
     }
 
 }
