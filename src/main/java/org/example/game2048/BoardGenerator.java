@@ -42,17 +42,17 @@ public class BoardGenerator {
 
     public static void printBoard(List<Point> pointList) {
         boolean isFilled;
-        for (int i = 0; i < MAX_SIZE_OF_BOARD; i++) {
-            for (int j = 0; j < MAX_SIZE_OF_BOARD; j++) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
                 isFilled = false;
-                for (Point point : pointList) {
-                    if (point.getX() == j && point.getY() == i) {
-                        System.out.print(point.getValue() + " ");
+                for (Point point4 : pointList) {
+                    if (point4.getX() == j && point4.getY() == i) {
+                        System.out.printf("%3s ", point4.getValue());
                         isFilled = true;
                     }
                 }
                 if (!isFilled) {
-                    System.out.print("0 ");
+                    System.out.printf("%3s ", String.valueOf(0));
                 }
             }
             System.out.println();
