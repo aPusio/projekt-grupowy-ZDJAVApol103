@@ -3,7 +3,7 @@ package org.example;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import org.example.Hangman.Hangman;
+import org.example.Hangman.HangmanProcessor;
 
 import java.util.Scanner;
 
@@ -32,8 +32,8 @@ public class App
                 break;
             case "3":
                 System.out.println("Hangman");
-                Hangman hangman = new Hangman(sessionFactory,scanner);
-                hangman.menu();
+                HangmanProcessor hangmanProcessor = new HangmanProcessor(sessionFactory,scanner);
+                hangmanProcessor.menu(scanner);
                 break;
         }
 

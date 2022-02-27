@@ -18,7 +18,7 @@ public class Player {
     private int chances;
 
     @OneToMany
-    private List<Hangman2> hangman2;
+    private List<Hangman> hangman;
 
     public void subtractChance(){
         this.chances -=1;
