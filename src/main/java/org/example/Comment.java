@@ -88,12 +88,13 @@ public class Comment {
             for (int j = 0; j < gameboard.length; j++) {
                 gameboard[i][j] = " ";
             }
-            Methods.State(paairState.getNumber(), String.valueOf(paairState.getStr()), gameboard);
         }
+        Methods.State(paairState.getNumber(), String.valueOf(paairState.getStr()), gameboard);
         for (String[] strings : gameboard) {
             for (int j = 0; j < gameboard.length; j++) {
                 System.out.printf(" %s%3s%3s ", "|", strings[j], "|");
             }
+
             System.out.println();
             System.out.print("=============================");
             System.out.println();

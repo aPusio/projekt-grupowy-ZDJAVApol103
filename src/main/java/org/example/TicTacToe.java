@@ -5,7 +5,6 @@ import org.hibernate.SessionFactory;
 
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.function.Predicate;
 
 public class TicTacToe {
     public static void main(String[] args) {
@@ -18,18 +17,20 @@ public class TicTacToe {
         String pl, pl1, pl2, turn;
         String[][] board = new String[3][3];
         int fieldNumber, option;
-        long state;
+        int state;
         System.out.printf("wybierz opcję%n 1- wczytaj grę%n 2- zagraj");
         option = scanner.nextInt();
             System.out.print("wybierz stan gry:");
         if (option == 1) {
-            state = scanner.nextLong();
+            state = scanner.nextInt();
             try (Session session = hibernateFactory.getSessionFactory().openSession()) {
-                Paair paair = session.get(Paair.class, state);
-                List<Paair> from_paair = session.createQuery("FROM Paair", Paair.class).getResultList();
-                for (Paair paair1: from_paair) {
-                    Comment.GameBoard(board, paair1);
-                }
+               Paair textPaair = null;
+               List<Paair> from_paair = session.createQuery("FROM Paair WHERE saveTheGame_id = 8", Paair.class).getResultList();
+               /* for (Paair paair1 : from_paair) {
+                    textPaair = paair1;
+                    //Comment.GameBoard(board, paair1);
+                }*/
+                Comment.GameBoard(board, from_paair.get(state));
             }
         }
         do {
