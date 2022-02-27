@@ -36,35 +36,41 @@ public class RockPaperScissors {
     public void startGame() {
         System.out.println("WELCOME IN ROCK, PAPER, SCISSORS ADVANCED VERSION!");
 
-        Move userMove = user.getMove();
-        Move computerMove = computer.getMove();
-        System.out.println("\nYou played " + userMove + ".");
-        System.out.println("Computer played " + computerMove + ".\n");
+        while (userScore <= 2 && computerScore <= 2){
+            Move userMove = user.getMove();
+            Move computerMove = computer.getMove();
+            System.out.println("\nYou played " + userMove + ".");
+            System.out.println("Computer played " + computerMove + ".\n");
 
-        int compareMoves = userMove.compareMoves(computerMove);
-        switch (compareMoves) {
-            case 0:
-                System.out.println("Draw!");
-                break;
-            case 1:
-                System.out.println(userMove + " beats " + computerMove + ". You won!");
-                userScore++;
-                break;
-            case -1:
-                System.out.println(computerMove + " beats " + userMove + ". You lost.");
-                computerScore++;
-                break;
+            int compareMoves = userMove.compareMoves(computerMove);
+            switch (compareMoves) {
+                case 0:
+                    System.out.println("Draw!");
+                    break;
+                case 1:
+                    System.out.println(userMove + " beats " + computerMove + ". You won!");
+                    userScore++;
+                    break;
+                case -1:
+                    System.out.println(computerMove + " beats " + userMove + ". You lost.");
+                    computerScore++;
+                    break;
+            }
+            numberOfGames++;
         }
-        numberOfGames++;
+        printActualGameStats();
+        userScore = 0;
+        computerScore = 0;
+        numberOfGames = 0;
 
         if (user.playAgain()) {
             System.out.println();
             startGame();
         } else {
-            printGameStats();
+            System.out.println("\nTHE END\nTHANKS FOR THE GAME ");
         }
     }
-    private void printGameStats() {
+    private void printActualGameStats() {
         int wins = userScore;
         int losses = computerScore;
         int draws = numberOfGames - userScore - computerScore;
