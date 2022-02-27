@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Janken;
 
 import org.example.Game2048.Board.Board;
 import org.example.Game2048.Point.Point;

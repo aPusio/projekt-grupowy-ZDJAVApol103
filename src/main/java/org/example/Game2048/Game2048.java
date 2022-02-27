@@ -4,7 +4,6 @@ import org.example.Game2048.Board.Board;
 import org.example.Game2048.Board.BoardGenerator;
 import org.example.Game2048.User.User;
 import org.example.Game2048.User.UserProcessor;
-import org.example.HibernateFactory;
 import org.hibernate.Session;
 
 import java.util.List;

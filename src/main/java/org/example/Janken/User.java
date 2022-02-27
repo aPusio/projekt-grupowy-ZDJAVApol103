@@ -1,6 +1,4 @@
-package org.example;
-
-import org.example.RockPaperScissors;
+package org.example.Janken;
 
 import java.util.Scanner;
 

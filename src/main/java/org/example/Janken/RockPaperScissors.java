@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Janken;
 
 public class RockPaperScissors {
     private User user = new User();

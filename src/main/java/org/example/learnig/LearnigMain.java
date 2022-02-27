@@ -1,6 +1,6 @@
 package org.example.learnig;
 
-import org.example.HibernateFactory;
+import org.example.Janken.HibernateFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
