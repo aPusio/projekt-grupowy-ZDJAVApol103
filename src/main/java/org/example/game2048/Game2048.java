@@ -9,9 +9,9 @@ import java.util.Scanner;
 
 public class Game2048 {
 //    Prywatna DB:
-//    private static final Session SESSION = new Factory().getSessionFactory().openSession();
+    private static final Session SESSION = new Factory().getSessionFactory().openSession();
 //    DB projektu wspólnego:
-    private static final Session SESSION = new HibernateFactory().getSessionFactory().openSession();
+//    private static final Session SESSION = new HibernateFactory().getSessionFactory().openSession();
     private static final UserProcessor USER_PROCESSOR = new UserProcessor();
 
     public void startGame() {
@@ -63,19 +63,19 @@ public class Game2048 {
             move = new Scanner(System.in).nextLine();
             switch (move) {
                 case "w":
-                    board.setPointList(Movement.moveUp(board.getPointList()));
+                    board.setPointList(Movement.moveUp(points));
                     USER_PROCESSOR.addNewBoard(user, BoardGenerator.updateBoard(board));
                     break;
                 case "s":
-                    board.setPointList(Movement.moveDown(board.getPointList()));
+                    board.setPointList(Movement.moveDown(points));
                     USER_PROCESSOR.addNewBoard(user, BoardGenerator.updateBoard(board));
                     break;
                 case "d":
-                    board.setPointList(Movement.moveRight(board.getPointList()));
+                    board.setPointList(Movement.moveRight(points));
                     USER_PROCESSOR.addNewBoard(user, BoardGenerator.updateBoard(board));
                     break;
                 case "a":
-                    board.setPointList(Movement.moveLeft(board.getPointList()));
+                    board.setPointList(Movement.moveLeft(points));
                     USER_PROCESSOR.addNewBoard(user, BoardGenerator.updateBoard(board));
                     break;
                 case "q":
