@@ -14,25 +14,25 @@ public class HangmanProcessor {
     public static final int WINNING_SCORE = 1; // debug  :D:D
     public static final int CHANCES = 1; // debug  :D:D
     private SessionFactory sf;
+    private Scanner scanner;
 
-
-    public HangmanProcessor(SessionFactory sessionFactory) {
+    public HangmanProcessor(SessionFactory sessionFactory, Scanner scanner) {
         this.sf = sessionFactory;
+        this.scanner = scanner;
     }
 
     public void menu() {
-        Scanner scanner = new Scanner(System.in);
         boolean loopMenu = true;
         while (loopMenu) {
             switch (scannerPrint(scanner)) {
                 case "1":
                     System.out.println("start game");
-                    HangmanProcessor hangmanProcessor = new HangmanProcessor(sf);
+                    HangmanProcessor hangmanProcessor = new HangmanProcessor(sf,scanner);
                     hangmanProcessor.start(sf);
                     break;
                 case "11":
                     System.out.println("Load game");
-                    HangmanProcessor hangmanProcessor2 = new HangmanProcessor(sf);
+                    HangmanProcessor hangmanProcessor2 = new HangmanProcessor(sf,scanner);
                     //tu będzie czytanie z bazy
                     hangmanProcessor2.start(sf);
                     break;
@@ -60,7 +60,6 @@ public class HangmanProcessor {
         }
     }
     public void start(SessionFactory sessionFactory, String usedLetters){
-        Scanner scanner = new Scanner(System.in);
         printPalyerPick("first");
         Player player1 = new Player.PlayerBuilder(scanner.next()).score(0).build();
         printPalyerPick("second");
@@ -85,11 +84,11 @@ public class HangmanProcessor {
                 }
             }
         }
-        scanner.close();
+
     }
 
     public void start(SessionFactory sessionFactory) {
-        Scanner scanner = new Scanner(System.in);
+        ///
         printPalyerPick("first");
         Player player1 = new Player.PlayerBuilder(scanner.next()).score(0).build();
         printPalyerPick("second");
@@ -114,7 +113,7 @@ public class HangmanProcessor {
                 }
             }
         }
-        scanner.close();
+
     }
 
     private String charToString(char[] array){
@@ -131,7 +130,7 @@ public class HangmanProcessor {
                 "3. delete word" +
                 "4. edit word" +
                 "0. exit");
-        return (String) scanner.next();
+        return scanner.next();
     }
 
     private void printPalyerPick(String number) {
@@ -206,6 +205,7 @@ public class HangmanProcessor {
             Hangman hangman = new Hangman();
             hangman.setUsedLetters(saveUsedLetter(c));
             hangman.setPlayer1(player);
+            //hibernate
 
             if (player.getChances() == 0) {
                 System.out.printf("Przegrana! %s nie odgadł hasła, ilość punktów %d, pozostałe szanse %d\n", player.getName(), player.getScore(), player.getChances());

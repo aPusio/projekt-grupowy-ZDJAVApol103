@@ -32,7 +32,7 @@ public class App
                 break;
             case "3":
                 System.out.println("Hangman");
-                HangmanProcessor hangmanProcessor = new HangmanProcessor(sessionFactory);
+                HangmanProcessor hangmanProcessor = new HangmanProcessor(sessionFactory,scanner);
                 hangmanProcessor.menu();
                 break;
         }
