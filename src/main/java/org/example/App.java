@@ -1,10 +1,8 @@
 package org.example;
 
-import org.example.Game2048.Game2048;
+import org.example.game2048.Game2048;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
-import java.util.List;
 
 import org.example.Hangman.Hangman;
 
@@ -38,11 +36,11 @@ public class App {
                 game2048.startGame();
                 break;
         }
-        HibernateFactory hibernateFactory = new HibernateFactory();
-        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
-        Session session = sessionFactory.openSession();
-
-        session.close();
-        sessionFactory.close();
+//        HibernateFactory hibernateFactory = new HibernateFactory();
+//        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
+//        Session session = sessionFactory.openSession();
+//
+//        session.close();
+//        sessionFactory.close();
     }
 }
