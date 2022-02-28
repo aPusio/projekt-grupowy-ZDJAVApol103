@@ -6,19 +6,18 @@ import org.example.game2048.board.BoardProcessor;
 import org.example.game2048.point.Point;
 import org.example.game2048.user.User;
 import org.example.game2048.user.UserProcessor;
-import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Game2048 {
-    private static final BoardProcessor BOARD_PROCESSOR = new BoardProcessor();
-    //    Prywatna DB:
-    private static final Session SESSION = new Factory().getSessionFactory().openSession();
-    //    DB projektu wspólnego:
-//    private static final Session SESSION = new HibernateFactory().getSessionFactory().openSession();
-    private static final UserProcessor USER_PROCESSOR = new UserProcessor();
+    private final BoardProcessor boardProcessor = new BoardProcessor();
+//        Prywatna DB:
+    private final SessionFactory sessionFactory = new Factory().getSessionFactory();
+//        DB projektu wspólnego:
+//    private  final Session session = new HibernateFactory().getSessionFactory();
 
     public void startGame() {
         Scanner scanner = new Scanner(System.in);
@@ -27,7 +26,7 @@ public class Game2048 {
                 "Podaj swój nickname:");
 
         String userNickname = scanner.nextLine();
-        User user = new UserProcessor().getUser(userNickname, SESSION);
+        User user = new UserProcessor().getUser(userNickname, sessionFactory);
         if (user.getBoardList().size() > 1) {
             System.out.println("Wybierz co chcesz zrobić: \n" +
                     "1 - nowa gra \n" +
@@ -35,7 +34,7 @@ public class Game2048 {
             switch (scanner.nextInt()) {
                 case 1:
                     System.out.println("Rozpoczęto nową grę!");
-                    BOARD_PROCESSOR.addNewBoard(user, BoardGenerator.generateNewBoard());
+                    boardProcessor.addNewBoard(user, BoardGenerator.generateNewBoard(), sessionFactory);
                     do {
                         play(user);
                     } while (new Scanner(System.in).nextInt() != 1);
@@ -97,7 +96,7 @@ public class Game2048 {
     }
 
     private void addBoard(User user, Board updatedBoard) {
-        BOARD_PROCESSOR.addNewBoard(user, updatedBoard);
+        boardProcessor.addNewBoard(user, updatedBoard, sessionFactory);
     }
 
     public static void main(String[] args) {
