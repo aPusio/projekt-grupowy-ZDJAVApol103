@@ -8,6 +8,7 @@ import org.example.game2048.point.Point;
 import org.example.game2048.user.User;
 
 import javax.persistence.*;
+import java.util.Comparator;
 import java.util.List;
 
 @Entity
@@ -15,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = {"user", "pointList"})
-public class Board {
+public class Board implements Comparable<Board> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,4 +25,8 @@ public class Board {
     @ManyToOne
     private User user;
 
+    @Override
+    public int compareTo(Board o) {
+        return (int) (this.getId() - o.getId());
+    }
 }

@@ -10,6 +10,7 @@ import org.example.game2048.user.UserProcessor;
 import org.hibernate.SessionFactory;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,9 +18,9 @@ public class Game2048 {
     private final BoardProcessor boardProcessor = new BoardProcessor();
     private final UserProcessor userProcessor = new UserProcessor();
     private final PointProcessor pointProcessor = new PointProcessor();
-//        Prywatna DB:
+//Prywatna DB:
     private final SessionFactory sessionFactory = new Factory().getSessionFactory();
-//        DB projektu wspólnego:
+//DB projektu wspólnego:
 //    private  final Session session = new HibernateFactory().getSessionFactory();
 
     public void startGame() {
@@ -30,8 +31,8 @@ public class Game2048 {
 
         String userNickname = scanner.nextLine();
         User user = userProcessor.getUser(userNickname, sessionFactory);
-        List<Board> userBoardList = boardProcessor.getUserBoardList(user.getId(),sessionFactory);
-        if (userBoardList.size() > 0) {
+        List<Board> userBoardList = boardProcessor.getUserBoardList(user.getId(), sessionFactory);
+        if (userBoardList.size() > 1) {
             System.out.println("Wybierz co chcesz zrobić: \n" +
                     "1 - nowa gra \n" +
                     "2 - wczytaj grę");
@@ -57,12 +58,15 @@ public class Game2048 {
 
     private void play(User user) {
         String move;
-
         do {
-            List<Board> boardList = boardProcessor.getUserBoardList(user.getId(),sessionFactory);
+            List<Board> boardList = boardProcessor.getUserBoardList(user.getId(), sessionFactory);
+            if (boardList.size() > 3) {
+                boardProcessor.deleteBoard(boardList.get(0).getId(),sessionFactory);
+                boardList.remove(0);
+            }
             int index = boardList.size() - 1;
             Board board = boardList.get(index);
-            List<Point> points = new ArrayList<>(pointProcessor.getBoardPointList(board.getId(),sessionFactory));
+            List<Point> points = new ArrayList<>(pointProcessor.getBoardPointList(board.getId(), sessionFactory));
             BoardGenerator.printBoard(points);
             System.out.println("Enter movement:\n" +
                     "w - Move up.\n" +
