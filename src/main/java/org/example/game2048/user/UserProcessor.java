@@ -1,11 +1,13 @@
 package org.example.game2048.user;
 
+import org.example.game2048.board.Board;
 import org.example.game2048.board.BoardGenerator;
 import org.example.game2048.board.BoardProcessor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.NoResultException;
+import java.util.List;
 
 public class UserProcessor {
     private final BoardProcessor boardProcessor = new BoardProcessor();
@@ -32,4 +34,7 @@ public class UserProcessor {
         }
 
     }
+
+
+
 }
