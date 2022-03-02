@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.example.game2048.board.Board;
+import org.example.game2048.board.BoardProcessor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -23,6 +24,5 @@ public class User {
     private String nickname;
     @OneToMany(mappedBy = "user")
     private List<Board> boardList = new ArrayList<>();
-
 
 }

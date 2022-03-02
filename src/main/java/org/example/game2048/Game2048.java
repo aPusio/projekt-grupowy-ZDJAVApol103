@@ -18,7 +18,7 @@ public class Game2048 {
     private final BoardProcessor boardProcessor = new BoardProcessor();
     private final UserProcessor userProcessor = new UserProcessor();
     private final PointProcessor pointProcessor = new PointProcessor();
-//Prywatna DB:
+    //Prywatna DB:
     private final SessionFactory sessionFactory = new Factory().getSessionFactory();
 //DB projektu wspólnego:
 //    private  final Session session = new HibernateFactory().getSessionFactory();
@@ -26,29 +26,27 @@ public class Game2048 {
     public void startGame() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Witaj w grze '2048'!\n" +
-                "Podaj swój nickname:");
+        System.out.println("Welcome to the game '2048'!\n" +
+                "Enter your nickname:");
 
         String userNickname = scanner.nextLine();
         User user = userProcessor.getUser(userNickname, sessionFactory);
         List<Board> userBoardList = boardProcessor.getUserBoardList(user.getId(), sessionFactory);
         if (userBoardList.size() > 1) {
-            System.out.println("Wybierz co chcesz zrobić: \n" +
-                    "1 - nowa gra \n" +
-                    "2 - wczytaj grę");
+            System.out.println("Menu: \n" +
+                    "1 - new game \n" +
+                    "2 - load game");
             switch (scanner.nextInt()) {
                 case 1:
-                    System.out.println("Rozpoczęto nową grę!");
+                    System.out.println("Start new game!");
+                    boardProcessor.getUserBoardList(user.getId(), sessionFactory)
+                            .forEach(board -> boardProcessor.deleteBoard(board.getId(), sessionFactory));
                     boardProcessor.addNewBoard(user, BoardGenerator.generateNewBoard(), sessionFactory);
-                    do {
-                        play(user);
-                    } while (new Scanner(System.in).nextInt() != 1);
+                    play(user);
                     break;
                 case 2:
-                    System.out.println("Wczytano ostatnią grę!");
-                    do {
-                        play(user);
-                    } while (new Scanner(System.in).nextInt() != 1);
+                    System.out.println("Loaded last game!");
+                    play(user);
                     break;
             }
         } else {
@@ -61,7 +59,7 @@ public class Game2048 {
         do {
             List<Board> boardList = boardProcessor.getUserBoardList(user.getId(), sessionFactory);
             if (boardList.size() > 3) {
-                boardProcessor.deleteBoard(boardList.get(0).getId(),sessionFactory);
+                boardProcessor.deleteBoard(boardList.get(0).getId(), sessionFactory);
                 boardList.remove(0);
             }
             int index = boardList.size() - 1;
@@ -73,6 +71,7 @@ public class Game2048 {
                     "s - Move down.\n" +
                     "d - Move right.\n" +
                     "a - Move left\n" +
+                    "r - undo move\n" +
                     "q - Quit.");
             move = new Scanner(System.in).nextLine();
             switch (move) {
@@ -92,11 +91,19 @@ public class Game2048 {
                     board.setPointList(Movement.moveLeft(points));
                     addBoard(user, BoardGenerator.updateBoard(board));
                     break;
+                case "r":
+                    if (boardList.size()>1){
+                        boardProcessor.deleteBoard(board.getId(),sessionFactory);
+                        System.out.println("Undo last move!");
+                    }else {
+                        System.out.println("There is no more move to undo!");
+                    }
+                    break;
                 case "q":
-                    System.out.println("Koniec!");
+                    System.out.println("End!");
                     break;
                 default:
-                    System.out.println("Zły ruch!");
+                    System.out.println("Bad move!");
                     break;
             }
         } while (!move.equals("q"));
