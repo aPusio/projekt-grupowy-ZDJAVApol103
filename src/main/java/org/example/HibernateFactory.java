@@ -1,7 +1,8 @@
 package org.example;
 
-import org.example.Service.Paair;
-import org.example.Service.SaveTheGame;
+//import org.example.Service.Paair;
+//import org.example.Service.SaveTheGame;
+import org.example.Tictactoe.Entity.RoundEntity;
 import org.example.learnig.Car;
 import org.example.learnig.Owner;
 import org.example.learnig.Wheel;
@@ -23,8 +24,9 @@ public class HibernateFactory {
         configuration.addAnnotatedClass(Car.class);
         configuration.addAnnotatedClass(Owner.class);
         configuration.addAnnotatedClass(Wheel.class);
-        configuration.addAnnotatedClass(SaveTheGame.class);
-        configuration.addAnnotatedClass(Paair.class);
+        configuration.addAnnotatedClass(RoundEntity.class);
+//        configuration.addAnnotatedClass(SaveTheGame.class);
+//        configuration.addAnnotatedClass(Paair.class);
         return configuration;
     }
 

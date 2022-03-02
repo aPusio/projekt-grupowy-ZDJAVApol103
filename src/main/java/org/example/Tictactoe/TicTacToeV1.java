@@ -1,4 +1,6 @@
-package org.example;
+package org.example.Tictactoe;
+
+import org.example.Tictactoe.Entity.Dao;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -159,32 +161,36 @@ public class TicTacToeV1 {
                 {' ', ' ', ' '},
                 {' ', ' ', ' '},
         };
-//        System.out.println("What do you have?");
-//        System.out.println("1-Load Game, 2- New Game");
-//         int number =scanner.nextInt();
-//        switch(number){
-//            case 1: String Load = "Load Game...";
-//                System.out.println(Load);
-//            break;
-//            case 2: String Play = "New Game...";
-//                System.out.println(Play);
-//            break;
-//        }
+        System.out.println("What do you have?");
+        System.out.println("1-Load Game, 2- New Game");
+         String number =scanner.nextLine();
+        switch(number){
+            case "1": String Load = "Load Game...";
+                System.out.println(Load);
+            break;
+            case "2": String Play = "New Game...";
+                System.out.println(Play);
+            break;
+            default:
+                System.out.println("Spróbuj jeszcze raz");
+        }
         //todo
         //opcja wyboru, nowa gra, wczytanie gry
         startPlay(scanner, board);
     }
 
     private static void startPlay(Scanner scanner, char[][] board) {
+        Dao dao = new Dao();
         while (true) {
             playerTurn(board, scanner);
             if (isGameFinished(board)){
                 break;
             }
             printBoard(board);
+            dao.SaveTheGame(board);
             //todo Sprawdzenie czy gracz nie chce wyjść
-            //todo Zapis do bazy
             computerTurn(board);
+            dao.SaveTheGame(board);
             //todo Sprawdzić czy gracz nie chce wyjść
             //todo Zapis do bazy
             printBoard(board);
