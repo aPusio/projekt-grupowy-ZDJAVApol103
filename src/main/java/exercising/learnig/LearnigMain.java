@@ -1,6 +1,6 @@
-package org.example.learnig;
+package exercising.learnig;
 
-import org.example.HibernateFactory;
+import org.example.factoring.HibernateFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 

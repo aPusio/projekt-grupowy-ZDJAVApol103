@@ -1,8 +1,10 @@
-package org.example;
+package org.example.factoring;
 
-import org.example.learnig.Car;
-import org.example.learnig.Owner;
-import org.example.learnig.Wheel;
+import exercising.learnig.Car;
+import exercising.learnig.Owner;
+import exercising.learnig.Wheel;
+import org.example.arraysCreating.Paair;
+import org.example.arraysCreating.SaveTheGame;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;

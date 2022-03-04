@@ -1,4 +1,4 @@
-package org.example;
+package org.example.arraysCreating;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,4 +19,9 @@ public class SaveTheGame {
     @OneToMany(mappedBy = "saveTheGame")
     @Column(name = "saveTheGame_id")
     private List<Paair> listPaair;
+
+    @Override
+    public String toString() {
+        return "SaveTheGame{" + id + ": " + localDateTime + '}';
+    }
 }

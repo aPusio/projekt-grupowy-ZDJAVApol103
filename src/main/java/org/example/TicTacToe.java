@@ -1,101 +1,97 @@
 package org.example;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.example.boardUpdating.CreatingAnArrayOfSpaces;
+import org.example.boardUpdating.WrittingToAnArray;
+import org.example.arraysCreating.Paair;
+import org.example.factoring.ReadingTheGame;
+import org.example.methoding.Comment;
+import org.example.methoding.Methods;
 
-import java.time.LocalDateTime;
 import java.util.*;
 
 public class TicTacToe {
     public static void main(String[] args) {
 
+        //-----------------------deklaracja zmiennych --------------------------------------------------------
         List<Paair> listPaair = new ArrayList<>();
         List<Integer> listNumbers = new ArrayList<>();
-        HibernateFactory hibernateFactory = new HibernateFactory();
-        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
-        Scanner scanner = new Scanner(System.in);
-        String pl, pl1, pl2, turn;
-        String[][] board = new String[3][3];
-        int fieldNumber, option;
-        int state;
-        System.out.printf("wybierz opcję%n 1- wczytaj grę%n 2- zagraj");
-        option = scanner.nextInt();
-            System.out.print("wybierz stan gry:");
-        if (option == 1) {
-            state = scanner.nextInt();
-            try (Session session = hibernateFactory.getSessionFactory().openSession()) {
-               Paair textPaair = null;
-               List<Paair> from_paair = session.createQuery("FROM Paair WHERE saveTheGame_id = 8", Paair.class).getResultList();
-               /* for (Paair paair1 : from_paair) {
-                    textPaair = paair1;
-                    //Comment.GameBoard(board, paair1);
-                }*/
-                Comment.GameBoard(board, from_paair.get(state));
+        Random random = new Random();
+        String pl, pl1, pl2, turn, option, save, select;
+        char[][] board = CreatingAnArrayOfSpaces.AnArrayOfSpaces(new char[3][3]);
+        int fieldNumber, state;
+        //-------------------wybór opcji wczytaj stan gry / rozpocznij nową grę ------------------------------
+       option = Methods.SelectAnOption(Comment.GameStateOptions());
+        //-------------------wybór stanu gry -----------------------------------------------------------------
+        if (Objects.equals(option, "o")) {
+            System.out.println(ReadingTheGame.StatesOfTheGame());
+            state = Methods.SelectAnItem(Comment.GameStateSelection());
+            for(Paair paair: ReadingTheGame.ReadTheStateOfTheGame(state)){
+                WrittingToAnArray.MapState(paair, board);}
+            CreatingAnArrayOfSpaces.GameBoard(board);
+        //-------------------wybór etapu gry -----------------------------------------------------------------
+              select = Methods.SelectAnOption(Comment.SelectAStageOfTheGame());
+            if (Objects.equals(select, "o")){
+                board = CreatingAnArrayOfSpaces.AnArrayOfSpaces(new char[3][3]);
+            } else {
+                Scanner scanner = Methods.getScanning();
+                scanner.close();
+                Comment.GameOver();
+                System.exit(0);
             }
+        } else {
+            Comment.TheBeginningOfTheGame();
         }
+        // -------------------wybór gracza -------------------------------------------------------------------
+        pl1 = Methods.SelectAnOption(Comment.PlayerChoice());
+        // -------------------wybierz, który gracz rozpoczyna ------------------------------------------------
+        pl = Methods.SelectAnOption(Comment.ThePlayerStartsTheGame());
+        // -------------------początek partii gry ------------------------------------------------------------
         do {
-        Comment.PlayerChoice();
-        pl = scanner.next();
-        } while ((!Objects.equals(pl, "x")) && (!Objects.equals(pl, "o")));
-        do {
-            Comment.ThePlayerStartsTheGame();
-            pl1 = scanner.next();
-        } while ((!Objects.equals(pl1, "x")) && (!Objects.equals(pl1, "o")));
-        do {
+        // -------------------wykonanie ruchu - wybór gracza wykonujący ruch----------------------------------
             if (Objects.equals(pl1, "x")) {
                 pl2 = "o";
             } else pl2 = "x";
-            PlayerOne player = new PlayerOne(pl1);
+        //--------------------gracz wykonuje ruch ------------------------------------------------------------
                 do {
-                    if (Objects.equals(pl1, pl)){
-                        Comment.FieldSelection();
-                    fieldNumber = scanner.nextInt();}
-                    else {
-                        Random random = new Random();
-                        fieldNumber = random.nextInt(9) + 1;
-                    }
+                    if (Objects.equals(pl, pl1)){
+                        fieldNumber = Methods.SelectAnItem(Comment.FieldSelection());
+                    } else {
+                        fieldNumber = random.nextInt(9) + 1; }
                 }
                 while ((Methods.CheckedLists(fieldNumber, listNumbers)) && fieldNumber < 10 && fieldNumber > 0);
-
-            for (int i = 0; i < board.length; i++) {
-                for (int j = 0; j < board.length; j++) {
-                    board[i][j] = " ";
-                }
+        //--------------------zapisywanie nowego ruchu --------------------------------------------------------
+            listPaair.add(new Paair(pl.charAt(0), fieldNumber));
+            listNumbers.add(fieldNumber);
+        //--------------------aktualizacja stanu gry ----------------------------------------------------------
+            for(Paair paair: listPaair){
+                WrittingToAnArray.MapState(paair, board);
             }
-            for (Paair o: listPaair){
-                Methods.MapState(o, board);
-            }
-                Methods.State(fieldNumber, String.valueOf(player), board);
-                listNumbers.add(fieldNumber);
-               listPaair.add(new Paair(String.valueOf(player), fieldNumber));
-            Comment.GameBoard(board, new Paair(String.valueOf(player), fieldNumber));
+        //--------------------drukowanie stanu gry na tablicy -------------------------------------------------
+            CreatingAnArrayOfSpaces.GameBoard(board);
             System.out.println(listNumbers);
-            do {
-                Comment.FurtherMove();
-                turn = scanner.next();
-            } while ((!Objects.equals(turn, "n")) && (!Objects.equals(turn, "e")));
-            if ((Objects.equals(turn, "n")) && Objects.equals(String.valueOf(player), pl1)) {
-               pl1 = pl2;
+        //--------------------sprawdzenie warunków kończących grę ---------------------------------------------
+            if (Methods.EndGame1(listPaair)){
+                break;
             }
-           if (Methods.EndGame(listPaair)){
-               break;
-           }
-        } while (!Objects.equals(turn, "e"));
-        scanner.close();
+        //--------------------wybór nowego ruchu lub koniec gry -----------------------------------------------
+            turn = Methods.SelectAnOption(Comment.FurtherMove());
+        //--------------------zamiana gracza wykonującego ruch ------------------------------------------------
+                if ((Objects.equals(turn, "o")) && Objects.equals(pl, pl1)) {
+                    pl = pl2;
+            } else{
+                    pl = pl1;
+                }
+        //--------------------koniec gry ----------------------------------------------------------------------
+        } while (!Objects.equals(turn, "x"));
         Comment.WinPlayer(listPaair);
-        Session session = sessionFactory.openSession();
-
-        SaveTheGame saveTheGame = new SaveTheGame();
-        saveTheGame.setLocalDateTime(LocalDateTime.now());
-       saveTheGame.setListPaair(listPaair);
-        session.save(saveTheGame);
-       for(Paair paair: listPaair){
-           paair.setSaveTheGame(saveTheGame);
-           session.save(paair);
-       }
-
-
-        session.close();
-        sessionFactory.close();
+        //--------------------wybór, czy zapisać grę ----------------------------------------------------------
+        save = Methods.SelectAnOption(Comment.WhetherToSaveTheGame());
+        if (Objects.equals(save,"o")){
+             ReadingTheGame.LoadGameState(listPaair);
+        } else {
+           Scanner scanner = Methods.getScanning();
+            scanner.close();
+        }
+        Comment.GameOver();
     }
     }

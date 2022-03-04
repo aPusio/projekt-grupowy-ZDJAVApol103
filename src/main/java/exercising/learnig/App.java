@@ -1,9 +1,9 @@
-package org.example;
+package exercising.learnig;
 
+import org.example.factoring.HibernateFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import java.util.List;
 import java.util.Scanner;
 
 /**

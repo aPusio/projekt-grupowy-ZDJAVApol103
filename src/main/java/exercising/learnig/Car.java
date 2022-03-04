@@ -1,4 +1,4 @@
-package org.example.learnig;
+package exercising.learnig;
 
 import lombok.Getter;
 import lombok.Setter;
