@@ -1,6 +1,9 @@
 package org.example.Tictactoe;
 
-import org.example.Tictactoe.Entity.Dao;
+import org.example.HibernateFactory;
+import org.example.Tictactoe.Entity.DaoRoundEntity;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -8,7 +11,11 @@ import java.util.Scanner;
 public class TicTacToeV1 {
     public static void main(String[] args) {
         WelcomeMenu();
-
+        DaoRoundEntity dao = new DaoRoundEntity();
+        HibernateFactory hibernateFactory = new HibernateFactory();
+        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        dao.readRoundById(5L, sessionFactory);
     }
 
     private static char[][] getStartChars(char c, char c2, char c3, char c4, char c5, char c6, char c7, char c8, char c9) {
@@ -168,19 +175,20 @@ public class TicTacToeV1 {
             case "1": String Load = "Load Game...";
                 System.out.println(Load);
             break;
-            case "2": String Play = "New Game...";
+            case "2": String Play = "New Game is ready..";
                 System.out.println(Play);
+                startPlay(scanner, board);
             break;
             default:
                 System.out.println("Spróbuj jeszcze raz");
         }
         //todo
         //opcja wyboru, nowa gra, wczytanie gry
-        startPlay(scanner, board);
+
     }
 
     private static void startPlay(Scanner scanner, char[][] board) {
-        Dao dao = new Dao();
+        DaoRoundEntity dao = new DaoRoundEntity();
         while (true) {
             playerTurn(board, scanner);
             if (isGameFinished(board)){
