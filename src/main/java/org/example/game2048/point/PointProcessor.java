@@ -1,21 +1,15 @@
 package org.example.game2048.point;
 
-import org.example.game2048.Factory;
 import org.example.game2048.board.Board;
-import org.example.game2048.point.Point;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import java.util.List;
 
 public class PointProcessor {
-    //        Prywatna DB:
-    private static final SessionFactory SESSION_FACTORY = new Factory().getSessionFactory();
-
-    //        DB projektu wspólnego:
-//    private static final SessionFactory SESSION_FACTORY = new HibernateFactory().getSessionFactory();
-    public void addPoints(Board board) {
-        try (Session session = SESSION_FACTORY.openSession()) {
+    public void addPoints(Board board, SessionFactory sessionFactory) {
+        try (Session session = sessionFactory.openSession()) {
             List<Point> points = board.getPointList();
             for (Point point : points) {
                 point.setBoard(board);
@@ -23,4 +17,25 @@ public class PointProcessor {
             }
         }
     }
+
+    public void deletePoints(Board board, SessionFactory sessionFactory) {
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+            List<Point> points = board.getPointList();
+            for (Point point : points) {
+                session.remove(point);
+            }
+            transaction.commit();
+        }
+    }
+
+    public List<Point> getBoardPointList(Long id, SessionFactory sessionFactory) {
+        try (Session session = sessionFactory.openSession()) {
+            return session.createQuery("SELECT p FROM Point p left join p.board b WHERE b.id = :id", Point.class)
+                    .setParameter("id", id)
+                    .getResultList();
+
+        }
+    }
+
 }

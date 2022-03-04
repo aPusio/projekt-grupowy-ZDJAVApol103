@@ -1,28 +1,41 @@
 package org.example.game2048.board;
 
-import org.example.game2048.Factory;
 import org.example.game2048.point.PointProcessor;
 import org.example.game2048.user.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import java.util.List;
 
 public class BoardProcessor {
-    private static final PointProcessor POINT_PROCESSOR = new PointProcessor();
-    //        Prywatna DB:
-    private static final SessionFactory SESSION_FACTORY = new Factory().getSessionFactory();
+    private final PointProcessor pointProcessor = new PointProcessor();
 
-    //        DB projektu wspólnego:
-//    private static final SessionFactory SESSION_FACTORY = new HibernateFactory().getSessionFactory();
-    public void addNewBoard(User user, Board board) {
-        try (Session session = SESSION_FACTORY.openSession()) {
+    public void addNewBoard(User user, Board board, SessionFactory sessionFactory) {
+        try (Session session = sessionFactory.openSession()) {
             board.setUser(user);
-            List<Board> boardList = user.getBoardList();
+            List<Board> boardList = getUserBoardList(user.getId(),sessionFactory);
             boardList.add(board);
             session.save(board);
-            POINT_PROCESSOR.addPoints(board);
+            pointProcessor.addPoints(board, sessionFactory);
         }
 
+    }
+    public void deleteBoard(Long id, SessionFactory sessionFactory) {
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+            Board board = session.load(Board.class, id);
+            pointProcessor.deletePoints(board,sessionFactory);
+            session.remove(board);
+            transaction.commit();
+        }
+    }
+
+    public List<Board> getUserBoardList(Long id, SessionFactory sessionFactory) {
+        try (Session session = sessionFactory.openSession()) {
+            return session.createQuery("SELECT b FROM Board b left join b.user u WHERE u.id = :id ORDER BY b.id ASC", Board.class)
+                    .setParameter("id", id)
+                    .getResultList();
+        }
     }
 }
