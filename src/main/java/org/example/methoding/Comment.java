@@ -13,8 +13,8 @@ public class Comment {
                 EndOfGameConditionsX.condition3(paairState) || EndOfGameConditionsX.condition4(paairState) ||
                 EndOfGameConditionsX.condition5(paairState) || EndOfGameConditionsX.condition6(paairState) ||
                 EndOfGameConditionsX.condition7(paairState) || EndOfGameConditionsX.condition8(paairState))
-    { System.out.println("Winner is Player 'x' " + LocalDateTime.now().format(ISO_LOCAL_DATE_TIME) + " " + paairState); }
-    else if (EndOfGameConditionsO.condition1(paairState) || EndOfGameConditionsO.condition2(paairState) ||
+        { System.out.println("Winner is Player 'x' " + LocalDateTime.now().format(ISO_LOCAL_DATE_TIME) + " " + paairState); }
+        else if (EndOfGameConditionsO.condition1(paairState) || EndOfGameConditionsO.condition2(paairState) ||
                 EndOfGameConditionsO.condition3(paairState) || EndOfGameConditionsO.condition4(paairState) ||
                 EndOfGameConditionsO.condition5(paairState) || EndOfGameConditionsO.condition6(paairState) ||
                 EndOfGameConditionsO.condition7(paairState) || EndOfGameConditionsO.condition8(paairState))

@@ -3,44 +3,52 @@ package org.example.boardUpdating;
 import org.example.arraysCreating.Paair;
 
 public class WrittingToAnArray {
-    public static void MapState(Paair paairState, char[][] board){
+    public static void MapState(Paair paairState, char[][] board) {
         switch (paairState.getFieldNumber()) {
-            case 1 : {
+            case 1: {
                 board[0][0] = paairState.getPlayer();
-                break;}
+                break;
+            }
 
-            case 2 : {
+            case 2: {
                 board[0][1] = paairState.getPlayer();
-                break;}
+                break;
+            }
 
-            case 3 : {
+            case 3: {
                 board[0][2] = paairState.getPlayer();
-                break;}
+                break;
+            }
 
-            case 4 : {
+            case 4: {
                 board[1][0] = paairState.getPlayer();
-                break;}
+                break;
+            }
 
-            case 5 : {
+            case 5: {
                 board[1][1] = paairState.getPlayer();
-                break;}
+                break;
+            }
 
-            case 6 : {
+            case 6: {
                 board[1][2] = paairState.getPlayer();
-                break;}
+                break;
+            }
 
-            case 7 : {
+            case 7: {
                 board[2][0] = paairState.getPlayer();
-                break;}
+                break;
+            }
 
-            case 8 : {
+            case 8: {
                 board[2][1] = paairState.getPlayer();
-                break;}
+                break;
+            }
 
-            case 9 : {
+            case 9: {
                 board[2][2] = paairState.getPlayer();
-                break;}
-
+                break;
+            }
         }
     }
 }

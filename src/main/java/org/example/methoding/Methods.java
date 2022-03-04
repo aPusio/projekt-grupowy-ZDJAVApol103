@@ -24,25 +24,25 @@ public class Methods {
                 paairState.size() == 9;
     }
 
-   public static Scanner getScanning(){
-       return new Scanner(System.in);
-   }
-
-   public static String SelectAnOption(String comment){
-     Scanner scanner = Methods.getScanning();
-       String option;
-       do {
-           System.out.print(comment);
-           option = scanner.next();
-       } while ((!Objects.equals(option, "o")) && (!Objects.equals(option, "x")));
-       return option;
-   }
-
-   public static int SelectAnItem(String comment){
-       Scanner scanner = Methods.getScanning();
-       int option;
-       System.out.print(comment);
-       option = scanner.nextInt();
-        return option;
-   }
+    public static Scanner getScanning(){
+        return new Scanner(System.in);
     }
+
+    public static String SelectAnOption(String comment){
+        Scanner scanner = Methods.getScanning();
+        String option;
+        do {
+            System.out.print(comment);
+            option = scanner.next();
+        } while ((!Objects.equals(option, "o")) && (!Objects.equals(option, "x")));
+        return option;
+    }
+
+    public static int SelectAnItem(String comment){
+        Scanner scanner = Methods.getScanning();
+        int option;
+        System.out.print(comment);
+        option = scanner.nextInt();
+        return option;
+    }
+}

@@ -33,7 +33,7 @@ public  class ReadingTheGame {
     }
     public static void LoadGameState(List<Paair> listpaair) {
         HibernateFactory hibernateFactory = new HibernateFactory();
-         SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
+        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
         Session session = sessionFactory.openSession();
         SaveTheGame saveTheGame = new SaveTheGame();
         saveTheGame.setLocalDateTime(LocalDateTime.now());
