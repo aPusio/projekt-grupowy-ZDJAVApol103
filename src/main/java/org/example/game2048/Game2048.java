@@ -3,14 +3,15 @@ package org.example.game2048;
 import org.example.game2048.board.Board;
 import org.example.game2048.board.BoardGenerator;
 import org.example.game2048.board.BoardProcessor;
+import org.example.game2048.movements.Movement;
 import org.example.game2048.point.Point;
 import org.example.game2048.point.PointProcessor;
 import org.example.game2048.user.User;
 import org.example.game2048.user.UserProcessor;
 import org.hibernate.SessionFactory;
 
+import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -66,7 +67,7 @@ public class Game2048 {
             Board board = boardList.get(index);
             List<Point> points = new ArrayList<>(pointProcessor.getBoardPointList(board.getId(), sessionFactory));
             BoardGenerator.printBoard(points);
-            System.out.println("Enter movement:\n" +
+            System.out.println("Enter movements:\n" +
                     "w - Move up.\n" +
                     "s - Move down.\n" +
                     "d - Move right.\n" +
@@ -115,6 +116,8 @@ public class Game2048 {
     }
 
     public static void main(String[] args) {
+        JFrame graphicBoard = new JFrame();
+
         Game2048 game2048 = new Game2048();
         game2048.startGame();
 
