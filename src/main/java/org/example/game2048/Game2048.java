@@ -21,7 +21,7 @@ public class Game2048 {
     private final PointProcessor pointProcessor = new PointProcessor();
     //Prywatna DB:
     private final SessionFactory sessionFactory = new Factory().getSessionFactory();
-//DB projektu wspólnego:
+//  DB projektu wspólnego:
 //    private  final Session session = new HibernateFactory().getSessionFactory();
 
     public void startGame() {
