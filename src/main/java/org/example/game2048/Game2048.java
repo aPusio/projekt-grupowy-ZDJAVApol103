@@ -116,8 +116,6 @@ public class Game2048 {
     }
 
     public static void main(String[] args) {
-        JFrame graphicBoard = new JFrame();
-
         Game2048 game2048 = new Game2048();
         game2048.startGame();
 
