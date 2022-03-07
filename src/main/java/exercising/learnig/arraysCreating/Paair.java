@@ -1,4 +1,4 @@
-package org.example.arraysCreating;
+package exercising.learnig.arraysCreating;
 
 import lombok.*;
 

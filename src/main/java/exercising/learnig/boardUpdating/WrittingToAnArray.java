@@ -1,6 +1,6 @@
-package org.example.boardUpdating;
+package exercising.learnig.boardUpdating;
 
-import org.example.arraysCreating.Paair;
+import exercising.learnig.arraysCreating.Paair;
 
 public class WrittingToAnArray {
     public static void MapState(Paair paairState, char[][] board) {

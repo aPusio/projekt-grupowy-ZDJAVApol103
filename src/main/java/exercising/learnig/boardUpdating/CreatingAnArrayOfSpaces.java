@@ -1,4 +1,4 @@
-package org.example.boardUpdating;
+package exercising.learnig.boardUpdating;
 
 import java.util.Arrays;
 

@@ -1,5 +1,6 @@
-package org.example.arraysCreating;
+package exercising.learnig.arraysCreating;
 
+import exercising.learnig.arraysCreating.Paair;
 import lombok.Getter;
 import lombok.Setter;
 

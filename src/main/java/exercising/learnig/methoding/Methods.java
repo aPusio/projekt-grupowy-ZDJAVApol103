@@ -1,7 +1,7 @@
-package org.example.methoding;
+package exercising.learnig.methoding;
 
 
-import org.example.arraysCreating.Paair;
+import exercising.learnig.arraysCreating.Paair;
 
 import java.util.*;
 import java.util.function.Predicate;

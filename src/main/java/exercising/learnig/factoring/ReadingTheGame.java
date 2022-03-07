@@ -1,8 +1,8 @@
-package org.example.factoring;
+package exercising.learnig.factoring;
 
 
-import org.example.arraysCreating.Paair;
-import org.example.arraysCreating.SaveTheGame;
+import exercising.learnig.arraysCreating.Paair;
+import exercising.learnig.arraysCreating.SaveTheGame;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 

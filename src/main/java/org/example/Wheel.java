@@ -1,20 +1,21 @@
-package exercising.learnig;
+package org.example;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.example.Car;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
-public class Owner {
+public class Wheel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String surname;
+    private Integer size;
 
-    @OneToOne
+    @ManyToOne
     private Car car;
 }
