@@ -9,7 +9,7 @@ import org.hibernate.SessionFactory;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public  class ReadingTheGame {
+public class SaveTheGameDAO {
 
     public static List<SaveTheGame> StatesOfTheGame(){
         HibernateFactory hibernateFactory = new HibernateFactory();

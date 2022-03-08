@@ -8,9 +8,9 @@ import java.util.function.Predicate;
 
 public class Methods {
 
-    public static boolean CheckedLists(int fieldNumber, List<Integer> listNumbers){
+    public static boolean CheckedList(int fieldNumber, List<Integer> listNumbers){
         Predicate<Integer> haspaair = namepaair -> namepaair.equals(fieldNumber);
-        return listNumbers.stream().anyMatch(haspaair);
+        return listNumbers.stream().anyMatch(haspaair) && fieldNumber < 10 && fieldNumber > 0;
     }
     public static boolean EndGame1(List<Paair> paairState) {
         return EndOfGameConditionsX.condition1(paairState) || EndOfGameConditionsX.condition2(paairState) ||

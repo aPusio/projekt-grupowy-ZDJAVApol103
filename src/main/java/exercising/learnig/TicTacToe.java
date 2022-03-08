@@ -2,7 +2,7 @@ package exercising.learnig;
 
 import exercising.learnig.arraysCreating.Paair;
 import exercising.learnig.boardUpdating.GameBoard;
-import exercising.learnig.factoring.ReadingTheGame;
+import exercising.learnig.factoring.SaveTheGameDAO;
 import exercising.learnig.methoding.Comment;
 import exercising.learnig.methoding.DeclaringVariables;
 import exercising.learnig.methoding.Methods;
@@ -15,20 +15,20 @@ public class TicTacToe {
         //-----------------------deklaracja zmiennych --------------------------------------------------------
         Random random = new Random();
         DeclaringVariables declaringVariables = new DeclaringVariables();
-        GameBoard gameBoardSecond = new GameBoard();
+        GameBoard gameBoard = new GameBoard();
         //-------------------wybór opcji wczytaj stan gry / rozpocznij nową grę ------------------------------
        declaringVariables.setOption(Methods.SelectAnOption(Comment.GameStateOptions()));
         //-------------------wybór stanu gry -----------------------------------------------------------------
         if (Objects.equals(declaringVariables.getOption(), "o")) {
-            System.out.println(ReadingTheGame.StatesOfTheGame());
+            System.out.println(SaveTheGameDAO.StatesOfTheGame());
             declaringVariables.setState(Methods.SelectAnItem(Comment.GameStateSelection()));
-            for(Paair paair: ReadingTheGame.ReadTheStateOfTheGame(declaringVariables.getState())){
-                GameBoard.MapState(paair, gameBoardSecond.getGameBoard());}
-            GameBoard.Board(gameBoardSecond.getGameBoard());
+            for(Paair paair: SaveTheGameDAO.ReadTheStateOfTheGame(declaringVariables.getState())){
+                GameBoard.MapState(paair, gameBoard.getGameBoard());}
+            GameBoard.Board(gameBoard.getGameBoard());
         //-------------------wybór etapu gry -----------------------------------------------------------------
             declaringVariables.setSelect(Methods.SelectAnOption(Comment.SelectAStageOfTheGame()));
             if (Objects.equals(declaringVariables.getSelect(), "o")){
-                gameBoardSecond = new GameBoard();
+                gameBoard = new GameBoard();
             } else {
                 Scanner scanner = Methods.getScanning();
                 scanner.close();
@@ -55,18 +55,17 @@ public class TicTacToe {
                     } else {
                         declaringVariables.setFieldNumber(random.nextInt(9) + 1);}
                 }
-                while ((Methods.CheckedLists(declaringVariables.getFieldNumber(), declaringVariables.getListOfBusyFields())) &&
-                        declaringVariables.getFieldNumber() < 10 && declaringVariables.getFieldNumber() > 0);
+                while (Methods.CheckedList(declaringVariables.getFieldNumber(), declaringVariables.getListOfBusyFields()));
 
         //--------------------zapisywanie nowego ruchu --------------------------------------------------------
             declaringVariables.getPlayerMoveList().add(new Paair(declaringVariables.getStartingPlayer().charAt(0), declaringVariables.getFieldNumber()));
             declaringVariables.getListOfBusyFields().add(declaringVariables.getFieldNumber());
         //--------------------aktualizacja stanu gry ----------------------------------------------------------
             for(Paair paair: declaringVariables.getPlayerMoveList()){
-                GameBoard.MapState(paair, gameBoardSecond.getGameBoard());
+                GameBoard.MapState(paair, gameBoard.getGameBoard());
             }
         //--------------------drukowanie stanu gry na tablicy -------------------------------------------------
-            GameBoard.Board(gameBoardSecond.getGameBoard());
+            GameBoard.Board(gameBoard.getGameBoard());
             System.out.println(declaringVariables.getListOfBusyFields());
         //--------------------sprawdzenie warunków kończących grę ---------------------------------------------
             if (Methods.EndGame1(declaringVariables.getPlayerMoveList())){
@@ -87,7 +86,7 @@ public class TicTacToe {
         //--------------------wybór, czy zapisać grę ----------------------------------------------------------
         declaringVariables.setSave(Methods.SelectAnOption(Comment.WhetherToSaveTheGame()));
         if (Objects.equals(declaringVariables.getSave(),"o")){
-            ReadingTheGame.LoadGameState(declaringVariables.getPlayerMoveList());
+            SaveTheGameDAO.LoadGameState(declaringVariables.getPlayerMoveList());
         } else {
            Scanner scanner = Methods.getScanning();
             scanner.close();
