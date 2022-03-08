@@ -7,26 +7,26 @@ import java.util.List;
 
 
 public class DeclaringVariables {
-    List<Paair> listPaair = new ArrayList<>();
-    List<Integer> listNumbers = new ArrayList<>();
-    String pl, pl1, pl2, turn, option, save, select;
+    List<Paair> playerMoveList = new ArrayList<>();
+    List<Integer> listOfBusyFields = new ArrayList<>();
+    String startingPlayer, firstPlayer, secondPlayer, turn, option, save, select;
     int fieldNumber, state;
 
-    public List<Paair> getListPaair() { return listPaair; }
+    public List<Paair> getPlayerMoveList() { return playerMoveList; }
 
-    public List<Integer> getListNumbers() { return listNumbers; }
+    public List<Integer> getListOfBusyFields() { return listOfBusyFields; }
 
-    public String getPl() { return pl; }
+    public String getStartingPlayer() { return startingPlayer; }
 
-    public void setPl(String pl) { this.pl = pl; }
+    public void setStartingPlayer(String startingPlayer) { this.startingPlayer = startingPlayer; }
 
-    public String getPl1() { return pl1; }
+    public String getFirstPlayer() { return firstPlayer; }
 
-    public void setPl1(String pl1) { this.pl1 = pl1; }
+    public void setFirstPlayer(String firstPlayer) { this.firstPlayer = firstPlayer; }
 
-    public String getPl2() { return pl2; }
+    public String getSecondPlayer() { return secondPlayer; }
 
-    public void setPl2(String pl2) { this.pl2 = pl2; }
+    public void setSecondPlayer(String secondPlayer) { this.secondPlayer = secondPlayer; }
 
     public String getTurn() { return turn; }
 

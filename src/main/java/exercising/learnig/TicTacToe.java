@@ -40,55 +40,55 @@ public class TicTacToe {
             Comment.TheBeginningOfTheGame();
         }
         // -------------------wybór gracza -------------------------------------------------------------------
-        declaringVariables.setPl1(Methods.SelectAnOption(Comment.PlayerChoice()));
+        declaringVariables.setFirstPlayer(Methods.SelectAnOption(Comment.PlayerChoice()));
         // -------------------wybierz, który gracz rozpoczyna ------------------------------------------------
-        declaringVariables.setPl(Methods.SelectAnOption(Comment.ThePlayerStartsTheGame()));
+        declaringVariables.setStartingPlayer(Methods.SelectAnOption(Comment.ThePlayerStartsTheGame()));
         // -------------------początek partii gry ------------------------------------------------------------
         do {
         // -------------------wykonanie ruchu - wybór gracza wykonujący ruch----------------------------------
-            if (Objects.equals(declaringVariables.getPl1(), "x")) {
-                declaringVariables.setPl2("o");
-            } else declaringVariables.setPl2("x");
+            if (Objects.equals(declaringVariables.getFirstPlayer(), "x")) {
+                declaringVariables.setSecondPlayer("o");
+            } else declaringVariables.setSecondPlayer("x");
         //--------------------gracz wykonuje ruch ------------------------------------------------------------
                 do {
-                    if (Objects.equals(declaringVariables.getPl(), declaringVariables.getPl1())){
+                    if (Objects.equals(declaringVariables.getStartingPlayer(), declaringVariables.getFirstPlayer())){
                         declaringVariables.setFieldNumber(Methods.SelectAnItem(Comment.FieldSelection()));
                     } else {
                         declaringVariables.setFieldNumber(random.nextInt(9) + 1);}
                 }
-                while ((Methods.CheckedLists(declaringVariables.getFieldNumber(), declaringVariables.getListNumbers())) &&
+                while ((Methods.CheckedLists(declaringVariables.getFieldNumber(), declaringVariables.getListOfBusyFields())) &&
                         declaringVariables.getFieldNumber() < 10 && declaringVariables.getFieldNumber() > 0);
 
         //--------------------zapisywanie nowego ruchu --------------------------------------------------------
-            declaringVariables.getListPaair().add(new Paair(declaringVariables.getPl().charAt(0), declaringVariables.getFieldNumber()));
-            declaringVariables.getListNumbers().add(declaringVariables.getFieldNumber());
+            declaringVariables.getPlayerMoveList().add(new Paair(declaringVariables.getStartingPlayer().charAt(0), declaringVariables.getFieldNumber()));
+            declaringVariables.getListOfBusyFields().add(declaringVariables.getFieldNumber());
         //--------------------aktualizacja stanu gry ----------------------------------------------------------
-            for(Paair paair: declaringVariables.getListPaair()){
+            for(Paair paair: declaringVariables.getPlayerMoveList()){
                 WrittingToAnArray.MapState(paair, board);
             }
         //--------------------drukowanie stanu gry na tablicy -------------------------------------------------
             CreatingAnArrayOfSpaces.GameBoard(board);
-            System.out.println(declaringVariables.getListNumbers());
+            System.out.println(declaringVariables.getListOfBusyFields());
         //--------------------sprawdzenie warunków kończących grę ---------------------------------------------
-            if (Methods.EndGame1(declaringVariables.getListPaair())){
+            if (Methods.EndGame1(declaringVariables.getPlayerMoveList())){
                 break;
             }
         //--------------------wybór nowego ruchu lub koniec gry -----------------------------------------------
             declaringVariables.setTurn(Methods.SelectAnOption(Comment.FurtherMove()));
         //--------------------zamiana gracza wykonującego ruch ------------------------------------------------
             if ((Objects.equals(declaringVariables.getTurn(), "o")) &&
-                    Objects.equals(declaringVariables.getPl(), declaringVariables.getPl1())) {
-                declaringVariables.setPl(declaringVariables.getPl2());
+                    Objects.equals(declaringVariables.getStartingPlayer(), declaringVariables.getFirstPlayer())) {
+                declaringVariables.setStartingPlayer(declaringVariables.getSecondPlayer());
             } else{
-                declaringVariables.setPl(declaringVariables.getPl1());
+                declaringVariables.setStartingPlayer(declaringVariables.getFirstPlayer());
                 }
         //--------------------koniec gry ----------------------------------------------------------------------
         } while (!Objects.equals(declaringVariables.getTurn(), "x"));
-        Comment.WinPlayer(declaringVariables.getListPaair());
+        Comment.WinPlayer(declaringVariables.getPlayerMoveList());
         //--------------------wybór, czy zapisać grę ----------------------------------------------------------
         declaringVariables.setSave(Methods.SelectAnOption(Comment.WhetherToSaveTheGame()));
         if (Objects.equals(declaringVariables.getSave(),"o")){
-            ReadingTheGame.LoadGameState(declaringVariables.getListPaair());
+            ReadingTheGame.LoadGameState(declaringVariables.getPlayerMoveList());
         } else {
            Scanner scanner = Methods.getScanning();
             scanner.close();
