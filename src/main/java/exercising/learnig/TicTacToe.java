@@ -1,8 +1,7 @@
 package exercising.learnig;
 
 import exercising.learnig.arraysCreating.Paair;
-import exercising.learnig.boardUpdating.CreatingAnArrayOfSpaces;
-import exercising.learnig.boardUpdating.WrittingToAnArray;
+import exercising.learnig.boardUpdating.GameBoard;
 import exercising.learnig.factoring.ReadingTheGame;
 import exercising.learnig.methoding.Comment;
 import exercising.learnig.methoding.DeclaringVariables;
@@ -16,7 +15,7 @@ public class TicTacToe {
         //-----------------------deklaracja zmiennych --------------------------------------------------------
         Random random = new Random();
         DeclaringVariables declaringVariables = new DeclaringVariables();
-        char[][] board = CreatingAnArrayOfSpaces.AnArrayOfSpaces(new char[3][3]);
+        GameBoard gameBoardSecond = new GameBoard();
         //-------------------wybór opcji wczytaj stan gry / rozpocznij nową grę ------------------------------
        declaringVariables.setOption(Methods.SelectAnOption(Comment.GameStateOptions()));
         //-------------------wybór stanu gry -----------------------------------------------------------------
@@ -24,12 +23,12 @@ public class TicTacToe {
             System.out.println(ReadingTheGame.StatesOfTheGame());
             declaringVariables.setState(Methods.SelectAnItem(Comment.GameStateSelection()));
             for(Paair paair: ReadingTheGame.ReadTheStateOfTheGame(declaringVariables.getState())){
-                WrittingToAnArray.MapState(paair, board);}
-            CreatingAnArrayOfSpaces.GameBoard(board);
+                GameBoard.MapState(paair, gameBoardSecond.getGameBoard());}
+            GameBoard.Board(gameBoardSecond.getGameBoard());
         //-------------------wybór etapu gry -----------------------------------------------------------------
             declaringVariables.setSelect(Methods.SelectAnOption(Comment.SelectAStageOfTheGame()));
             if (Objects.equals(declaringVariables.getSelect(), "o")){
-                board = CreatingAnArrayOfSpaces.AnArrayOfSpaces(new char[3][3]);
+                gameBoardSecond = new GameBoard();
             } else {
                 Scanner scanner = Methods.getScanning();
                 scanner.close();
@@ -64,10 +63,10 @@ public class TicTacToe {
             declaringVariables.getListOfBusyFields().add(declaringVariables.getFieldNumber());
         //--------------------aktualizacja stanu gry ----------------------------------------------------------
             for(Paair paair: declaringVariables.getPlayerMoveList()){
-                WrittingToAnArray.MapState(paair, board);
+                GameBoard.MapState(paair, gameBoardSecond.getGameBoard());
             }
         //--------------------drukowanie stanu gry na tablicy -------------------------------------------------
-            CreatingAnArrayOfSpaces.GameBoard(board);
+            GameBoard.Board(gameBoardSecond.getGameBoard());
             System.out.println(declaringVariables.getListOfBusyFields());
         //--------------------sprawdzenie warunków kończących grę ---------------------------------------------
             if (Methods.EndGame1(declaringVariables.getPlayerMoveList())){

@@ -2,7 +2,30 @@ package exercising.learnig.boardUpdating;
 
 import exercising.learnig.arraysCreating.Paair;
 
-public class WrittingToAnArray {
+import java.util.Arrays;
+
+public class GameBoard {
+
+    private final char[][] gameBoard = GameBoard.AnArrayOfSpaces(new char[3][3]);
+
+    public char[][] getGameBoard() { return gameBoard; }
+
+    public static char[][] AnArrayOfSpaces(char[][] gameBoard){
+        for (char[] ch: gameBoard) {
+            Arrays.fill(ch, ' ');
+        }
+        return gameBoard;
+    }
+    public static void Board(char[][] gameBoard) {
+        for (char[] strings : gameBoard) {
+            for (int j = 0; j < gameBoard.length; j++) {
+                System.out.printf(" %s%3s%3s ", "|", strings[j], "|");
+            }
+            System.out.println();
+            System.out.print("===========================");
+            System.out.println();
+        }
+    }
     public static void MapState(Paair paairState, char[][] board) {
         switch (paairState.getFieldNumber()) {
             case 1: {
