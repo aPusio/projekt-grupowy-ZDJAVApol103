@@ -1,5 +1,6 @@
 package org.example.game2048;
 
+import org.example.game2048.GameGUI.NicknameFrame;
 import org.example.game2048.board.Board;
 import org.example.game2048.board.BoardGenerator;
 import org.example.game2048.board.BoardProcessor;
@@ -10,7 +11,6 @@ import org.example.game2048.user.UserProcessor;
 import org.hibernate.SessionFactory;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -23,36 +23,36 @@ public class Game2048 {
 //DB projektu wspólnego:
 //    private  final Session session = new HibernateFactory().getSessionFactory();
 
-    public void startGame() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Welcome to the game '2048'!\n" +
-                "Enter your nickname:");
-
-        String userNickname = scanner.nextLine();
-        User user = userProcessor.getUser(userNickname, sessionFactory);
-        List<Board> userBoardList = boardProcessor.getUserBoardList(user.getId(), sessionFactory);
-        if (userBoardList.size() > 1) {
-            System.out.println("Menu: \n" +
-                    "1 - new game \n" +
-                    "2 - load game");
-            switch (scanner.nextInt()) {
-                case 1:
-                    System.out.println("Start new game!");
-                    boardProcessor.getUserBoardList(user.getId(), sessionFactory)
-                            .forEach(board -> boardProcessor.deleteBoard(board.getId(), sessionFactory));
-                    boardProcessor.addNewBoard(user, BoardGenerator.generateNewBoard(), sessionFactory);
-                    play(user);
-                    break;
-                case 2:
-                    System.out.println("Loaded last game!");
-                    play(user);
-                    break;
-            }
-        } else {
-            play(user);
-        }
-    }
+//    public void startGame() {
+//        Scanner scanner = new Scanner(System.in);
+//
+//        System.out.println("Welcome to the game '2048'!\n" +
+//                "Enter your nickname:");
+//
+//        String userNickname = scanner.nextLine();
+//        User user = userProcessor.getUser(userNickname, sessionFactory);
+//        List<Board> userBoardList = boardProcessor.getUserBoardList(user.getId(), sessionFactory);
+//        if (userBoardList.size() > 1) {
+//            System.out.println("Menu: \n" +
+//                    "1 - new game \n" +
+//                    "2 - load game");
+//            switch (scanner.nextInt()) {
+//                case 1:
+//                    System.out.println("Start new game!");
+//                    boardProcessor.getUserBoardList(user.getId(), sessionFactory)
+//                            .forEach(board -> boardProcessor.deleteBoard(board.getId(), sessionFactory));
+//                    boardProcessor.addNewBoard(user, BoardGenerator.generateNewBoard(), sessionFactory);
+//                    play(user);
+//                    break;
+//                case 2:
+//                    System.out.println("Loaded last game!");
+//                    play(user);
+//                    break;
+//            }
+//        } else {
+//            play(user);
+//        }
+//    }
 
     private void play(User user) {
         String move;
@@ -92,10 +92,10 @@ public class Game2048 {
                     addBoard(user, BoardGenerator.updateBoard(board));
                     break;
                 case "r":
-                    if (boardList.size()>1){
-                        boardProcessor.deleteBoard(board.getId(),sessionFactory);
+                    if (boardList.size() > 1) {
+                        boardProcessor.deleteBoard(board.getId(), sessionFactory);
                         System.out.println("Undo last move!");
-                    }else {
+                    } else {
                         System.out.println("There is no more move to undo!");
                     }
                     break;
@@ -115,8 +115,11 @@ public class Game2048 {
     }
 
     public static void main(String[] args) {
-        Game2048 game2048 = new Game2048();
-        game2048.startGame();
+//        Game2048 game2048 = new Game2048();
+//        game2048.startGame();
+        NicknameFrame nicknameFrame = new NicknameFrame();
+//        new FrameTest();
+
 
     }
 }

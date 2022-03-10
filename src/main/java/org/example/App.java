@@ -1,16 +1,10 @@
 package org.example;
 
-import org.example.game2048.Game2048;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
 import org.example.Hangman.Hangman;
+import org.example.game2048.Game2048;
 
 import java.util.Scanner;
 
-/**
- * Hello world!
- */
 public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -31,16 +25,8 @@ public class App {
                 hangman.start();
                 break;
             case 4:
-                System.out.println("2048 Game");
                 Game2048 game2048 = new Game2048();
-                game2048.startGame();
                 break;
         }
-//        HibernateFactory hibernateFactory = new HibernateFactory();
-//        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
-//        Session session = sessionFactory.openSession();
-//
-//        session.close();
-//        sessionFactory.close();
     }
 }
