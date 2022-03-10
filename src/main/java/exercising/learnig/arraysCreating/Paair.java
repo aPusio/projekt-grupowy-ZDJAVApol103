@@ -20,7 +20,7 @@ public class Paair {
     private SaveTheGame saveTheGame;
 
     public Paair(char player, int fieldNumber) {
-        this.player =player;
+        this.player = player;
         this.fieldNumber = fieldNumber;
     }
     @Override

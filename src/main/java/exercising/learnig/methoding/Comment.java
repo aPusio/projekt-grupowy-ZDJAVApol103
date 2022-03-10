@@ -9,15 +9,17 @@ import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 public class Comment {
 
     public static void WinPlayer(List<Paair> paairState){
-        if (EndOfGameConditionsX.condition1(paairState) || EndOfGameConditionsX.condition2(paairState) ||
-                EndOfGameConditionsX.condition3(paairState) || EndOfGameConditionsX.condition4(paairState) ||
-                EndOfGameConditionsX.condition5(paairState) || EndOfGameConditionsX.condition6(paairState) ||
-                EndOfGameConditionsX.condition7(paairState) || EndOfGameConditionsX.condition8(paairState))
+        EndOfGameConditions endOfGameConditionsO = new EndOfGameConditions('o');
+        EndOfGameConditions endOfGameConditionsX = new EndOfGameConditions('x');
+        if (endOfGameConditionsX.condition1(paairState) || endOfGameConditionsX.condition2(paairState) ||
+                endOfGameConditionsX.condition3(paairState) || endOfGameConditionsX.condition4(paairState) ||
+                endOfGameConditionsX.condition5(paairState) || endOfGameConditionsX.condition6(paairState) ||
+                endOfGameConditionsX.condition7(paairState) || endOfGameConditionsX.condition8(paairState))
         { System.out.println("Winner is Player 'x' " + LocalDateTime.now().format(ISO_LOCAL_DATE_TIME) + " " + paairState); }
-        else if (EndOfGameConditionsO.condition1(paairState) || EndOfGameConditionsO.condition2(paairState) ||
-                EndOfGameConditionsO.condition3(paairState) || EndOfGameConditionsO.condition4(paairState) ||
-                EndOfGameConditionsO.condition5(paairState) || EndOfGameConditionsO.condition6(paairState) ||
-                EndOfGameConditionsO.condition7(paairState) || EndOfGameConditionsO.condition8(paairState))
+        else if (endOfGameConditionsO.condition1(paairState) || endOfGameConditionsO.condition2(paairState) ||
+                endOfGameConditionsO.condition3(paairState) || endOfGameConditionsO.condition4(paairState) ||
+                endOfGameConditionsO.condition5(paairState) || endOfGameConditionsO.condition6(paairState) ||
+                endOfGameConditionsO.condition7(paairState) || endOfGameConditionsO.condition8(paairState))
         { System.out.println("Winner is Player 'o' " + LocalDateTime.now().format(ISO_LOCAL_DATE_TIME) + " " + paairState); }
         else if (paairState.size() == 9)
         { System.out.println("There is no winner " + LocalDateTime.now().format(ISO_LOCAL_DATE_TIME) + " "  + paairState); }

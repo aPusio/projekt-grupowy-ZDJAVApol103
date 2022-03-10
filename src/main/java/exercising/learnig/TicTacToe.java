@@ -68,7 +68,7 @@ public class TicTacToe {
             GameBoard.Board(gameBoard.getGameBoard());
             System.out.println(declaringVariables.getListOfBusyFields());
         //--------------------sprawdzenie warunków kończących grę ---------------------------------------------
-            if (Methods.EndGame1(declaringVariables.getPlayerMoveList())){
+            if (Methods.EndGame(declaringVariables.getPlayerMoveList())){
                 break;
             }
         //--------------------wybór nowego ruchu lub koniec gry -----------------------------------------------
