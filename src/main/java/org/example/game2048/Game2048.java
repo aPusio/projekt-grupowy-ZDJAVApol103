@@ -10,7 +10,6 @@ import org.example.game2048.user.User;
 import org.example.game2048.user.UserProcessor;
 import org.hibernate.SessionFactory;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -67,13 +66,13 @@ public class Game2048 {
             Board board = boardList.get(index);
             List<Point> points = new ArrayList<>(pointProcessor.getBoardPointList(board.getId(), sessionFactory));
             BoardGenerator.printBoard(points);
-            System.out.println("Enter movements:\n" +
-                    "w - Move up.\n" +
-                    "s - Move down.\n" +
-                    "d - Move right.\n" +
-                    "a - Move left\n" +
-                    "r - undo move\n" +
-                    "q - Quit.");
+            System.out.println("Enter movements:\t" +
+                    "W - Move up.\t" +
+                    "S - Move down.\t" +
+                    "D - Move right.\t" +
+                    "A - Move left\t" +
+                    "R - undo move\t" +
+                    "Q - Quit.");
             move = new Scanner(System.in).nextLine();
             switch (move) {
                 case "w":
@@ -118,6 +117,5 @@ public class Game2048 {
     public static void main(String[] args) {
         Game2048 game2048 = new Game2048();
         game2048.startGame();
-
     }
 }

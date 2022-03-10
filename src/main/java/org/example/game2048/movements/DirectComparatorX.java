@@ -4,10 +4,18 @@ import org.example.game2048.point.Point;
 
 import java.util.Comparator;
 
-public class ComparatorX implements Comparator<Point> {
+class DirectComparatorX implements Comparator<Point> {
 
     @Override
     public int compare(Point p1, Point p2) {
         return p1.getX().compareTo(p2.getX());
+    }
+}
+
+class ReversedComparatorX implements Comparator<Point> {
+
+    @Override
+    public int compare(Point p1, Point p2) {
+        return p2.getX().compareTo(p1.getX());
     }
 }
