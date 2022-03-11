@@ -6,7 +6,7 @@ import java.util.List;
 
 public class EndOfGameConditions {
 
-   char e;
+  private final char e;
 
     public EndOfGameConditions(char e) {
         this.e = e;

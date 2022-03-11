@@ -26,6 +26,14 @@ public class Methods {
                 paairState.size() == 9;
     }
 
+    public static boolean WinConditions(List<Paair> paairState, char c){
+        EndOfGameConditions endOfGameConditions = new EndOfGameConditions(c);
+        return endOfGameConditions.condition1(paairState) || endOfGameConditions.condition2(paairState) ||
+                endOfGameConditions.condition3(paairState) || endOfGameConditions.condition4(paairState) ||
+                endOfGameConditions.condition5(paairState) || endOfGameConditions.condition6(paairState) ||
+                endOfGameConditions.condition7(paairState) || endOfGameConditions.condition8(paairState);
+    }
+
     public static Scanner getScanning(){
         return new Scanner(System.in);
     }

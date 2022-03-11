@@ -9,17 +9,9 @@ import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 public class Comment {
 
     public static void WinPlayer(List<Paair> paairState){
-        EndOfGameConditions endOfGameConditionsO = new EndOfGameConditions('o');
-        EndOfGameConditions endOfGameConditionsX = new EndOfGameConditions('x');
-        if (endOfGameConditionsX.condition1(paairState) || endOfGameConditionsX.condition2(paairState) ||
-                endOfGameConditionsX.condition3(paairState) || endOfGameConditionsX.condition4(paairState) ||
-                endOfGameConditionsX.condition5(paairState) || endOfGameConditionsX.condition6(paairState) ||
-                endOfGameConditionsX.condition7(paairState) || endOfGameConditionsX.condition8(paairState))
+        if (Methods.WinConditions(paairState, 'x'))
         { System.out.println("Winner is Player 'x' " + LocalDateTime.now().format(ISO_LOCAL_DATE_TIME) + " " + paairState); }
-        else if (endOfGameConditionsO.condition1(paairState) || endOfGameConditionsO.condition2(paairState) ||
-                endOfGameConditionsO.condition3(paairState) || endOfGameConditionsO.condition4(paairState) ||
-                endOfGameConditionsO.condition5(paairState) || endOfGameConditionsO.condition6(paairState) ||
-                endOfGameConditionsO.condition7(paairState) || endOfGameConditionsO.condition8(paairState))
+        else if (Methods.WinConditions(paairState, 'o'))
         { System.out.println("Winner is Player 'o' " + LocalDateTime.now().format(ISO_LOCAL_DATE_TIME) + " " + paairState); }
         else if (paairState.size() == 9)
         { System.out.println("There is no winner " + LocalDateTime.now().format(ISO_LOCAL_DATE_TIME) + " "  + paairState); }
