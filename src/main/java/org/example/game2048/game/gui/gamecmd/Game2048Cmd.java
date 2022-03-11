@@ -1,7 +1,6 @@
 package org.example.game2048.game.gui.gamecmd;
 
 import org.example.game2048.Factory;
-import org.example.game2048.Movement;
 import org.example.game2048.board.Board;
 import org.example.game2048.board.BoardGenerator;
 import org.example.game2048.board.BoardProcessor;
