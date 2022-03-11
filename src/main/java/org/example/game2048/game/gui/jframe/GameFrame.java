@@ -1,4 +1,4 @@
-package org.example.game2048.GameGUI;
+package org.example.game2048.game.gui.jframe;
 
 import org.example.game2048.Movement;
 import org.example.game2048.board.Board;
@@ -7,7 +7,6 @@ import org.example.game2048.board.BoardProcessor;
 import org.example.game2048.point.Point;
 import org.example.game2048.point.PointProcessor;
 import org.example.game2048.user.User;
-import org.example.game2048.user.UserProcessor;
 import org.hibernate.SessionFactory;
 
 import javax.swing.*;
@@ -17,14 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameFrame extends JFrame {
-    private final JPanel jPanel;
+    private final JPanel gamePanel;
     private final BoardProcessor boardProcessor = new BoardProcessor();
-    private final UserProcessor userProcessor = new UserProcessor();
     private final PointProcessor pointProcessor = new PointProcessor();
     private final User user;
     private final SessionFactory sessionFactory;
     private final List<JTextField> boxList = new ArrayList<>();
-    private List<Point> points;
+    private List<Point> boardPointsList;
     private Board board;
 
 
@@ -32,24 +30,24 @@ public class GameFrame extends JFrame {
         this.user = user;
         this.sessionFactory = sessionFactory;
 
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(420, 420);
+        JFrame gameFrame = new JFrame();
+        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gameFrame.setSize(420, 420);
+        gameFrame.setTitle("Game 2048");
 
-        jPanel = new JPanel();
-        jPanel.setLayout(new GridLayout(4, 4));
-        jPanel.setBounds(0, 0, 410, 395);
+        gamePanel = new JPanel();
+        gamePanel.setLayout(new GridLayout(4, 4));
+        gamePanel.setBounds(0, 0, 409, 388);
 
         setBoxes();
-        play();
-        movement(jPanel);
+        updateBoardPoints();
+        movement(gamePanel);
 
-
-
-        frame.add(jPanel);
-
-        frame.setLayout(null);
-        frame.setVisible(true);
+        gameFrame.add(gamePanel);
+        gameFrame.setLayout(null);
+        gameFrame.setResizable(false);
+        gameFrame.setLocationRelativeTo(null);
+        gameFrame.setVisible(true);
 
     }
 
@@ -61,8 +59,10 @@ public class GameFrame extends JFrame {
             box.setEditable(false);
             box.setFont(new Font("Consolas", Font.BOLD, 60));
             box.setHorizontalAlignment(JTextField.CENTER);
-            box.setForeground(new Color(0xFFA200));
-            jPanel.add(box);
+            box.setForeground(new Color(0x775100));
+            box.setBackground(new Color(0xCFF6DFBC));
+            box.setBorder(BorderFactory.createLineBorder(new Color(0x2D2102),2));
+            gamePanel.add(box);
         }
     }
 
@@ -106,7 +106,7 @@ public class GameFrame extends JFrame {
         }
     }
 
-    private void play() {
+    private void updateBoardPoints() {
         List<Board> boardList = boardProcessor.getUserBoardList(user.getId(), sessionFactory);
         if (boardList.size() > 3) {
             boardProcessor.deleteBoard(boardList.get(0).getId(), sessionFactory);
@@ -114,17 +114,18 @@ public class GameFrame extends JFrame {
         }
         int indexOfLastBoard = boardList.size() - 1;
         board = boardList.get(indexOfLastBoard);
-        points = new ArrayList<>(pointProcessor.getBoardPointList(board.getId(), sessionFactory));
-        drawBoard(points);
+        boardPointsList = new ArrayList<>(pointProcessor.getBoardPointList(board.getId(), sessionFactory));
+        drawBoard(boardPointsList);
     }
+
 
     public class UpAction extends AbstractAction {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            board.setPointList(Movement.moveUp(points));
+            board.setPointList(Movement.moveUp(boardPointsList));
             addBoard(user, BoardGenerator.updateBoard(board));
-            play();
+            updateBoardPoints();
         }
     }
 
@@ -132,9 +133,9 @@ public class GameFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            board.setPointList(Movement.moveLeft(points));
+            board.setPointList(Movement.moveLeft(boardPointsList));
             addBoard(user, BoardGenerator.updateBoard(board));
-            play();
+            updateBoardPoints();
         }
     }
 
@@ -142,9 +143,9 @@ public class GameFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            board.setPointList(Movement.moveDown(points));
+            board.setPointList(Movement.moveDown(boardPointsList));
             addBoard(user, BoardGenerator.updateBoard(board));
-            play();
+            updateBoardPoints();
         }
     }
 
@@ -152,9 +153,9 @@ public class GameFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            board.setPointList(Movement.moveRight(points));
+            board.setPointList(Movement.moveRight(boardPointsList));
             addBoard(user, BoardGenerator.updateBoard(board));
-            play();
+            updateBoardPoints();
         }
     }
 }
