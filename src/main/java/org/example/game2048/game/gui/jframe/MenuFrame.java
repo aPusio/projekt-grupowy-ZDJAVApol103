@@ -2,7 +2,6 @@ package org.example.game2048.game.gui.jframe;
 
 import org.example.game2048.board.BoardGenerator;
 import org.example.game2048.board.BoardProcessor;
-import org.example.game2048.game.gui.jframe.GameFrame;
 import org.example.game2048.user.User;
 import org.hibernate.SessionFactory;
 
@@ -23,7 +22,7 @@ public class MenuFrame extends JFrame {
 
         menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menuFrame.setLayout(null);
-        menuFrame.setTitle("2048 Game");
+        menuFrame.setTitle("Game 2048 " + user.getNickname());
 
         JLabel menuLabel = new JLabel();
         menuLabel.setLayout(new GridLayout(2,1));
