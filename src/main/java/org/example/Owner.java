@@ -1,8 +1,8 @@
 package org.example;
 
+
 import lombok.Getter;
 import lombok.Setter;
-import org.example.Car;
 
 import javax.persistence.*;
 

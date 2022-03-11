@@ -14,11 +14,11 @@ public class OneToManyExample {
         car.setName("Fiat");
         car.setProductionYear(1992);
 
-        Wheel leftWheel = new Wheel();
+        org.example.Wheel leftWheel = new org.example.Wheel();
         leftWheel.setSize(17);
         leftWheel.setName("kolo lewe");
 
-        Wheel rightWheel = new Wheel();
+        org.example.Wheel rightWheel = new org.example.Wheel();
         rightWheel.setSize(17);
         rightWheel.setName("kolo prawe");
 

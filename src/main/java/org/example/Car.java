@@ -20,5 +20,5 @@ public class Car {
     private Owner owner;
 
     @OneToMany(mappedBy = "car")
-    private List<Wheel> wheels;
+    private List<org.example.Wheel> wheels;
 }
