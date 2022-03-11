@@ -6,6 +6,7 @@ import org.example.game2048.board.Board;
 import org.example.game2048.board.BoardGenerator;
 import org.example.game2048.board.BoardProcessor;
 import org.example.game2048.game.gui.Game2048;
+import org.example.game2048.movements.Movement;
 import org.example.game2048.point.Point;
 import org.example.game2048.point.PointProcessor;
 import org.example.game2048.user.User;
@@ -20,9 +21,9 @@ public class Game2048Cmd implements Game2048 {
     private final BoardProcessor boardProcessor = new BoardProcessor();
     private final UserProcessor userProcessor = new UserProcessor();
     private final PointProcessor pointProcessor = new PointProcessor();
-    //Prywatna DB:
+    // own database
     private final SessionFactory sessionFactory = new Factory().getSessionFactory();
-//DB projektu wspólnego:
+    // common group's database
 //    private  final Session session = new HibernateFactory().getSessionFactory();
 
     private void play(User user) {
@@ -37,13 +38,13 @@ public class Game2048Cmd implements Game2048 {
             Board board = boardList.get(index);
             List<Point> points = new ArrayList<>(pointProcessor.getBoardPointList(board.getId(), sessionFactory));
             BoardGenerator.printBoard(points);
-            System.out.println("Enter movement:\n" +
-                    "w - Move up.\n" +
-                    "s - Move down.\n" +
-                    "d - Move right.\n" +
-                    "a - Move left\n" +
-                    "r - undo move\n" +
-                    "q - Quit.");
+            System.out.println("Enter movements:\t" +
+                    "W - Move up.\t" +
+                    "S - Move down.\t" +
+                    "D - Move right.\t" +
+                    "A - Move left\t" +
+                    "R - undo move\t" +
+                    "Q - Quit.");
             move = new Scanner(System.in).nextLine();
             switch (move) {
                 case "w":
