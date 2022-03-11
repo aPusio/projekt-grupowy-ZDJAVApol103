@@ -11,7 +11,6 @@ import java.util.Objects;
 @Setter
 @RequiredArgsConstructor
 @AllArgsConstructor
-@NoArgsConstructor
 @ToString(exclude = "board")
 public class Point {
     @Id
