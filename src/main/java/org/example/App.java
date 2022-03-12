@@ -28,10 +28,10 @@ public class App {
                 break;
             case 4:
 //                CMD GUI
-//                Game2048Cmd game2048Cmd = new Game2048Cmd();
+//                Game2048Cmd game2048Cmd = new Game2048Cmd(new HibernateFactory().getSessionFactory());
 //                game2048Cmd.start();
 //                JFrame GUI
-                Game2048JFrame game2048JFrame = new Game2048JFrame();
+                Game2048JFrame game2048JFrame = new Game2048JFrame(new HibernateFactory().getSessionFactory());
                 game2048JFrame.start();
                 break;
         }

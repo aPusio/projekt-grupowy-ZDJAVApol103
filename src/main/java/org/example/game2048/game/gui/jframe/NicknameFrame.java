@@ -17,9 +17,10 @@ public class NicknameFrame extends JFrame {
     private JTextField nicknameField;
     private final BoardProcessor boardProcessor = new BoardProcessor();
     private final UserProcessor userProcessor = new UserProcessor();
-    private final SessionFactory sessionFactory = new Factory().getSessionFactory();
+    private final SessionFactory sessionFactory;
 
-    public NicknameFrame() {
+    public NicknameFrame(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
         nicknameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         nicknameFrame.setTitle("2048 Game");
         JLabel nicknameLabel = new JLabel();
