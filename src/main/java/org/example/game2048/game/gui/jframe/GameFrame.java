@@ -49,11 +49,13 @@ public class GameFrame extends JFrame {
         movement(gamePanel);
 
         JFrame gameFrame = new JFrame();
+        ImageIcon icon = new ImageIcon("D:\\IdeaProjects\\SDA\\projekt-grupowy-ZDJAVApol103\\src\\main\\resources\\2048_logo.png");
+        gameFrame.setIconImage(icon.getImage());
         gameFrame.add(gamePanel);
         gameFrame.add(newGamePanel);
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameFrame.setSize(420, 470);
-        gameFrame.setTitle("Game 2048 " + user.getNickname());
+        gameFrame.setTitle("Game 2048");
         gameFrame.setLayout(null);
         gameFrame.setResizable(false);
         gameFrame.setLocationRelativeTo(null);
