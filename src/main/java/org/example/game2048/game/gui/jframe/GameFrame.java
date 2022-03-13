@@ -13,18 +13,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GameFrame extends JFrame {
-    private final JPanel gamePanel;
-    private JButton newGameButton;
-    private JButton backMoveButton;
     private final BoardProcessor boardProcessor = new BoardProcessor();
     private final PointProcessor pointProcessor = new PointProcessor();
+    private final ImageIcon icon = new ImageIcon(
+            "src\\main\\resources\\2048_logo.png");
     private final User user;
     private final SessionFactory sessionFactory;
     private final List<JTextField> boxList = new ArrayList<>();
+    private JPanel gamePanel;
+    private JPanel newGamePanel;
+    private JButton newGameButton;
+    private JButton backMoveButton;
     private List<Point> boardPointsList;
+    private Map<Integer, Color> colorMap;
     private Board board;
 
 
@@ -32,24 +38,35 @@ public class GameFrame extends JFrame {
         this.user = user;
         this.sessionFactory = sessionFactory;
 
-        JPanel newGamePanel = new JPanel();
-        newGamePanel.setLayout(new GridLayout(1, 2));
-        newGamePanel.setBounds(0, 0, 406, 45);
         setNewGameButton();
         setBackMoveButton();
-        newGamePanel.add(newGameButton);
-        newGamePanel.add(backMoveButton);
-
-        gamePanel = new JPanel();
-        gamePanel.setLayout(new GridLayout(4, 4));
-        gamePanel.setBounds(0, 45, 409, 388);
-
+        setNewGamePanel();
+        setColorMap();
+        setGamePanel();
         setBoxes();
         updateBoardPoints();
         movement(gamePanel);
+        setGameFrame();
 
+    }
+
+    private void setNewGamePanel() {
+        newGamePanel = new JPanel();
+        newGamePanel.setLayout(new GridLayout(1, 2));
+        newGamePanel.setBounds(0, 0, 406, 45);
+        newGamePanel.add(newGameButton);
+        newGamePanel.add(backMoveButton);
+
+    }
+
+    private void setGamePanel() {
+        gamePanel = new JPanel();
+        gamePanel.setLayout(new GridLayout(4, 4));
+        gamePanel.setBounds(0, 45, 409, 388);
+    }
+
+    private void setGameFrame() {
         JFrame gameFrame = new JFrame();
-        ImageIcon icon = new ImageIcon("D:\\IdeaProjects\\SDA\\projekt-grupowy-ZDJAVApol103\\src\\main\\resources\\2048_logo.png");
         gameFrame.setIconImage(icon.getImage());
         gameFrame.add(gamePanel);
         gameFrame.add(newGamePanel);
@@ -62,14 +79,30 @@ public class GameFrame extends JFrame {
         gameFrame.setVisible(true);
 
     }
-    private void setBackMoveButton(){
+
+    private void setColorMap() {
+        colorMap = new HashMap<>();
+        colorMap.put(2, new Color(0xCFF6DFBC));
+        colorMap.put(4, new Color(0xF3C272));
+        colorMap.put(8, new Color(0xF8B250));
+        colorMap.put(16, new Color(0xF5921D));
+        colorMap.put(32, new Color(0xF58206));
+        colorMap.put(64, new Color(0xE88C55));
+        colorMap.put(128, new Color(0xE87734));
+        colorMap.put(256, new Color(0xE56B1F));
+        colorMap.put(512, new Color(0xDC732A));
+        colorMap.put(1024, new Color(0xF16305));
+        colorMap.put(2048, new Color(0xF15902));
+    }
+
+    private void setBackMoveButton() {
         backMoveButton = new JButton("Back Move");
         backMoveButton.setFont(new Font("Consolas", Font.ITALIC, 25));
         backMoveButton.setBackground(new Color(0xCFEFD794));
         backMoveButton.setFocusable(false);
         backMoveButton.setBorder(BorderFactory.createLineBorder(new Color(0x2D2102), 2));
         backMoveButton.addActionListener(e -> {
-            if (boardProcessor.getUserBoardList(user.getId(),sessionFactory).size() > 1) {
+            if (boardProcessor.getUserBoardList(user.getId(), sessionFactory).size() > 1) {
                 boardProcessor.deleteBoard(board.getId(), sessionFactory);
                 updateBoardPoints();
             } else {
@@ -102,9 +135,9 @@ public class GameFrame extends JFrame {
         }
         for (JTextField box : boxList) {
             box.setEditable(false);
-            box.setFont(new Font("Consolas", Font.BOLD, 60));
+            box.setFont(new Font("Consolas", Font.BOLD, 45));
             box.setHorizontalAlignment(JTextField.CENTER);
-            box.setForeground(new Color(0x775100));
+            box.setForeground(Color.black);
             box.setBackground(new Color(0xCFF6DFBC));
             box.setBorder(BorderFactory.createLineBorder(new Color(0x2D2102)));
             gamePanel.add(box);
@@ -149,11 +182,13 @@ public class GameFrame extends JFrame {
                 for (Point point : pointList) {
                     if (point.getX() == j && point.getY() == i) {
                         boxList.get(boxIndex).setText(String.valueOf(point.getValue()));
+                        boxList.get(boxIndex).setBackground(colorMap.get(point.getValue()));
                         isFilled = true;
                     }
                 }
                 if (!isFilled) {
                     boxList.get(boxIndex).setText("");
+                    boxList.get(boxIndex).setBackground(new Color(0xCFF6DFBC));
                 }
                 boxIndex++;
             }
