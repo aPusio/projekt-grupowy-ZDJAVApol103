@@ -12,7 +12,7 @@ public class MenuFrame extends JFrame {
     private final BoardProcessor boardProcessor = new BoardProcessor();
     private final JFrame menuFrame = new JFrame();
     private final ImageIcon icon = new ImageIcon(
-            "D:\\IdeaProjects\\SDA\\projekt-grupowy-ZDJAVApol103\\src\\main\\resources\\2048_logo.png");
+            "src\\main\\resources\\2048_logo.png");
     private JButton newGameButton;
     private JButton loadGameButton;
     private JLabel menuLabel;

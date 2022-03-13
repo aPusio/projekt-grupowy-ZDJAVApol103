@@ -13,7 +13,7 @@ import java.util.List;
 public class NicknameFrame extends JFrame {
     private final JFrame nicknameFrame = new JFrame();
     private final ImageIcon icon = new ImageIcon(
-            "D:\\IdeaProjects\\SDA\\projekt-grupowy-ZDJAVApol103\\src\\main\\resources\\2048_logo.png");
+            "src\\main\\resources\\2048_logo.png");
     private JButton submitButton;
     private JTextField nicknameField;
     private JLabel nicknameLabel;

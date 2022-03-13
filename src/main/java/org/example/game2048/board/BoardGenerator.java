@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Random;
 
 public class BoardGenerator {
-    private static final PointProcessor POINT_PROCESSOR = new PointProcessor();
     private static final Random RANDOM = new Random();
     private static final int MAX_SIZE_OF_BOARD = 4;
     private static final int NEW_VALUE = 2;
@@ -29,7 +28,7 @@ public class BoardGenerator {
         List<Point> points = new ArrayList<>(board.getPointList());
         Point newPoint;
         boolean isNewPointEqual;
-        if (points.size() < 16){
+        if (points.size() < 16) {
             do {
                 isNewPointEqual = false;
                 newPoint = new Point(RANDOM.nextInt(MAX_SIZE_OF_BOARD), RANDOM.nextInt(MAX_SIZE_OF_BOARD), NEW_VALUE);
@@ -43,7 +42,7 @@ public class BoardGenerator {
             points.add(newPoint);
             board.setPointList(points);
             return board;
-        }else return null;
+        } else return null;
 
     }
 
