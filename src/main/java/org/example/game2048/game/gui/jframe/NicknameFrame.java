@@ -12,15 +12,15 @@ import java.util.List;
 
 public class NicknameFrame extends JFrame {
     private final JFrame nicknameFrame = new JFrame();
-    private final ImageIcon icon = new ImageIcon(
-            "src\\main\\resources\\2048_logo.png");
+    private final ImageIcon icon = new ImageIcon("src\\main\\resources\\2048_logo.png");
+    private final BoardProcessor boardProcessor = new BoardProcessor();
+    private final UserProcessor userProcessor = new UserProcessor();
+    private final SessionFactory sessionFactory;
     private JButton submitButton;
     private JTextField nicknameField;
     private JLabel nicknameLabel;
     private JLabel iconLabel;
-    private final BoardProcessor boardProcessor = new BoardProcessor();
-    private final UserProcessor userProcessor = new UserProcessor();
-    private final SessionFactory sessionFactory;
+
 
     public NicknameFrame(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;

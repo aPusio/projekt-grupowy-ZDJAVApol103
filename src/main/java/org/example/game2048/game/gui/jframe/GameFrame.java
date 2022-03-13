@@ -20,8 +20,8 @@ import java.util.Map;
 public class GameFrame extends JFrame {
     private final BoardProcessor boardProcessor = new BoardProcessor();
     private final PointProcessor pointProcessor = new PointProcessor();
-    private final ImageIcon icon = new ImageIcon(
-            "src\\main\\resources\\2048_logo.png");
+    private final ImageIcon icon = new ImageIcon("src\\main\\resources\\2048_logo.png");
+    private final JFrame gameFrame = new JFrame();
     private final User user;
     private final SessionFactory sessionFactory;
     private final List<JTextField> boxList = new ArrayList<>();
@@ -66,7 +66,6 @@ public class GameFrame extends JFrame {
     }
 
     private void setGameFrame() {
-        JFrame gameFrame = new JFrame();
         gameFrame.setIconImage(icon.getImage());
         gameFrame.add(gamePanel);
         gameFrame.add(newGamePanel);
@@ -82,17 +81,17 @@ public class GameFrame extends JFrame {
 
     private void setColorMap() {
         colorMap = new HashMap<>();
-        colorMap.put(2, new Color(0xCFF6DFBC));
-        colorMap.put(4, new Color(0xF3C272));
-        colorMap.put(8, new Color(0xF8B250));
-        colorMap.put(16, new Color(0xF5921D));
-        colorMap.put(32, new Color(0xF58206));
-        colorMap.put(64, new Color(0xE88C55));
-        colorMap.put(128, new Color(0xE87734));
-        colorMap.put(256, new Color(0xE56B1F));
-        colorMap.put(512, new Color(0xDC732A));
-        colorMap.put(1024, new Color(0xF16305));
-        colorMap.put(2048, new Color(0xF15902));
+        colorMap.put(2, new Color(0xffc299));
+        colorMap.put(4, new Color(0xffb380));
+        colorMap.put(8, new Color(0xffa366));
+        colorMap.put(16, new Color(0xff944d));
+        colorMap.put(32, new Color(0xff8533));
+        colorMap.put(64, new Color(0xff751a));
+        colorMap.put(128, new Color(0xff6600));
+        colorMap.put(256, new Color(0xff471a));
+        colorMap.put(512, new Color(0xff3300));
+        colorMap.put(1024, new Color(0xff1a1a));
+        colorMap.put(2048, new Color(0xff0000));
     }
 
     private void setBackMoveButton() {
@@ -144,22 +143,6 @@ public class GameFrame extends JFrame {
         }
     }
 
-    private void movement(JPanel boxesPanel) {
-        Action downAction = new DownAction();
-        Action rightAction = new RightAction();
-        Action leftAction = new LeftAction();
-        Action upAction = new UpAction();
-
-        boxesPanel.getInputMap().put(KeyStroke.getKeyStroke("UP"), "upAction");
-        boxesPanel.getActionMap().put("upAction", upAction);
-        boxesPanel.getInputMap().put(KeyStroke.getKeyStroke("RIGHT"), "rightAction");
-        boxesPanel.getActionMap().put("rightAction", rightAction);
-        boxesPanel.getInputMap().put(KeyStroke.getKeyStroke("LEFT"), "leftAction");
-        boxesPanel.getActionMap().put("leftAction", leftAction);
-        boxesPanel.getInputMap().put(KeyStroke.getKeyStroke("DOWN"), "downAction");
-        boxesPanel.getActionMap().put("downAction", downAction);
-    }
-
     private void addBoard(User user) {
         Board updatedBoard = BoardGenerator.updateBoard(board);
         if (updatedBoard == null) {
@@ -207,6 +190,21 @@ public class GameFrame extends JFrame {
         drawBoard(boardPointsList);
     }
 
+    private void movement(JPanel boxesPanel) {
+        Action downAction = new DownAction();
+        Action rightAction = new RightAction();
+        Action leftAction = new LeftAction();
+        Action upAction = new UpAction();
+
+        boxesPanel.getInputMap().put(KeyStroke.getKeyStroke("UP"), "upAction");
+        boxesPanel.getActionMap().put("upAction", upAction);
+        boxesPanel.getInputMap().put(KeyStroke.getKeyStroke("RIGHT"), "rightAction");
+        boxesPanel.getActionMap().put("rightAction", rightAction);
+        boxesPanel.getInputMap().put(KeyStroke.getKeyStroke("LEFT"), "leftAction");
+        boxesPanel.getActionMap().put("leftAction", leftAction);
+        boxesPanel.getInputMap().put(KeyStroke.getKeyStroke("DOWN"), "downAction");
+        boxesPanel.getActionMap().put("downAction", downAction);
+    }
 
     public class UpAction extends AbstractAction {
 

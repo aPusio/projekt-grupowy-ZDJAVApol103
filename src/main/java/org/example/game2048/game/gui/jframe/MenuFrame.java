@@ -11,14 +11,14 @@ import java.awt.*;
 public class MenuFrame extends JFrame {
     private final BoardProcessor boardProcessor = new BoardProcessor();
     private final JFrame menuFrame = new JFrame();
-    private final ImageIcon icon = new ImageIcon(
-            "src\\main\\resources\\2048_logo.png");
+    private final User user;
+    private final SessionFactory sessionFactory;
+    private final ImageIcon icon = new ImageIcon("src\\main\\resources\\2048_logo.png");
     private JButton newGameButton;
     private JButton loadGameButton;
     private JLabel menuLabel;
     private JLabel iconLabel;
-    private final User user;
-    private final SessionFactory sessionFactory;
+
 
     MenuFrame(User user, SessionFactory sessionFactory) {
         this.user = user;
