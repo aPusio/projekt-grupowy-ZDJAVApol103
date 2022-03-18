@@ -1,6 +1,7 @@
 package org.example.game2048.board;
 
 import org.example.game2048.point.Point;
+import org.example.game2048.point.PointProcessor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,19 +28,22 @@ public class BoardGenerator {
         List<Point> points = new ArrayList<>(board.getPointList());
         Point newPoint;
         boolean isNewPointEqual;
-        do {
-            isNewPointEqual = false;
-            newPoint = new Point(RANDOM.nextInt(MAX_SIZE_OF_BOARD), RANDOM.nextInt(MAX_SIZE_OF_BOARD), NEW_VALUE);
-            for (Point x : points) {
-                if (newPoint.equals(x)) {
-                    isNewPointEqual = true;
-                    break;
+        if (points.size() < 16) {
+            do {
+                isNewPointEqual = false;
+                newPoint = new Point(RANDOM.nextInt(MAX_SIZE_OF_BOARD), RANDOM.nextInt(MAX_SIZE_OF_BOARD), NEW_VALUE);
+                for (Point x : points) {
+                    if (newPoint.equals(x)) {
+                        isNewPointEqual = true;
+                        break;
+                    }
                 }
-            }
-        } while (isNewPointEqual);
-        points.add(newPoint);
-        board.setPointList(points);
-        return board;
+            } while (isNewPointEqual);
+            points.add(newPoint);
+            board.setPointList(points);
+            return board;
+        } else return null;
+
     }
 
     public static void printBoard(List<Point> pointList) {

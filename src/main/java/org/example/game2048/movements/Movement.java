@@ -80,7 +80,6 @@ public class Movement {
     private static synchronized void slideByOnePosition(List<Point> oneRowOrColumn, int firstElement) {
 
         int checker = firstElement;
-        System.out.println(checker);
 
         oneRowOrColumn.get(checker).setValue(oneRowOrColumn.get(checker).getValue() + oneRowOrColumn.get(checker + 1).getValue());
         checker++;
